@@ -1,0 +1,67 @@
+http://www.behindthename.com/top/lists/us/2012
+
+COMMON PATTERNS
+
+<meta property="og:site_name" content="..."/>
+
+by (<..>)<a>...</a>
+
+
+H1..H6
+
+classnames including 'authorname', 'author'
+
+at github.com: div.authorship img[@alt]
+.. <meta content="..." name="octolytics-dimension-user_login" />
+
+.by-line a
+.byline
+.by a
+
+Copyright &copy; ...
+
+<link rel="alternate" type="application/rss+xml" title="...
+
+og:site_name  og:description  og:image  rel="author"  og:title
+
+.blogger-description
+
+<meta name="author" itemprop="creator" content="..."/>
+<meta name=author content="..."/>
+
+data-from= .. author name
+
+<a rel=author>...</a>
+<a itemprop=author>...</a>
+
+<meta name="author"
+
+.byline .fn
+
+.author a
+.author_name
+.attribution
+
+cut "by" from before names.
+
+all posts by ..
+
+rel="author"
+
+title="... on Twitter"
+title="... on Google+"
+
+svbtle.com -> figure.avatar a, #page_title a, #bottom_tagline span
+
+og:article:author
+
+span[@itemprop='name']
+
+NEED
+
+function that can detect things that "seem like names"
+
+
+
+http://www.amberbit.com/blog/2014/2/4/postgresql-awesomeness-for-rails-developers/
+
