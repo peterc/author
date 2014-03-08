@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     author (0.0.1)
+      nokogiri
 
 GEM
   remote: https://rubygems.org/
@@ -18,5 +19,4 @@ PLATFORMS
 DEPENDENCIES
   author!
   minitest (>= 5.0)
-  nokogiri
   rake

@@ -1,4 +1,6 @@
 require 'author/name_detector'
+require 'author/html_name_finder'
+require 'author/extractor'
 
 module Author
   LIB_ROOT = File.join(__dir__, '..')

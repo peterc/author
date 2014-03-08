@@ -3,50 +3,42 @@ http://www.behindthename.com/top/lists/us/2012
 COMMON PATTERNS
 
 <meta property="og:site_name" content="..."/>
-
-by (<..>)<a>...</a>
-
-
- <meta content="..." property="article:author" />
-
-
-
-H1..H6
-
-classnames including 'authorname', 'author'
-
-at github.com: div.authorship img[@alt]
-.. <meta content="..." name="octolytics-dimension-user_login" />
-
-.by-line a
-.byline
-.by a
-
-Copyright &copy; ...
+<meta property="article:author" content="..."  />
+<meta name="author" itemprop="creator" content="..."/>
+<meta name=author content="..."/>
+<meta name="octolytics-dimension-user_login" content="..." />
+og:article:author
 
 <link rel="alternate" type="application/rss+xml" title="...
 
-og:site_name  og:description  og:image  rel="author"  og:title
 
+.authorname
+.author
+.by-line a
+.byline
+.by a
 .blogger-description
-
-<meta name="author" itemprop="creator" content="..."/>
-<meta name=author content="..."/>
-
-data-from= .. author name
-
-<a rel=author>...</a>
-<a itemprop=author>...</a>
-
-<meta name="author"
-
 .byline .fn
-
 .author a
 .author_name
 .attribution
+at github.com: div.authorship img[@alt]
 
-cut "by" from before names.
+
+Copyright &copy; ...
+
+
+rel="author"
+<a rel=author>...</a>
+<a itemprop=author>...</a>
+
+data-from= .. author name
+
+
+
+
+
+
 
 all posts by ..
 
@@ -57,7 +49,7 @@ title="... on Google+"
 
 svbtle.com -> figure.avatar a, #page_title a, #bottom_tagline span
 
-og:article:author
+
 
 span[@itemprop='name']
 

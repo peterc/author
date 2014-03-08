@@ -7,6 +7,12 @@ module Author
       @text = [*text]
     end
 
+    def best_match
+      names = extract_names
+
+      names.sort_by(&:last).last[0] if names
+    end
+
     def extract_names
       names = []
 
@@ -17,7 +23,6 @@ module Author
 
         likelihood_set.each do |(word, info)|
           score = info[:score]
-          running_score += score
 
           scores << score
           threshold = 3
@@ -26,8 +31,9 @@ module Author
 
           if score > threshold
             name << word
-          elsif name.length > 0
-            names << [name.join(' '), running_score / name.length] if (name.length > 1 || [:first, :last].include?(info[:type])) && running_score > 0
+            running_score += score
+          elsif name.length > 1
+            names << [name.join(' '), running_score / name.length] if running_score > 0
             running_score = 0
             name = []
           else
@@ -53,9 +59,10 @@ module Author
 
           if previous_word && previous_word[0] && word && word[0]
             score_effect += 1 if previous_word[0] =~ /^\d+$/    # could be following a copyright notice
-            score_effect += 5 if previous_word[0] == 'By'
-            score_effect += 3 if previous_word[0] == 'by'
+            score_effect += 6 if previous_word[0] == 'By'
+            score_effect += 4 if previous_word[0] == 'by'
             score_effect += 1 if previous_word[0] == 'am'
+            score_effect += 2 if previous_word[0] == '&copy;'
 
             score_effect -= 3 if previous_word[0][0] =~ /[A-Z]/ && word[0][0] =~ /[a-z]/
           end
