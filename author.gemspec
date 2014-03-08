@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.description = %q{}
 
   s.add_development_dependency 'minitest', '>= 5.0'
+  #s.add_development_dependency 'minitest-reporters'
   s.add_development_dependency 'rake'
 
   s.files         = `git ls-files`.split("\n")

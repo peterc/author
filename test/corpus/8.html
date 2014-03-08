@@ -1,0 +1,1346 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>lukehoban/es6features</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub" />
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png" />
+    <meta property="fb:app_id" content="1401488693436528"/>
+
+      <meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="lukehoban/es6features" name="twitter:title" /><meta content="es6features - Overview of ECMAScript 6 features" name="twitter:description" /><meta content="https://2.gravatar.com/avatar/e0c8f100556abaab7fd77258fa4f8879?d=https%3A%2F%2Fidenticons.github.com%2F0ddec67dcb2cc75008fb910252d30f65.png&amp;r=x&amp;s=400" name="twitter:image:src" />
+<meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="https://2.gravatar.com/avatar/e0c8f100556abaab7fd77258fa4f8879?d=https%3A%2F%2Fidenticons.github.com%2F0ddec67dcb2cc75008fb910252d30f65.png&amp;r=x&amp;s=400" property="og:image" /><meta content="lukehoban/es6features" property="og:title" /><meta content="https://github.com/lukehoban/es6features" property="og:url" /><meta content="es6features - Overview of ECMAScript 6 features" property="og:description" />
+
+    <meta name="hostname" content="github-fe118-cp1-prd.iad.github.net">
+    <meta name="ruby" content="ruby 2.1.0p0-github-tcmalloc (87c9373a41) [x86_64-linux]">
+    <link rel="assets" href="https://github.global.ssl.fastly.net/">
+    <link rel="conduit-xhr" href="https://ghconduit.com:25035/">
+    <link rel="xhr-socket" href="/_sockets" />
+
+
+    <meta name="msapplication-TileImage" content="/windows-tile.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="selected-link" value="repo_source" data-pjax-transient />
+    <meta content="collector.githubapp.com" name="octolytics-host" /><meta content="collector-cdn.github.com" name="octolytics-script-host" /><meta content="github" name="octolytics-app-id" /><meta content="25CD3DCB:1E8B:8CCD46F:531AE951" name="octolytics-dimension-request_id" /><meta content="118" name="octolytics-actor-id" /><meta content="peterc" name="octolytics-actor-login" /><meta content="556fe920f53a425d45c422013cba2db2d01a04e177180677a777f4ac38195d49" name="octolytics-actor-hash" />
+    
+
+    
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="OnvYmDhuCJCVG5XfTvi9GWXsYPYCaSp+Oc85lwXjKTY=" name="csrf-token" />
+
+    <link href="https://github.global.ssl.fastly.net/assets/github-d648f1196659f589579aa6aaddcc78c4f8e87552.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://github.global.ssl.fastly.net/assets/github2-32987ede34015d8eaa4618614894d836adf201f6.css" media="all" rel="stylesheet" type="text/css" />
+    
+    
+
+
+      <script crossorigin="anonymous" src="https://github.global.ssl.fastly.net/assets/frameworks-855d68c505f4b08a77e4d991f11cf5d8f43250e2.js" type="text/javascript"></script>
+      <script async="async" crossorigin="anonymous" src="https://github.global.ssl.fastly.net/assets/github-e6bd35a239a3a0ab82cd42cd9df317778e5a1270.js" type="text/javascript"></script>
+      
+      <meta http-equiv="x-pjax-version" content="2fe0694ce2393a8db660e33f758021ee">
+
+      
+  <meta name="description" content="es6features - Overview of ECMAScript 6 features" />
+
+  <meta content="223467" name="octolytics-dimension-user_id" /><meta content="lukehoban" name="octolytics-dimension-user_login" /><meta content="17375436" name="octolytics-dimension-repository_id" /><meta content="lukehoban/es6features" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="17375436" name="octolytics-dimension-repository_network_root_id" /><meta content="lukehoban/es6features" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/lukehoban/es6features/commits/master.atom" rel="alternate" title="Recent Commits to es6features:master" type="application/atom+xml" />
+
+  </head>
+
+
+  <body class="logged_in  env-production macintosh vis-public tipsy-tooltips">
+    <a href="#start-of-content" class="accessibility-aid js-skip-to-content">Skip to content</a>
+    <div class="wrapper">
+      
+      
+      
+      
+
+
+      <div class="header header-logged-in true">
+  <div class="container clearfix">
+
+    <a class="header-logo-invertocat" href="https://github.com/">
+  <span class="mega-octicon octicon-mark-github"></span>
+</a>
+
+    
+    <a href="/notifications" aria-label="You have unread notifications" class="notification-indicator tooltipped tooltipped-s" data-gotokey="n">
+        <span class="mail-status unread"></span>
+</a>
+
+      <div class="command-bar js-command-bar  in-repository">
+          <form accept-charset="UTF-8" action="/search" class="command-bar-form" id="top_search_form" method="get">
+
+<input type="text" data-hotkey="/ s" name="q" id="js-command-bar-field" placeholder="Search or type a command" tabindex="1" autocapitalize="off"
+    
+    data-username="peterc"
+      data-repo="lukehoban/es6features"
+      data-branch="master"
+      data-sha="a18b0c1ead5f6ad60c6975dcb48d65aa71e44d45"
+  >
+
+    <input type="hidden" name="nwo" value="lukehoban/es6features" />
+
+    <div class="select-menu js-menu-container js-select-menu search-context-select-menu">
+      <span class="minibutton select-menu-button js-menu-target" role="button" aria-haspopup="true">
+        <span class="js-select-button">This repository</span>
+      </span>
+
+      <div class="select-menu-modal-holder js-menu-content js-navigation-container" aria-hidden="true">
+        <div class="select-menu-modal">
+
+          <div class="select-menu-item js-navigation-item js-this-repository-navigation-item selected">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input type="radio" class="js-search-this-repository" name="search_target" value="repository" checked="checked" />
+            <div class="select-menu-item-text js-select-button-text">This repository</div>
+          </div> <!-- /.select-menu-item -->
+
+          <div class="select-menu-item js-navigation-item js-all-repositories-navigation-item">
+            <span class="select-menu-item-icon octicon octicon-check"></span>
+            <input type="radio" name="search_target" value="global" />
+            <div class="select-menu-item-text js-select-button-text">All repositories</div>
+          </div> <!-- /.select-menu-item -->
+
+        </div>
+      </div>
+    </div>
+
+  <span class="help tooltipped tooltipped-s" aria-label="Show command bar help">
+    <span class="octicon octicon-question"></span>
+  </span>
+
+
+  <input type="hidden" name="ref" value="cmdform">
+
+</form>
+        <ul class="top-nav">
+          <li class="explore"><a href="/explore">Explore</a></li>
+            <li><a href="https://gist.github.com">Gist</a></li>
+            <li><a href="/blog">Blog</a></li>
+          <li><a href="https://help.github.com">Help</a></li>
+        </ul>
+      </div>
+
+    
+
+
+  <ul id="user-links">
+    <li>
+      <a href="/peterc" class="name">
+        <img alt="Peter Cooper" class=" js-avatar" data-user="118" height="20" src="https://avatars2.githubusercontent.com/u/118?s=140" width="20" /> peterc
+      </a>
+    </li>
+
+    <li class="new-menu dropdown-toggle js-menu-container">
+      <a href="#" class="js-menu-target tooltipped tooltipped-s" aria-label="Create new...">
+        <span class="octicon octicon-plus"></span>
+        <span class="dropdown-arrow"></span>
+      </a>
+
+      <div class="new-menu-content js-menu-content">
+      </div>
+    </li>
+
+    <li>
+      <a href="/settings/profile" id="account_settings"
+        class="tooltipped tooltipped-s"
+        aria-label="Account settings ">
+        <span class="octicon octicon-tools"></span>
+      </a>
+    </li>
+    <li>
+      <a class="tooltipped tooltipped-s" href="/logout" data-method="post" id="logout" aria-label="Sign out">
+        <span class="octicon octicon-log-out"></span>
+      </a>
+    </li>
+
+  </ul>
+
+<div class="js-new-dropdown-contents hidden">
+  
+
+<ul class="dropdown-menu">
+  <li>
+    <a href="/new"><span class="octicon octicon-repo-create"></span> New repository</a>
+  </li>
+  <li>
+    <a href="/organizations/new"><span class="octicon octicon-organization"></span> New organization</a>
+  </li>
+
+
+    <li class="section-title">
+      <span title="lukehoban/es6features">This repository</span>
+    </li>
+      <li>
+        <a href="/lukehoban/es6features/issues/new"><span class="octicon octicon-issue-opened"></span> New issue</a>
+      </li>
+</ul>
+
+</div>
+
+
+    
+  </div>
+</div>
+
+      
+
+        
+
+
+
+      <div id="start-of-content" class="accessibility-aid"></div>
+          <div class="site" itemscope itemtype="http://schema.org/WebPage">
+    
+    <div class="pagehead repohead instapaper_ignore readability-menu">
+      <div class="container">
+        
+
+<ul class="pagehead-actions">
+
+    <li class="subscription">
+      <form accept-charset="UTF-8" action="/notifications/subscribe" class="js-social-container" data-autosubmit="true" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="authenticity_token" type="hidden" value="OnvYmDhuCJCVG5XfTvi9GWXsYPYCaSp+Oc85lwXjKTY=" /></div>  <input id="repository_id" name="repository_id" type="hidden" value="17375436" />
+
+    <div class="select-menu js-menu-container js-select-menu">
+      <a class="social-count js-social-count" href="/lukehoban/es6features/watchers">
+        50
+      </a>
+      <span class="minibutton select-menu-button with-count js-menu-target" role="button" tabindex="0" aria-haspopup="true">
+        <span class="js-select-button">
+          <span class="octicon octicon-eye-watch"></span>
+          Watch
+        </span>
+      </span>
+
+      <div class="select-menu-modal-holder">
+        <div class="select-menu-modal subscription-menu-modal js-menu-content" aria-hidden="true">
+          <div class="select-menu-header">
+            <span class="select-menu-title">Notification status</span>
+            <span class="octicon octicon-remove-close js-menu-close"></span>
+          </div> <!-- /.select-menu-header -->
+
+          <div class="select-menu-list js-navigation-container" role="menu">
+
+            <div class="select-menu-item js-navigation-item selected" role="menuitem" tabindex="0">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <div class="select-menu-item-text">
+                <input checked="checked" id="do_included" name="do" type="radio" value="included" />
+                <h4>Not watching</h4>
+                <span class="description">You only receive notifications for conversations in which you participate or are @mentioned.</span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <span class="octicon octicon-eye-watch"></span>
+                  Watch
+                </span>
+              </div>
+            </div> <!-- /.select-menu-item -->
+
+            <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+              <span class="select-menu-item-icon octicon octicon octicon-check"></span>
+              <div class="select-menu-item-text">
+                <input id="do_subscribed" name="do" type="radio" value="subscribed" />
+                <h4>Watching</h4>
+                <span class="description">You receive notifications for all conversations in this repository.</span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <span class="octicon octicon-eye-unwatch"></span>
+                  Unwatch
+                </span>
+              </div>
+            </div> <!-- /.select-menu-item -->
+
+            <div class="select-menu-item js-navigation-item " role="menuitem" tabindex="0">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <div class="select-menu-item-text">
+                <input id="do_ignore" name="do" type="radio" value="ignore" />
+                <h4>Ignoring</h4>
+                <span class="description">You do not receive any notifications for conversations in this repository.</span>
+                <span class="js-select-button-text hidden-select-button-text">
+                  <span class="octicon octicon-mute"></span>
+                  Stop ignoring
+                </span>
+              </div>
+            </div> <!-- /.select-menu-item -->
+
+          </div> <!-- /.select-menu-list -->
+
+        </div> <!-- /.select-menu-modal -->
+      </div> <!-- /.select-menu-modal-holder -->
+    </div> <!-- /.select-menu -->
+
+</form>
+    </li>
+
+  <li>
+  
+
+  <div class="js-toggler-container js-social-container starring-container ">
+    <a href="/lukehoban/es6features/unstar"
+      class="minibutton with-count js-toggler-target star-button starred"
+      aria-label="Unstar this repository" data-remote="true" data-method="post" rel="nofollow">
+      <span class="octicon octicon-star-delete"></span><span class="text">Unstar</span>
+    </a>
+
+    <a href="/lukehoban/es6features/star"
+      class="minibutton with-count js-toggler-target star-button unstarred"
+      aria-label="Star this repository" data-remote="true" data-method="post" rel="nofollow">
+      <span class="octicon octicon-star"></span><span class="text">Star</span>
+    </a>
+
+      <a class="social-count js-social-count" href="/lukehoban/es6features/stargazers">
+        672
+      </a>
+  </div>
+
+  </li>
+
+
+        <li>
+          <a href="/lukehoban/es6features/fork" class="minibutton with-count js-toggler-target fork-button lighter tooltipped-n" title="Fork this repo" rel="facebox nofollow">
+            <span class="octicon octicon-git-branch-create"></span><span class="text">Fork</span>
+          </a>
+          <a href="/lukehoban/es6features/network" class="social-count">32</a>
+        </li>
+
+
+</ul>
+
+        <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public">
+          <span class="repo-label"><span>public</span></span>
+          <span class="mega-octicon octicon-repo"></span>
+          <span class="author">
+            <a href="/lukehoban" class="url fn" itemprop="url" rel="author"><span itemprop="title">lukehoban</span></a>
+          </span>
+          <span class="repohead-name-divider">/</span>
+          <strong><a href="/lukehoban/es6features" class="js-current-repository js-repo-home-link">es6features</a></strong>
+
+          <span class="page-context-loader">
+            <img alt="Octocat-spinner-32" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+          </span>
+
+        </h1>
+      </div><!-- /.container -->
+    </div><!-- /.repohead -->
+
+    <div class="container">
+      <div class="repository-with-sidebar repo-container new-discussion-timeline js-new-discussion-timeline with-full-navigation ">
+        <div class="repository-sidebar clearfix">
+            
+
+<div class="sunken-menu vertical-right repo-nav js-repo-nav js-repository-container-pjax js-octicon-loaders">
+  <div class="sunken-menu-contents">
+    <ul class="sunken-menu-group">
+      <li class="tooltipped tooltipped-w" aria-label="Code">
+        <a href="/lukehoban/es6features" aria-label="Code" class="selected js-selected-navigation-item sunken-menu-item" data-gotokey="c" data-pjax="true" data-selected-links="repo_source repo_downloads repo_commits repo_tags repo_branches /lukehoban/es6features">
+          <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+        <li class="tooltipped tooltipped-w" aria-label="Issues">
+          <a href="/lukehoban/es6features/issues" aria-label="Issues" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-gotokey="i" data-selected-links="repo_issues /lukehoban/es6features/issues">
+            <span class="octicon octicon-issue-opened"></span> <span class="full-word">Issues</span>
+            <span class='counter'>1</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>        </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Pull Requests">
+        <a href="/lukehoban/es6features/pulls" aria-label="Pull Requests" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-gotokey="p" data-selected-links="repo_pulls /lukehoban/es6features/pulls">
+            <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull Requests</span>
+            <span class='counter'>0</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+
+        <li class="tooltipped tooltipped-w" aria-label="Wiki">
+          <a href="/lukehoban/es6features/wiki" aria-label="Wiki" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="repo_wiki /lukehoban/es6features/wiki">
+            <span class="octicon octicon-book"></span> <span class="full-word">Wiki</span>
+            <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>        </li>
+    </ul>
+    <div class="sunken-menu-separator"></div>
+    <ul class="sunken-menu-group">
+
+      <li class="tooltipped tooltipped-w" aria-label="Pulse">
+        <a href="/lukehoban/es6features/pulse" aria-label="Pulse" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="pulse /lukehoban/es6features/pulse">
+          <span class="octicon octicon-pulse"></span> <span class="full-word">Pulse</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Graphs">
+        <a href="/lukehoban/es6features/graphs" aria-label="Graphs" class="js-selected-navigation-item sunken-menu-item" data-pjax="true" data-selected-links="repo_graphs repo_contributors /lukehoban/es6features/graphs">
+          <span class="octicon octicon-graph"></span> <span class="full-word">Graphs</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Network">
+        <a href="/lukehoban/es6features/network" aria-label="Network" class="js-selected-navigation-item sunken-menu-item js-disable-pjax" data-selected-links="repo_network /lukehoban/es6features/network">
+          <span class="octicon octicon-git-branch"></span> <span class="full-word">Network</span>
+          <img alt="Octocat-spinner-32" class="mini-loader" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+    </ul>
+
+
+  </div>
+</div>
+
+              <div class="only-with-full-nav">
+                
+
+  
+
+<div class="clone-url "
+  data-protocol-type="http"
+  data-url="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone">
+  <h3><strong>HTTPS</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="https://github.com/lukehoban/es6features.git" readonly="readonly">
+
+    <span aria-label="copy to clipboard" class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="https://github.com/lukehoban/es6features.git" data-copied-hint="copied!"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+  
+
+<div class="clone-url open"
+  data-protocol-type="ssh"
+  data-url="/users/set_protocol?protocol_selector=ssh&amp;protocol_type=clone">
+  <h3><strong>SSH</strong> clone URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="git@github.com:lukehoban/es6features.git" readonly="readonly">
+
+    <span aria-label="copy to clipboard" class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="git@github.com:lukehoban/es6features.git" data-copied-hint="copied!"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+  
+
+<div class="clone-url "
+  data-protocol-type="subversion"
+  data-url="/users/set_protocol?protocol_selector=subversion&amp;protocol_type=clone">
+  <h3><strong>Subversion</strong> checkout URL</h3>
+  <div class="clone-url-box">
+    <input type="text" class="clone js-url-field"
+           value="https://github.com/lukehoban/es6features" readonly="readonly">
+
+    <span aria-label="copy to clipboard" class="js-zeroclipboard url-box-clippy minibutton zeroclipboard-button" data-clipboard-text="https://github.com/lukehoban/es6features" data-copied-hint="copied!"><span class="octicon octicon-clippy"></span></span>
+  </div>
+</div>
+
+
+<p class="clone-options">You can clone with
+      <a href="#" class="js-clone-selector" data-protocol="http">HTTPS</a>,
+      <a href="#" class="js-clone-selector" data-protocol="ssh">SSH</a>,
+      or <a href="#" class="js-clone-selector" data-protocol="subversion">Subversion</a>.
+  <span class="help tooltipped tooltipped-n" aria-label="Get help on which URL is right for you.">
+    <a href="https://help.github.com/articles/which-remote-url-should-i-use">
+    <span class="octicon octicon-question"></span>
+    </a>
+  </span>
+</p>
+
+  <a href="http://mac.github.com" data-url="github-mac://openRepo/https://github.com/lukehoban/es6features" class="minibutton sidebar-button js-conduit-rewrite-url">
+    <span class="octicon octicon-device-desktop"></span>
+    Clone in Desktop
+  </a>
+
+
+                <a href="/lukehoban/es6features/archive/master.zip"
+                   class="minibutton sidebar-button"
+                   title="Download this repository as a zip file"
+                   rel="nofollow">
+                  <span class="octicon octicon-cloud-download"></span>
+                  Download ZIP
+                </a>
+              </div>
+        </div><!-- /.repository-sidebar -->
+
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container>
+          
+
+<span id="js-show-full-navigation"></span>
+
+<div class="repository-meta js-details-container ">
+    <div class="repository-description js-details-show">
+      <p>Overview of ECMAScript 6 features</p>
+    </div>
+
+
+
+</div>
+
+<div class="capped-box overall-summary without-lang-stats">
+
+  <div class="stats-switcher-viewport js-stats-switcher-viewport">
+
+    <ul class="numbers-summary">
+      <li class="commits">
+        <a data-pjax href="/lukehoban/es6features/commits/master">
+            <span class="num">
+              <span class="octicon octicon-history"></span>
+              54
+            </span>
+            commits
+        </a>
+      </li>
+      <li>
+        <a data-pjax href="/lukehoban/es6features/branches">
+          <span class="num">
+            <span class="octicon octicon-git-branch"></span>
+            1
+          </span>
+          branch
+        </a>
+      </li>
+
+      <li>
+        <a data-pjax href="/lukehoban/es6features/releases">
+          <span class="num">
+            <span class="octicon octicon-tag"></span>
+            0
+          </span>
+          releases
+        </a>
+      </li>
+
+      <li>
+        
+  <a href="/lukehoban/es6features/graphs/contributors">
+    <span class="num">
+      <span class="octicon octicon-organization"></span>
+      18
+    </span>
+    contributors
+  </a>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
+
+
+
+
+
+<div class="file-navigation in-mid-page">
+    <a href="/lukehoban/es6features/compare" aria-label="Compare, review, create a pull request" class="minibutton compact primary tooltipped tooltipped-s" aria-label="Compare &amp; review" data-pjax>
+      <span class="octicon octicon-git-compare"></span>
+    </a>
+
+  
+
+<div class="select-menu js-menu-container js-select-menu" >
+  <span class="minibutton select-menu-button js-menu-target" data-hotkey="w"
+    data-master-branch="master"
+    data-ref="master"
+    role="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <span class="octicon octicon-git-branch"></span>
+    <i>branch:</i>
+    <span class="js-select-button">master</span>
+  </span>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="select-menu-title">Switch branches/tags</span>
+        <span class="octicon octicon-remove-close js-menu-close"></span>
+      </div> <!-- /.select-menu-header -->
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" class="js-select-menu-tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" class="js-select-menu-tab">Tags</a>
+            </li>
+          </ul>
+        </div><!-- /.select-menu-tabs -->
+      </div><!-- /.select-menu-filters -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <div class="select-menu-item js-navigation-item selected">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <a href="/lukehoban/es6features/tree/master"
+                 data-name="master"
+                 data-skip-pjax="true"
+                 rel="nofollow"
+                 class="js-navigation-open select-menu-item-text js-select-button-text css-truncate-target"
+                 title="master">master</a>
+            </div> <!-- /.select-menu-item -->
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div> <!-- /.select-menu-list -->
+
+    </div> <!-- /.select-menu-modal -->
+  </div> <!-- /.select-menu-modal-holder -->
+</div> <!-- /.select-menu -->
+
+
+  <div class="breadcrumb"><span class='repo-root js-repo-root'><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/lukehoban/es6features" data-branch="master" data-direction="back" data-pjax="true" itemscope="url"><span itemprop="title">es6features</span></a></span></span><span class="separator"> / </span><form action="/lukehoban/es6features/new/master" aria-label="Fork this project and create a new file" class="js-new-blob-form tooltipped tooltipped-e new-file-link" method="post"><span aria-label="Fork this project and create a new file" class="js-new-blob-submit octicon octicon-file-add" data-test-id="create-new-git-file" role="button"></span></form></div>
+</div>
+
+
+
+<a href="/lukehoban/es6features/find/master"
+  data-hotkey="t" class="js-show-file-finder" style="display:none" data-pjax>Show File Finder</a>
+<div class="bubble files-bubble">
+
+  
+  <div class="commit commit-tease js-details-container" >
+    <p class="commit-title ">
+        <a href="/lukehoban/es6features/commit/e7a1905d2bf610b18c2431a227cf10dd01837ebb" class="message" data-pjax="true" title="Merge pull request #32 from michalstanko/patch-1
+
+Fixed a typo">Merge pull request</a> <a href="https://github.com/lukehoban/es6features/pull/32" class="issue-link" title="Fixed a typo">#32</a> <a href="/lukehoban/es6features/commit/e7a1905d2bf610b18c2431a227cf10dd01837ebb" class="message" data-pjax="true" title="Merge pull request #32 from michalstanko/patch-1
+
+Fixed a typo">from michalstanko/patch-1</a>
+        <span class="hidden-text-expander inline"><a href="#" class="js-details-target">…</a></span>
+    </p>
+      <div class="commit-desc"><pre>Fixed a typo</pre></div>
+    <div class="commit-meta">
+      <span aria-label="Copy SHA" class="js-zeroclipboard zeroclipboard-link" data-clipboard-text="e7a1905d2bf610b18c2431a227cf10dd01837ebb" data-copied-hint="copied!"><span class="octicon octicon-clippy"></span></span>
+      <a href="/lukehoban/es6features/commit/e7a1905d2bf610b18c2431a227cf10dd01837ebb" class="sha-block" data-pjax>latest commit <span class="sha">e7a1905d2b</span></a>
+
+      <div class="authorship">
+        <img alt="Luke Hoban" class="gravatar js-avatar" data-user="223467" height="20" src="https://2.gravatar.com/avatar/e0c8f100556abaab7fd77258fa4f8879?d=https%3A%2F%2Fidenticons.github.com%2F0ddec67dcb2cc75008fb910252d30f65.png&amp;r=x&amp;s=140" width="20" />
+        <span class="author-name"><a href="/lukehoban" data-skip-pjax="true" rel="author">lukehoban</a></span>
+        authored <time class="js-relative-date updated" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-03-07T11:48:34-08:00" title="2014-03-07 14:48:34">March 07, 2014</time>
+
+      </div>
+    </div>
+  </div>
+
+  <table class="files" data-pjax>
+
+    
+<tbody class=""
+  data-url="/lukehoban/es6features/file-list/master">
+    <tr>
+      <td class="icon">
+        <span class="octicon octicon-file-text"></span>
+        <img alt="Octocat-spinner-32" class="spinner" height="16" src="https://github.global.ssl.fastly.net/images/spinners/octocat-spinner-32.gif" width="16" />
+      </td>
+      <td class="content">
+        <span class="css-truncate css-truncate-target"><a href="/lukehoban/es6features/blob/master/README.md" class="js-directory-link" id="04c6e90faac2675aa89e2176d2eec7d8-f05e56085447cea2382fd8d33558d69419b09de8" title="README.md">README.md</a></span>
+      </td>
+      <td class="message">
+        <span class="css-truncate css-truncate-target"><a href="/lukehoban/es6features/commit/e98b37c0662e06280635eb566e2566f78650ce10" class="message" data-pjax="true" title="Fixed a typo">Fixed a typo</a></span>
+      </td>
+      <td class="age"><span class="css-truncate css-truncate-target"><time class="js-relative-date" data-title-format="YYYY-MM-DD HH:mm:ss" datetime="2014-03-07T19:54:03+01:00" title="2014-03-07 18:54:03">March 07, 2014</time></span></td>
+    </tr>
+</tbody>
+
+  </table>
+</div>
+
+  <div id="readme" class="clearfix announce instapaper_body md">
+    <span class="name">
+      <span class="octicon octicon-book"></span>
+      README.md
+    </span>
+
+    <article class="markdown-body entry-content" itemprop="mainContentOfPage"><h1>
+<a name="ecmascript-6-gitioes6features" class="anchor" href="#ecmascript-6-gitioes6features"><span class="octicon octicon-link"></span></a>ECMAScript 6 <sup><a href="http://git.io/es6features">git.io/es6features</a></sup>
+</h1>
+
+<h2>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>ECMAScript 6 is the upcoming version of the ECMAScript standard.  This standard is targeting ratification in December 2014.  ES6 is a significant update to the language, and the first update to the language since ES5 was standardized in 2009.    Implementation of these features in major JavaScript engines is <a href="http://kangax.github.io/es5-compat-table/es6/">underway now</a>.</p>
+
+<p>See the <a href="https://people.mozilla.org/%7Ejorendorff/es6-draft.html">draft ES6 standard</a> for full specification of the ECMAScript 6 language.</p>
+
+<p>ES6 includes the following new features:</p>
+
+<ul>
+<li><a href="#arrows">arrows</a></li>
+<li><a href="#classes">classes</a></li>
+<li><a href="#enhanced-object-literals">enhanced object literals</a></li>
+<li><a href="#template-strings">template strings</a></li>
+<li><a href="#destructuring">destructuring</a></li>
+<li><a href="#default--rest--spread">default + rest + spread</a></li>
+<li><a href="#let--const">let + const</a></li>
+<li><a href="#iterators--forof">iterators + for..of</a></li>
+<li><a href="#generators">generators</a></li>
+<li><a href="#comprehensions">comprehensions</a></li>
+<li><a href="#unicode">unicode</a></li>
+<li><a href="#modules">modules</a></li>
+<li><a href="#modules-loaders">module loaders</a></li>
+<li><a href="#map--set--weakmap--weakset">map + set + weakmap + weakset</a></li>
+<li><a href="#proxies">proxies</a></li>
+<li><a href="#symbols">symbols</a></li>
+<li><a href="#subclassable-built-ins">subclassable built-ins</a></li>
+<li><a href="#promises">promises</a></li>
+<li><a href="#math--number--string--object-apis">math + number + string + object APIs</a></li>
+<li><a href="#binary-and-octal-literals">binary and octal literals</a></li>
+<li><a href="#reflect-api">reflect api</a></li>
+<li><a href="#tail-calls">tail calls</a></li>
+</ul><h2>
+<a name="ecmascript-6-features" class="anchor" href="#ecmascript-6-features"><span class="octicon octicon-link"></span></a>ECMAScript 6 Features</h2>
+
+<h3>
+<a name="arrows" class="anchor" href="#arrows"><span class="octicon octicon-link"></span></a>Arrows</h3>
+
+<p>Arrows are a function shorthand using the <code>=&gt;</code> syntax.  They are syntactically similar to the related feature in C#, Java 8 and CoffeeScript.  They support both expression and statement bodies.  Unlike functions, arrows share the same lexical <code>this</code> as their surrounding code.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Expression bodies</span>
+<span class="kd">var</span> <span class="nx">odds</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">nums</span> <span class="o">=</span> <span class="nx">evens</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">v</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">v</span> <span class="o">+</span> <span class="nx">i</span><span class="p">);</span>
+
+<span class="c1">// Statement bodies</span>
+<span class="nx">nums</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">v</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">v</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nx">fives</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="c1">// Lexical this</span>
+<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">_name</span><span class="o">:</span> <span class="s2">"Bob"</span><span class="p">,</span>
+  <span class="nx">_friends</span><span class="o">:</span> <span class="p">[],</span>
+  <span class="nx">printFriends</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">_friends</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">f</span> <span class="o">=&gt;</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">_name</span> <span class="o">+</span> <span class="s2">" knows "</span> <span class="o">+</span> <span class="nx">f</span><span class="p">));</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="classes" class="anchor" href="#classes"><span class="octicon octicon-link"></span></a>Classes</h3>
+
+<p>ES6 classes are a simple sugar over the prototype-based OO pattern.  Having a single convenient declarative form makes class patterns easier to use, and encourages interoperability.  Classes support prototype-based inheritance, super calls, instance and static methods and constructors.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kr">class</span> <span class="nx">SkinnedMesh</span> <span class="kr">extends</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Mesh</span> <span class="p">{</span>
+  <span class="nx">constructor</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">super</span><span class="p">(</span><span class="nx">geometry</span><span class="p">,</span> <span class="nx">materials</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">idMatrix</span> <span class="o">=</span> <span class="nx">SkinnedMesh</span><span class="p">.</span><span class="nx">defaultMatrix</span><span class="p">();</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">bones</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">boneMatrices</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="c1">//...</span>
+  <span class="p">}</span>
+  <span class="nx">update</span><span class="p">(</span><span class="nx">camera</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="kr">super</span><span class="p">.</span><span class="nx">update</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="kr">static</span> <span class="nx">defaultMatrix</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">THREE</span><span class="p">.</span><span class="nx">Matrix4</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="enhanced-object-literals" class="anchor" href="#enhanced-object-literals"><span class="octicon octicon-link"></span></a>Enhanced Object Literals</h3>
+
+<p>Object literals are extended to support setting the prototype at construction, shorthand for <code>foo: foo</code> assignments, defining methods and making super calls.  Together, these also bring object literals and class declarations closer together, and let object-based design benefit from some of the same conveniences.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="c1">// __proto__</span>
+   <span class="nx">__proto__</span><span class="o">:</span> <span class="nx">theProtoObj</span><span class="p">,</span>
+   <span class="c1">// Shorthand for ‘handler: handler’</span>
+   <span class="nx">handler</span><span class="p">,</span>
+   <span class="c1">// Methods</span>
+   <span class="nx">toString</span><span class="p">()</span> <span class="p">{</span>
+     <span class="c1">// Super calls</span>
+     <span class="k">return</span> <span class="s2">"d "</span> <span class="o">+</span> <span class="kr">super</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+   <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+<h3>
+<a name="template-strings" class="anchor" href="#template-strings"><span class="octicon octicon-link"></span></a>Template Strings</h3>
+
+<p>Template strings provide syntactic sugar for constructing strings.  This is similar to string interpolation features in Perl, Python and more.  Optionally, a tag can be added to allow the string construction to be customized, avoiding injection attacks or constructing higher level data structures from string contents.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Basic literal string creation</span>
+<span class="err">`</span><span class="nx">In</span> <span class="nx">JavaScript</span> <span class="s1">'\n'</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">line</span><span class="o">-</span><span class="nx">feed</span><span class="p">.</span><span class="err">`</span>
+
+<span class="c1">// Multiline strings</span>
+<span class="err">`</span><span class="nx">In</span> <span class="nx">JavaScript</span> <span class="k">this</span> <span class="nx">is</span>
+ <span class="nx">not</span> <span class="nx">legal</span><span class="p">.</span><span class="err">`</span>
+
+<span class="c1">// Construct a DOM query</span>
+<span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="s2">"Bob"</span><span class="p">,</span> <span class="nx">time</span> <span class="o">=</span> <span class="s2">"today"</span><span class="p">;</span>
+<span class="err">`</span><span class="nx">Hello</span> <span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">},</span> <span class="nx">how</span> <span class="nx">are</span> <span class="nx">you</span> <span class="nx">$</span><span class="p">{</span><span class="nx">time</span><span class="p">}</span><span class="o">?</span><span class="err">`</span>
+
+<span class="c1">// Construct an HTTP request prefix is used to interpret the replacements and construction</span>
+<span class="nx">GET</span><span class="err">`</span><span class="nx">http</span><span class="o">:</span><span class="c1">//foo.org/bar?a=${a}&amp;b=${b}</span>
+    <span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span><span class="o">:</span> <span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
+    <span class="nx">X</span><span class="o">-</span><span class="nx">Credentials</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">credentials</span><span class="p">}</span>
+    <span class="p">{</span> <span class="s2">"foo"</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">foo</span><span class="p">},</span>
+      <span class="s2">"bar"</span><span class="o">:</span> <span class="nx">$</span><span class="p">{</span><span class="nx">bar</span><span class="p">}}</span><span class="err">`</span><span class="p">(</span><span class="nx">myOnReadyStateChangeHandler</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="destructuring" class="anchor" href="#destructuring"><span class="octicon octicon-link"></span></a>Destructuring</h3>
+
+<p>Destructuring allows binding using pattern matching, with support for matching arrays and objects.  Destructuring is fail-soft, similar to standard object lookup <code>foo["bar"]</code>, producing <code>undefined</code> values when not found.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// list matching</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="p">,</span> <span class="nx">b</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+
+<span class="c1">// object matching</span>
+<span class="kd">var</span> <span class="p">{</span> <span class="nx">op</span><span class="o">:</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">lhs</span><span class="o">:</span> <span class="p">{</span> <span class="nx">op</span><span class="o">:</span> <span class="nx">b</span> <span class="p">},</span> <span class="nx">rhs</span><span class="o">:</span> <span class="nx">c</span> <span class="p">}</span>
+       <span class="o">=</span> <span class="nx">getASTNode</span><span class="p">()</span>
+
+<span class="c1">// object matching shorthand</span>
+<span class="c1">// binds `op`, `lhs` and `rhs` in scope</span>
+<span class="kd">var</span> <span class="p">{</span><span class="nx">op</span><span class="p">,</span> <span class="nx">lhs</span><span class="p">,</span> <span class="nx">rhs</span><span class="p">}</span> <span class="o">=</span> <span class="nx">getASTNode</span><span class="p">()</span>
+
+<span class="c1">// Can be used in parameter position</span>
+<span class="kd">function</span> <span class="nx">g</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="nx">x</span><span class="p">})</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nx">g</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="mi">5</span><span class="p">})</span>
+
+<span class="c1">// Fail-soft destructuring</span>
+<span class="kd">var</span> <span class="p">[</span><span class="nx">a</span><span class="p">]</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">a</span> <span class="o">===</span> <span class="kc">undefined</span><span class="p">;</span>
+</pre></div>
+
+<h3>
+<a name="default--rest--spread" class="anchor" href="#default--rest--spread"><span class="octicon octicon-link"></span></a>Default + Rest + Spread</h3>
+
+<p>Callee-evaluated default parameter values.  Turn an array into consecutive arguments in a function call.  Bind trailing parameters to an array.  Rest replaces the need for <code>arguments</code> and addresses common cases more directly.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// y is 12 if not passed (or passed as undefined)</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">15</span>
+</pre></div>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="p">...</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// y is an Array</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">y</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">f</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">"hello"</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+</pre></div>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">z</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// Pass each elem of array as argument</span>
+<span class="nx">f</span><span class="p">(...[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="o">==</span> <span class="mi">6</span>
+</pre></div>
+
+<h3>
+<a name="let--const" class="anchor" href="#let--const"><span class="octicon octicon-link"></span></a>Let + Const</h3>
+
+<p>Block-scoped binding constructs.  <code>let</code> is the new <code>var</code>.  <code>const</code> is single-assignment.  Static restrictions prevent use before assignment.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">function</span> <span class="nx">f</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">x</span><span class="p">;</span>
+    <span class="p">{</span>
+      <span class="c1">// okay, block scoped name</span>
+      <span class="kr">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">"sneaky"</span><span class="p">;</span>
+      <span class="c1">// error, const</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="s2">"foo"</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// error, already declared in block</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="s2">"inner"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="iterators--forof" class="anchor" href="#iterators--forof"><span class="octicon octicon-link"></span></a>Iterators + For..Of</h3>
+
+<p>Iterator objects enable custom iteration like CLR IEnumerable or Java Iteratable.  Generalize <code>for..in</code> to custom iterator-based iteration with <code>for..of</code>.  Don’t require realizing an array, enabling lazy design patterns like LINQ.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">let</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">next</span><span class="p">()</span> <span class="p">{</span>
+        <span class="p">[</span><span class="nx">pre</span><span class="p">,</span> <span class="nx">cur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nx">cur</span><span class="p">,</span> <span class="nx">pre</span> <span class="o">+</span> <span class="nx">cur</span><span class="p">];</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="nx">done</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">cur</span> <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">n</span> <span class="nx">of</span> <span class="nx">fibonacci</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// truncate the sequence at 1000</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="nx">print</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Iteration is based on these duck-typed interfaces (using <a href="http://typescriptlang.org">TypeScript</a> type syntax for exposition only):</p>
+
+<div class="highlight highlight-TypeScript"><pre><span class="kr">interface</span> <span class="nx">IteratorResult</span> <span class="p">{</span>
+  <span class="nx">done</span>: <span class="kt">boolean</span><span class="p">;</span>
+  <span class="nx">value</span>: <span class="kt">any</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">Iterator</span> <span class="p">{</span>
+  <span class="nx">next</span><span class="p">()</span><span class="o">:</span> <span class="nx">IteratorResult</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">interface</span> <span class="nx">Iterable</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]()</span><span class="o">:</span> <span class="nx">Iterator</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="generators" class="anchor" href="#generators"><span class="octicon octicon-link"></span></a>Generators</h3>
+
+<p>Generators simplify iterator-authoring using <code>function*</code> and <code>yield</code>.  A function declared as function* returns a Generator instance.  Generators are subtypes of iterators which include additional  <code>next</code> and <code>throw</code>.  These enable values to flow back into the generator, so <code>yield</code> is an expression form which returns a value (or throws).</p>
+
+<p>Note: Can also be used to enable ‘await’-like async programming, see also ES7 <code>await</code> proposal.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">var</span> <span class="nx">fibonacci</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]</span><span class="o">:</span> <span class="kd">function</span><span class="o">*</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">cur</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">temp</span> <span class="o">=</span> <span class="nx">pre</span><span class="p">;</span>
+      <span class="nx">pre</span> <span class="o">=</span> <span class="nx">cur</span><span class="p">;</span>
+      <span class="nx">cur</span> <span class="o">+=</span> <span class="nx">temp</span><span class="p">;</span>
+      <span class="k">yield</span> <span class="nx">cur</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">n</span> <span class="nx">of</span> <span class="nx">fibonacci</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// truncate the sequence at 1000</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="nx">print</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>The generator interface is (using <a href="http://typescriptlang.org">TypeScript</a> type syntax for exposition only):</p>
+
+<div class="highlight highlight-TypeScript"><pre><span class="kr">interface</span> <span class="nx">Generator</span> <span class="kr">extends</span> <span class="nx">Iterator</span> <span class="p">{</span>
+    <span class="nx">next</span><span class="p">(</span><span class="nx">value?</span>: <span class="kt">any</span><span class="p">)</span><span class="o">:</span> <span class="nx">IteratorResult</span><span class="p">;</span>
+    <span class="k">throw</span><span class="p">(</span><span class="nx">exception</span>: <span class="kt">any</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="comprehensions" class="anchor" href="#comprehensions"><span class="octicon octicon-link"></span></a>Comprehensions</h3>
+
+<p>Array and generator comprehensions provide simple declarative list processing similar as used in many functional programming patterns.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Array comprehensions</span>
+<span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">c</span> <span class="nx">of</span> <span class="nx">customers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">city</span> <span class="o">==</span> <span class="s2">"Seattle"</span><span class="p">)</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">c</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="nx">c</span><span class="p">.</span><span class="nx">age</span> <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1">// Generator comprehensions</span>
+<span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="k">for</span><span class="p">(</span><span class="nx">c</span> <span class="nx">of</span> <span class="nx">customers</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">city</span> <span class="o">==</span> <span class="s2">"Seattle"</span><span class="p">)</span>
+      <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">c</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span> <span class="nx">c</span><span class="p">.</span><span class="nx">age</span> <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+
+<h3>
+<a name="unicode" class="anchor" href="#unicode"><span class="octicon octicon-link"></span></a>Unicode</h3>
+
+<p>Non-breaking additions to support full Unicode, including new unicode literal form in strings and new RegExp <code>u</code> mode to handle code points, as well as new APIs to process strings at the 21bit code points level.  These additions support building global apps in JavaScript.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// same as ES5.1</span>
+<span class="s2">"𠮷"</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span>
+
+<span class="c1">// new RegExp behaviour, opt-in ‘u’</span>
+<span class="s2">"𠮷"</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="err">/./u)[0].length == 2</span>
+
+<span class="c1">// new form</span>
+<span class="s2">"\u{20BB7}"</span><span class="o">==</span><span class="s2">"𠮷"</span><span class="o">==</span><span class="s2">"\uD842\uDFB7"</span>
+
+<span class="c1">// new String ops</span>
+<span class="s2">"𠮷"</span><span class="p">.</span><span class="nx">codePointAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x20BB7</span>
+
+<span class="c1">// for-of iterates code points</span>
+<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">c</span> <span class="nx">of</span> <span class="s2">"𠮷"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">c</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="modules" class="anchor" href="#modules"><span class="octicon octicon-link"></span></a>Modules</h3>
+
+<p>Language-level support for modules for component definition.  Codifies patterns from popular JavaScript module loaders (AMD, CommonJS). Runtime behaviour defined by a host-defined default loader.  Implicitly async model – no code executes until requested modules are available and processed.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// lib/math.js</span>
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="kd">var</span> <span class="nx">pi</span> <span class="o">=</span> <span class="mf">3.141593</span><span class="p">;</span>
+</pre></div>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// app.js</span>
+<span class="nx">module</span> <span class="nx">math</span> <span class="nx">from</span> <span class="s2">"lib/math"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">math</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">));</span>
+</pre></div>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// otherApp.js</span>
+<span class="kr">import</span> <span class="p">{</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">pi</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"lib/math"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">pi</span><span class="p">));</span>
+</pre></div>
+
+<p>Some additional features include <code>export default</code> and <code>export *</code>:</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// lib/mathplusplus.js</span>
+<span class="kr">export</span> <span class="o">*</span> <span class="nx">from</span> <span class="s2">"lib/math"</span><span class="p">;</span>
+<span class="kr">export</span> <span class="kd">var</span> <span class="nx">e</span> <span class="o">=</span> <span class="mf">2.71828182846</span><span class="p">;</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">exp</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// app.js</span>
+<span class="nx">module</span> <span class="nx">math</span> <span class="nx">from</span> <span class="s2">"lib/mathplusplus"</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">exp</span> <span class="nx">from</span> <span class="s2">"lib/mathplusplus"</span><span class="p">;</span>
+<span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">exp</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">math</span><span class="p">.</span><span class="nx">e</span><span class="p">));</span>
+</pre></div>
+
+<h3>
+<a name="module-loaders" class="anchor" href="#module-loaders"><span class="octicon octicon-link"></span></a>Module Loaders</h3>
+
+<p>Module loaders support:</p>
+
+<ul>
+<li>Dynamic loading</li>
+<li>State isolation</li>
+<li>Global namespace isolation</li>
+<li>Compilation hooks</li>
+<li>Nested virtualization</li>
+</ul><p>The default module loader can be configured, and new loaders can be constructed to evaluated and load code in isolated or constrained contexts.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Dynamic loading – ‘System’ is default loader</span>
+<span class="nx">System</span><span class="p">.</span><span class="kr">import</span><span class="p">(</span><span class="s1">'lib/math'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">alert</span><span class="p">(</span><span class="s2">"2π = "</span> <span class="o">+</span> <span class="nx">m</span><span class="p">.</span><span class="nx">sum</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">pi</span><span class="p">,</span> <span class="nx">m</span><span class="p">.</span><span class="nx">pi</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="c1">// Create execution sandboxes – new Loaders</span>
+<span class="kd">var</span> <span class="nx">loader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Loader</span><span class="p">({</span>
+  <span class="nx">global</span><span class="o">:</span> <span class="nx">fixup</span><span class="p">(</span><span class="nb">window</span><span class="p">)</span> <span class="c1">// replace ‘console.log’</span>
+<span class="p">});</span>
+<span class="nx">loader</span><span class="p">.</span><span class="nb">eval</span><span class="p">(</span><span class="s2">"console.log('hello world!');"</span><span class="p">);</span>
+
+<span class="c1">// Directly manipulate module cache</span>
+<span class="nx">System</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<span class="nx">System</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">,</span> <span class="nx">Module</span><span class="p">({</span><span class="nx">$</span><span class="o">:</span> <span class="nx">$</span><span class="p">}));</span> <span class="c1">// WARNING: not yet finalized</span>
+</pre></div>
+
+<h3>
+<a name="map--set--weakmap--weakset" class="anchor" href="#map--set--weakmap--weakset"><span class="octicon octicon-link"></span></a>Map + Set + WeakMap + WeakSet</h3>
+
+<p>Efficient data structures for common algorithms.  WeakMaps provides leak-free object-key’d side tables.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Sets</span>
+<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Set</span><span class="p">();</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">"goodbye"</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">);</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">size</span> <span class="o">===</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">s</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">)</span> <span class="o">===</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="c1">// Maps</span>
+<span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">();</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="mi">42</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="mi">34</span><span class="p">);</span>
+<span class="nx">m</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">34</span><span class="p">;</span>
+
+<span class="c1">// Weak Maps</span>
+<span class="kd">var</span> <span class="nx">wm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakMap</span><span class="p">();</span>
+<span class="nx">wm</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="p">{</span> <span class="nx">extra</span><span class="o">:</span> <span class="mi">42</span> <span class="p">});</span>
+<span class="nx">wm</span><span class="p">.</span><span class="nx">size</span> <span class="o">===</span> <span class="kc">undefined</span>
+
+<span class="c1">// Weak Sets</span>
+<span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WeakSet</span><span class="p">();</span>
+<span class="nx">ws</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span> <span class="nx">data</span><span class="o">:</span> <span class="mi">42</span> <span class="p">});</span>
+<span class="c1">// Because the added object has no other references, it will not be held in the set</span>
+</pre></div>
+
+<h3>
+<a name="proxies" class="anchor" href="#proxies"><span class="octicon octicon-link"></span></a>Proxies</h3>
+
+<p>Proxies enable creation of objects with the full range of behaviors available to host objects.  Can be used for interception, object virtualization, logging/profiling, etc.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Proxying a normal object</span>
+<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="err">`</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">$</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span><span class="o">!</span><span class="err">`</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">world</span> <span class="o">===</span> <span class="s1">'Hello, world!'</span><span class="p">;</span>
+</pre></div>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Proxying a function object</span>
+<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">'I am the target'</span><span class="p">;</span> <span class="p">};</span>
+<span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">apply</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">receiver</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s1">'I am the proxy'</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Proxy</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">handler</span><span class="p">);</span>
+<span class="nx">p</span><span class="p">()</span> <span class="o">===</span> <span class="s1">'I am the proxy'</span><span class="p">;</span>
+</pre></div>
+
+<p>There are traps available for all of the runtime-level meta-operations:</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">var</span> <span class="nx">handler</span> <span class="o">=</span>
+<span class="p">{</span>
+  <span class="nx">get</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">set</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">has</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">deleteProperty</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">apply</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">construct</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">getOwnPropertyDescriptor</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">defineProperty</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">getPrototypeOf</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">setPrototypeOf</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">enumerate</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">ownKeys</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">preventExtensions</span><span class="o">:</span><span class="p">...,</span>
+  <span class="nx">isExtensible</span><span class="o">:</span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="symbols" class="anchor" href="#symbols"><span class="octicon octicon-link"></span></a>Symbols</h3>
+
+<p>Symbols enable access control for object state.  Symbols allow properties to be keyed by either <code>string</code> (as in ES5) or <code>symbol</code>.  Symbols are a new primitive type. Optional <code>name</code> parameter used in debugging - but is not part of identity.  Symbols are unique (like gensym), but not private since they are exposed via reflection features like <code>Object.getOwnPropertySymbols</code>.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">// module scoped symbol</span>
+  <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">"key"</span><span class="p">);</span>
+
+  <span class="kd">function</span> <span class="nx">MyClass</span><span class="p">(</span><span class="nx">privateData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">privateData</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">MyClass</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">doStuff</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+      <span class="p">...</span> <span class="k">this</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="p">...</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+
+<span class="p">})();</span>
+
+<span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyClass</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">)</span>
+<span class="nx">c</span><span class="p">[</span><span class="s2">"key"</span><span class="p">]</span> <span class="o">===</span> <span class="kc">undefined</span>
+</pre></div>
+
+<h3>
+<a name="subclassable-built-ins" class="anchor" href="#subclassable-built-ins"><span class="octicon octicon-link"></span></a>Subclassable Built-ins</h3>
+
+<p>In ES6, built-ins like <code>Array</code>, <code>Date</code> and DOM <code>Element</code>s can be subclassed.</p>
+
+<p>Object construction for a function named <code>Ctor</code> now uses two-phases (both virtually dispatched):</p>
+
+<ul>
+<li>Call <code>Ctor[@@create]</code> to allocate the object, installing any special behavior</li>
+<li>Invoke constructor on new instance to initialize</li>
+</ul><p>The known <code>@@create</code> symbol is available via <code>Symbol.create</code>.  Built-ins now expose their <code>@@create</code> explicitly.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// Pseudo-code of Array</span>
+<span class="kr">class</span> <span class="nb">Array</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+    <span class="kr">static</span> <span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">create</span><span class="p">]()</span> <span class="p">{</span>
+        <span class="c1">// Install special [[DefineOwnProperty]]</span>
+        <span class="c1">// to magically update 'length'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// User code of Array subclass</span>
+<span class="kr">class</span> <span class="nx">MyArray</span> <span class="kr">extends</span> <span class="nb">Array</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="kr">super</span><span class="p">(...</span><span class="nx">args</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Two-phase 'new':</span>
+<span class="c1">// 1) Call @@create to allocate object</span>
+<span class="c1">// 2) Invoke constructor on new instance</span>
+<span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArray</span><span class="p">();</span>
+<span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+<span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">2</span>
+</pre></div>
+
+<h3>
+<a name="math--number--string--object-apis" class="anchor" href="#math--number--string--object-apis"><span class="octicon octicon-link"></span></a>Math + Number + String + Object APIs</h3>
+
+<p>Many new library additions, including core Math libraries, Array conversion helpers, and Object.assign for copying.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="nb">Number</span><span class="p">.</span><span class="nx">EPSILON</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nx">isInteger</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">)</span> <span class="c1">// false</span>
+<span class="nb">Number</span><span class="p">.</span><span class="nb">isNaN</span><span class="p">(</span><span class="s2">"NaN"</span><span class="p">)</span> <span class="c1">// false</span>
+
+<span class="nb">Math</span><span class="p">.</span><span class="nx">acosh</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// 1.762747174039086</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">hypot</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="c1">// 5</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nx">imul</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// 2</span>
+
+<span class="s2">"abcde"</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s2">"cd"</span><span class="p">)</span> <span class="c1">// true</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">// "abcabcabc"</span>
+
+<span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'*'</span><span class="p">))</span> <span class="c1">// Returns a real Array</span>
+<span class="nb">Array</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1">// Similar to new Array(...), but without special one-arg behavior</span>
+<span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">].</span><span class="nx">fill</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1">// [0,7,7]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">].</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// 1</span>
+<span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">].</span><span class="nx">entries</span><span class="p">()</span> <span class="c1">// iterator [0, "a"], [1,"b"], [2,"c"]</span>
+<span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">].</span><span class="nx">keys</span><span class="p">()</span> <span class="c1">// iterator 0, 1, 2</span>
+<span class="p">[</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">,</span> <span class="s2">"c"</span><span class="p">].</span><span class="nx">values</span><span class="p">()</span> <span class="c1">// iterator "a", "b", "c"</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">Point</span><span class="p">,</span> <span class="p">{</span> <span class="nx">origin</span><span class="o">:</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="binary-and-octal-literals" class="anchor" href="#binary-and-octal-literals"><span class="octicon octicon-link"></span></a>Binary and Octal Literals</h3>
+
+<p>Two new numeric literal forms are addded for binary (<code>b</code>) and octal (<code>o</code>).</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="mi">0</span><span class="nx">b111110111</span> <span class="o">===</span> <span class="mi">503</span> <span class="c1">// true</span>
+<span class="mi">0</span><span class="nx">o767</span> <span class="o">===</span> <span class="mi">503</span> <span class="c1">// true</span>
+</pre></div>
+
+<h3>
+<a name="promises" class="anchor" href="#promises"><span class="octicon octicon-link"></span></a>Promises</h3>
+
+<p>Promises are a library for asynchronous programming.  Promises are a first class representation of a value that may be made available in the future.  Promises are used in many existing JavaScript libraries.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">function</span> <span class="nx">timeout</span><span class="p">(</span><span class="nx">duration</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+    <span class="p">})</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">timeout</span><span class="p">(</span><span class="mi">1000</span><span class="p">).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">timeout</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">"hmm"</span><span class="p">);</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span><span class="nx">timeout</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="nx">timeout</span><span class="p">(</span><span class="mi">200</span><span class="p">)]);</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="reflect-api" class="anchor" href="#reflect-api"><span class="octicon octicon-link"></span></a>Reflect API</h3>
+
+<p>Full reflection API exposing the runtime-level meta-operations on objects.  This is effectively the inverse of the Proxy API, and allows making calls corresponding to the same meta-operations as the proxy traps.  Especially useful for implementing proxies.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="c1">// No sample yet</span>
+</pre></div>
+
+<h3>
+<a name="tail-calls" class="anchor" href="#tail-calls"><span class="octicon octicon-link"></span></a>Tail Calls</h3>
+
+<p>Calls in tail-position are guaranteed to not grow the stack unboundedly.  Makes recursive algorithms safe in the face of unbounded inputs.</p>
+
+<div class="highlight highlight-JavaScript"><pre><span class="kd">function</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">acc</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'use strict'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="nx">acc</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">n</span> <span class="o">*</span> <span class="nx">acc</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Stack overflow in most implementations today,</span>
+<span class="c1">// but safe on arbitrary inputs in eS6</span>
+<span class="nx">factorial</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+</pre></div></article>
+  </div>
+
+
+        </div>
+
+      </div><!-- /.repo-container -->
+      <div class="modal-backdrop"></div>
+    </div><!-- /.container -->
+  </div><!-- /.site -->
+
+
+    </div><!-- /.wrapper -->
+
+      <div class="container">
+  <div class="site-footer">
+    <ul class="site-footer-links right">
+      <li><a href="https://status.github.com/">Status</a></li>
+      <li><a href="http://developer.github.com">API</a></li>
+      <li><a href="http://training.github.com">Training</a></li>
+      <li><a href="http://shop.github.com">Shop</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/about">About</a></li>
+
+    </ul>
+
+    <a href="/">
+      <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+    </a>
+
+    <ul class="site-footer-links">
+      <li>&copy; 2014 <span title="0.10788s from github-fe118-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="/site/terms">Terms</a></li>
+        <li><a href="/site/privacy">Privacy</a></li>
+        <li><a href="/security">Security</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+  </div><!-- /.site-footer -->
+</div><!-- /.container -->
+
+
+    <div class="fullscreen-overlay js-fullscreen-overlay" id="fullscreen_overlay">
+  <div class="fullscreen-container js-fullscreen-container">
+    <div class="textarea-wrap">
+      <textarea name="fullscreen-contents" id="fullscreen-contents" class="js-fullscreen-contents" placeholder="" data-suggester="fullscreen_suggester"></textarea>
+    </div>
+  </div>
+  <div class="fullscreen-sidebar">
+    <a href="#" class="exit-fullscreen js-exit-fullscreen tooltipped tooltipped-w" aria-label="Exit Zen Mode">
+      <span class="mega-octicon octicon-screen-normal"></span>
+    </a>
+    <a href="#" class="theme-switcher js-theme-switcher tooltipped tooltipped-w"
+      aria-label="Switch themes">
+      <span class="octicon octicon-color-mode"></span>
+    </a>
+  </div>
+</div>
+
+
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <a href="#" class="octicon octicon-remove-close close js-ajax-error-dismiss"></a>
+      Something went wrong with that request. Please try again.
+    </div>
+
+  </body>
+</html>
+

@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Untangle Your JavaScript with Browserify | Blog |  Django Development | Lincoln Loop</title>
+
+    <link rel=”alternate” type=”application/rss+xml” title="Lincoln Loop Blog” href="/blog/feed/ />
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+
+    
+    
+
+<script type="text/javascript" src="//use.typekit.net/avt3dhl.js"></script>
+<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+<link rel="stylesheet" type="text/css" media="screen, projection" href="/static/css/style.css?095501300813"  />
+<link rel="stylesheet" type="text/css" media="screen, projection" href=/static/fonts/fontello.css?014503190713"  />
+
+<!--[if IE]>
+<link rel="stylesheet" href="{/static/css/ie.css?485502200713" type="text/css" media="screen, projection" />
+<![endif]-->
+    
+    <meta name="Description" content="The Lincoln Loop blog. Find articles on Django, deployment, best practices, and more." />
+    <meta name="Keywords" content="django, web development, lincoln loop, lincolnloop, open source, git, python, html, css, javascript, geo-django, geodjango, geo, gis, deployment, backend, best practices, what not to do, blog posts, articles, feedback, thoughts on django" />
+
+    <link rel="alternate" type="application/rss+xml" title="Lincoln Loop Blog Feed" href="http://feeds.feedburner.com/LincolnLoop" />
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/pygments.css" />
+
+	<!-- Radio Guy Image from The Juniper Gallery: http://www.junipergallery.com/ -->
+
+</head>
+<body class="sub blog blog-post">
+
+
+<div id="container" class="container_12">
+    <div id="header">
+        <ul class="primary">
+            <li><a class="active" href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/services/">Services</a></li>
+            <li><a href="/work/">Work</a></li>
+            <li><a href="/jobs/">Jobs</a></li>
+            <li><a href="/contact/">Contact</a></li>
+        </ul>
+        <a href="/" class="logo"><img src="/static/img/logo.png" alt="Lincoln Loop" /></a>
+    </div>
+
+    <div id="main">
+        
+    <div class="nav clearfix">
+        <h4>
+            <a class="active" href="/blog/">Blog</a>
+            
+        </h4>
+    </div>
+
+	
+<div class="container_12 post">
+
+    
+    <div class="grid_2">&nbsp;</div>
+    <div class="grid_8 post-title">
+        
+
+        
+
+        <h1>Untangle Your JavaScript with Browserify</h1>
+    </div>
+    <div class="clear"></div>
+
+
+    
+    <div class="grid_2 post-aside">
+        
+
+<p class="date">Mar 03, 2014</p>
+<p class="author">
+    
+    <a href="/blog/by-author/bkonkle/">
+        <img src="/uploads/mugshots/brandon_1.png.80x80_q85_crop.jpg"/>
+    </a>
+    
+</p>
+
+    </div>
+
+    
+    <div class="grid_8 post-body">
+        
+
+        <div class="post-content">
+            <p class="byline">
+    Posted
+    
+    by <a href="/blog/by-author/bkonkle/">Brandon</a>
+    
+
+    
+    in
+    
+    <a href="/blog/categories/development/">Development</a>, 
+    
+    <a href="/blog/categories/javascript/">Javascript</a></p>
+
+
+            <p>We&#39;ve all been there. You&#39;re working on an project with a lot of JavaScript, and you need to add a new widget that depends on some libraries. You have a complex template structure and you don&#39;t know which libraries have been added as &lt;script&gt; tags already, or where they might be. You can&#39;t just add them to the template you&#39;re working on, because that would add redundant HTTP requests. Furthermore, you might end up overwriting a library that had plugins added to it, breaking other widgets that relied on those plugins. So, you end up putting all your &lt;script&gt; tags in your base template in a monolithic block and making sure you have them listed in the correct order.</p>
+
+<p>Some time later, you realize you need to clean up your script block, but you have no idea which ones are still being used and which aren&#39;t. You remove some tags you think are unneeded and the site seems fine when you click around, but later you get a bug report about a broken widget that was actually using that library. </p>
+
+<h2>It doesn&#39;t have to be this way</h2>
+
+<p>As we do increasingly amazing things with the web, the size and complexity of our JavaScript code has exploded! In many cases we&#39;re not building &quot;sites&quot; any more, we are truly building &quot;apps&quot; - highly interactive and responsive tools that look less and less like the hyperlinked pages of the original web. To move forward in this environment it&#39;s vital to keep your code clean, well structured, and maintainable.</p>
+
+<p>It&#39;s time to embrace modularity in our client-side code. Instead of writing tightly integrated code that depends on everything being in the global scope, we should strive to create decoupled, discrete components that clearly define their dependencies and the functionality that they export. There are many tools to help with this, but two of the most popular are <a href="http://browserify.org/">Browserify</a> and <a href="http://requirejs.org/">RequireJS</a>.</p>
+
+<h2>Browserify and transforms</h2>
+
+<p>Though we used RequireJS briefly, in the end we chose Browserify for its simplicity, easy extension through transforms, and its focus on npm and the Node.js module system. It is an astoundingly flexible system that implements a &quot;require&quot; function on the browser and cleanly encapsulates modules so that they don&#39;t pollute the global scope.</p>
+
+<p>Transforms allow Browserify to become incredibly versatile. You can consume AMD packages with <a href="https://github.com/jaredhanson/deamdify">deAMDify</a>, or use <a href="https://github.com/thlorenz/browserify-shim">browserify-shim</a> to consume libraries that attach themselves to the window. You can take advantage of alternate package management systems, like Bower with <a href="https://github.com/eugeneware/debowerify">debowerify</a> or Component with <a href="https://github.com/eugeneware/decomponentify">decomponentify</a>. You can smoothly handle code that needs to be precompiled, like <a href="https://github.com/jnordberg/coffeeify">CoffeeScript</a> and <a href="https://github.com/andreypopp/reactify">JSX</a>. You can even precompile things like <a href="https://github.com/epeli/node-hbsfy">Handlebars templates</a> so that you can &quot;require&quot; them in your modules.</p>
+
+<h2>Let&#39;s get to work!</h2>
+
+<p>So, enough talk about <em>why</em>. Let&#39;s move on to <em>how</em>! Browserify is built with Node.js, so you will need to <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager">have it installed</a> on your system. To take your first steps with Browserify, you&#39;ll probably want to install it globally so that you can use it as a command-line script.</p>
+
+<pre class="highlight"><code data-syntax="text-only">$ npm install -g browserify</code></pre>
+
+<h2>Writing modules</h2>
+
+<p>Now, let&#39;s write a simple module that requires something:</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">_</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;underscore&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">logUnderscoreVersion</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">VERSION</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">logUnderscoreVersion</span><span class="p">;</span></code></pre>
+
+<p>There are a few things you&#39;ll notice here. First, some of you will immediately point out that I&#39;m using <code data-syntax="text-only">&#39;use strict&#39;</code> outside of a function, and chastise me because that will apply strict mode to the entire global scope and break all the things! Thankfully, that&#39;s not the case here. Browserify encapsulates every module in it&#39;s own scope, so strict mode will only apply to the current module.</p>
+
+<p>To use the Underscore library, I&#39;m calling &quot;require&quot; and assigning it to the familiar &quot;_&quot; variable. At the moment, however, this will fail because we haven&#39;t installed it yet. Remedy this with npm:</p>
+
+<pre class="highlight"><code data-syntax="text-only">$ npm install underscore</code></pre>
+
+<p>By calling the &quot;install&quot; command without the &quot;-g&quot; flag, you&#39;re telling npm to install your dependency in the local &quot;node_modules&quot; folder, which it will create for you if needed. Browserify will use that folder to find Underscore and make it available to your module.</p>
+
+<p>Finally, at the end of the module I&#39;m &quot;exporting&quot; the function that I defined. This means that I am making that function available outside of my module. When another module requires my module, the result will be whatever I assigned to &quot;module.exports&quot;. This is how Node.js modules work. Anything I don&#39;t export stays private to my module.</p>
+
+<h2>Building a bundle</h2>
+
+<p>Now, let&#39;s use the command-line script to build a bundle for the browser. This will include all the required modules in one file. If you saved your module above as &quot;logunderscore.js&quot;, browserify it like this:</p>
+
+<pre class="highlight"><code data-syntax="text-only">$ browserify logunderscore.js &gt; bundle.js</code></pre>
+
+<p>Now you can include bundle.js in an HTML file using a single script tag, and you&#39;re ready to use your JavaScript! Code that is outside of a function will be executed immediately, so a common pattern is to use a &quot;main.js&quot; or an &quot;index.js&quot; as an entry point that requires whatever you need to initialize your app and kicks it off immediately.</p>
+
+<h2>Requiring your own modules</h2>
+
+<p>When you need to require one of your own modules, use the relative path. You don&#39;t need to add the &quot;.js&quot; at the end of the path.</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="kd">var</span> <span class="nx">logUnderscoreVersion</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./logunderscore&#39;</span><span class="p">);</span>
+<span class="nx">logUnderscoreVersion</span><span class="p">();</span></code></pre>
+
+<h2>Exporting multiple things</h2>
+
+<p>If you need to export multiple functions or objects, you can use the &quot;exports&quot; shortcut from Node.js.</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">logDate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getDate</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">logMonth</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getMonth</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">logDate</span> <span class="o">=</span> <span class="nx">logDate</span><span class="p">;</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">logMonth</span> <span class="o">=</span> <span class="nx">logMonth</span><span class="p">;</span></code></pre>
+
+<p>Then, you can use it like this:</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="kd">var</span> <span class="nx">dateUtils</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./dateutils&#39;</span><span class="p">);</span>
+<span class="nx">dateUtils</span><span class="p">.</span><span class="nx">logDate</span><span class="p">();</span>
+<span class="nx">dateUtils</span><span class="p">.</span><span class="nx">logMonth</span><span class="p">();</span></code></pre>
+
+<p>Or like this:</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="kd">var</span> <span class="nx">logDate</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./dateutils&#39;</span><span class="p">).</span><span class="nx">logDate</span><span class="p">;</span>
+<span class="nx">logDate</span><span class="p">();</span></code></pre>
+
+<h2>Integrating Browserify with build tools</h2>
+
+<p>Once you&#39;re comfortable with Browserify, you&#39;ll probably want to integrate it with your favorite build tool. </p>
+
+<h3>Browserify and Grunt</h3>
+
+<p>In Grunt, you&#39;ll use <a href="https://github.com/jmreidy/grunt-browserify">grunt-browserify</a>. Here&#39;s a config snippet that builds the bundle, and then watches for changes:</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="s1">&#39;browserify&#39;</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">debug</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">transform</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;reactify&#39;</span><span class="p">],</span>
+    <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;.jsx&#39;</span><span class="p">],</span>
+  <span class="p">},</span>
+  <span class="nx">dev</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">alias</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;react:&#39;</span><span class="p">]</span>  <span class="c1">// Make React available externally for dev tools</span>
+    <span class="p">},</span>
+    <span class="nx">src</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;client/index.js&#39;</span><span class="p">],</span>
+    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;build/bundle.js&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">production</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">debug</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="nx">src</span><span class="o">:</span> <span class="s1">&#39;&lt;%= browserify.dev.src %&gt;&#39;</span><span class="p">,</span>
+    <span class="nx">dest</span><span class="o">:</span> <span class="s1">&#39;build/bundle.js&#39;</span>
+  <span class="p">}</span>
+<span class="p">},</span></code></pre>
+
+<p>This config takes advantage of several features, some of which I haven&#39;t mentioned yet. It&#39;s using the <a href="https://github.com/andreypopp/reactify">reactify</a> transform to precompile JSX files for use with <a href="http://facebook.github.io/react/">React</a>. It instructs browserify to look for &quot;.jsx&quot; extensions so that you don&#39;t have to include them in your require path. It sets the debug flag so that Browserify will generate source maps for effective debugging in development, but overrides that flag in the production target to keep the build lean.</p>
+
+<p>The &quot;alias&quot; option makes a reqirement available through a global &quot;require&quot; function. This allows you to work with multiple bundles, if you&#39;d like. Here, though, it&#39;s being done so that the React dev tools extension can find React and enable a tab in Chrome. The &quot;alias&quot; setting in the Grunt plugin uses the <code data-syntax="text-only">bundle.require()</code> method from Browserify&#39;s API, which is also available with the &quot;-r&quot; flag on the command-line script.</p>
+
+<h3>Browserify and Gulp</h3>
+
+<p>The <a href="https://github.com/deepak1556/gulp-browserify">gulp-browserify</a> plugin is currently a bit more minimal than its Grunt counterpart, but you can still do everything that you&#39;d like to do by listening for the &quot;prebundle&quot; event and interacting with the bundler API directly.</p>
+
+<pre class="highlight"><code data-syntax="javascript"><span class="kd">var</span> <span class="nx">browserify</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-browserify&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">gutil</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-util&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rename</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;gulp-rename&#39;</span><span class="p">);</span>
+
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">&#39;browserify&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">production</span> <span class="o">=</span> <span class="nx">gutil</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;production&#39;</span><span class="p">;</span>
+
+  <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">([</span><span class="s1">&#39;index.js&#39;</span><span class="p">],</span> <span class="p">{</span><span class="nx">read</span><span class="o">:</span> <span class="kc">false</span><span class="p">})</span>
+
+    <span class="c1">// Browserify, and add source maps if this isn&#39;t a production build</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">browserify</span><span class="p">({</span>
+      <span class="nx">debug</span><span class="o">:</span> <span class="o">!</span><span class="nx">production</span><span class="p">,</span>
+      <span class="nx">transform</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;reactify&#39;</span><span class="p">],</span>
+      <span class="nx">extensions</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;.jsx&#39;</span><span class="p">]</span>
+    <span class="p">}))</span>
+
+    <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;prebundle&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">bundler</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// Make React available externally for dev tools</span>
+      <span class="nx">bundler</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;react&#39;</span><span class="p">);</span>
+    <span class="p">})</span>
+
+    <span class="c1">// Rename the destination file</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;bundle.js&#39;</span><span class="p">))</span>
+
+    <span class="c1">// Output to the build directory</span>
+    <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">&#39;build/&#39;</span><span class="p">));</span>
+<span class="p">});</span></code></pre>
+
+<h2>You, too, can Browserify today!</h2>
+
+<p>Hopefully this guide has illustrated the usefulness of Browserify and helped you get it up and running yourself. If you&#39;ve got questions or comments, let me know below or find me on Twitter <a href="https://twitter.com/bkonkle">@bkonkle</a>. Happy coding!</p>
+
+        </div>
+
+        <p class="more-container"><a href="/blog/" class="more">Find more posts on our blog</a></p>
+
+        <div class="post-taglines">
+            <p class="ginger-tag">
+                Need to get everyone on the same page? <strong><a href="http://gingerhq.com/">Try Ginger</a></strong>! Hold productive discussions with your teammates across the globe or across the hall. Build consensus, hash out complex ideas, and eliminate meetings altogether.
+            </p>
+            <p class="ll-tag">
+                
+                Looking for help building your web app? Lincoln Loop is a full service web studio focusing on Django development. <a href="/services/">See what we can do</a>.
+                
+            </p>
+        </div>
+
+        <div id="comments" class="post-comments">
+        
+        <div id="disqus_thread"> </div>
+        <script type="text/javascript">
+            var disqus_shortname = 'lincoln-loop';
+            var disqus_identifier = 'untangle-your-javascript-browserify';
+            var disqus_url = 'http://lincolnloop.com/blog/untangle-your-javascript-browserify/';
+            var disqus_title = 'Untangle Your JavaScript with Browserify';
+            
+
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+        </div>
+    </div>
+
+    <!--
+    <div class="grid_2 post-right">
+        <p class="more-container"><a href="/blog/" class="more">Blog Home</a></p>
+    </div>
+    -->
+</div>
+
+
+    <div class="clear"></div>
+
+    </div>
+</div>
+
+
+    
+
+<div id="footer">
+<div class="container_12">
+    <div class="main clearfix">
+    <div class="sitemap grid_7">
+        <ul class="clearfix">
+          <li><a class="active" href="/">Home</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/work/">Work</a></li>
+          <li><a href="/work/speaking/">Speaking</a></li>
+          <li style="width: 150px"><a href="/django-best-practices/">Django Best Practices</a></li>
+          <li><a href="/jobs/">Jobs</a></li>
+          <li><a class="active" href="/blog/">Blog</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+    </div>
+    <div class="social grid_2">
+        <ul>
+        <li><a href="http://twitter.com/lincolnloop"><span class="icon icon-twitter-rect"></span>Twitter</a></li>
+        <li><a href="/blog/feed/"><span class="icon icon-rss"></span>RSS</a></li>
+        </ul>
+    </div>
+    <div class="contact grid_3 omega">
+        <ul>
+        <li><span class="icon icon-phone"></span>+1.970.879.8810</li>
+        <li><a href="mailto:info@lincolnloop.com"><span class="icon icon-at"></span>info@lincolnloop.com</a></li>
+        </ul>
+    </div>
+    <div class="launchpad grid_12">
+        <div class="launchpad-box container_12 clearfix">
+            <div class="grid_5 label">
+                Subscribe and Learn! Join <strong>Django Round-Up</strong>, a low traffic mailing list with
+                high quality Django content.
+                <a class="learn-more" href="/django-round-up/">Learn more.</a>
+            </div>
+            <div class="grid_7 input">
+                <div class="success">
+                     <input class="inline-button" type="button" value="Add Another"/>
+                    <strong>Thanks!</strong> Welcome to the Django Round-Up Mailinglist.
+                </div>
+                <form method="POST" action="/django-round-up/">
+                    <input type='hidden' name='csrfmiddlewaretoken' value='R3DG2UCc9PCZXQbiZYQPQP43r2uWTMRq' />
+                    <input class="email" type="email" name="email" placeholder="you@example.com"/>
+                    <input class="inline-button" type="submit" value="Submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="copyright grid_12">
+        <p>&copy; Copyright 2007-2014 Lincoln Loop, LLC.</p>
+    </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- Load JS -->
+
+    <script type="text/javascript">
+        var mediaURL = /static/;
+    </script>
+    <script type="text/javascript" src="/static/js/libs/jquery-1.4.4.min.js?004503190713"></script>
+    <script type="text/javascript" src="/static/js/init.js?004503190713" charset="utf-8"></script>
+
+
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2434423-1']);
+    _gaq.push(['_trackPageview']);
+    _gaq.push(['_trackPageLoadTime']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+</body>
+</html>

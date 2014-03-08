@@ -1,0 +1,1154 @@
+
+<!DOCTYPE html>
+<html lang="en" class="isChrome ver330 isAnonymous isMobile " prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering the DOM access (100 lines of JavaScript) - Tech.Pro</title>
+    
+    <link rel="icon" href="http://tech.pro/favicon.ico">
+    <link rel="shortcut icon" href="http://tech.pro/favicon.ico">
+    <link rel="apple-touch-icon" sizes="57x57" href="//tpstatic.com/img/root/techpro/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="//tpstatic.com/img/root/techpro/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="//tpstatic.com/img/root/techpro/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="//tpstatic.com/img/root/techpro/apple-touch-icon-144x144.png" />
+    <link rel="search" type="application/opensearchdescription+xml" title="Tech.Pro" href="/OpenSearch">
+    <script type="text/javascript" src="/Scripts/ext/modernizr.js"></script>
+    <script type="text/javascript" src="//use.typekit.net/wsf0avv.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <link href="//tpstatic.com/bundles/css/bootstrap?v=pfT5OW9kXDWaj6LD9DsIHJM2wLvIExsAA_6Kl1jBrCg1" rel="stylesheet"/>
+
+    <link href="//tpstatic.com/bundles/css/master?v=fjsyiPS79IQrEuvhipfGb1ktOLdikpIC8k2jEIMGmtU1" rel="stylesheet"/>
+
+
+    
+    <link href="http://tech.pro/tutorial/1910/mastering-the-dom-access-100-lines-of-javascript" rel="canonical" />
+    <meta name="twitter:card" value="summary" />
+    <meta name="twitter:site" value="@techdotpro" />
+    <meta name="twitter:creator" value="@KrasimirTsonev" />
+
+    <meta content="article" property="og:type" />
+<meta content="Mastering the DOM access (100 lines of JavaScript)" property="og:title" />
+<meta content="http://tech.pro/tutorial/1910/mastering-the-dom-access-100-lines-of-javascript" property="og:url" />
+<meta content="http://www.gravatar.com/avatar/ac92c93f447d217e2ece66d84a0e0d3c.png?d=retro&amp;s=50" property="og:image" />
+<meta content="248957485211620" property="og:app_id" />
+<meta content="Tech.Pro" property="og:site_name" />
+
+    <meta content="Krasimir Tsonev" property="og:article:author" />
+    <meta content="Tutorial" property="og:article:section" />
+<meta content="02/28/2014 17:46:22" property="og:article:published_time" />
+    <meta content="Tech.Pro" property="og:site_name" />
+    <meta content="If you build web applications you probably communicate with the DOM a lot. Accessing and manipulating DOM elements is the thing which we do almost every day...." property="og:description" />
+    <meta content="If you build web applications you probably communicate with the DOM a lot. Accessing and manipulating DOM elements is the thing which we do almost every day...." name="description" />
+    
+
+<link href="https://plus.google.com/102456483730254999684/posts" rel="author" />
+    
+<meta content="DOM" property="og:article:tag" /><meta content="JavaScript" property="og:article:tag" />    <meta content="(Tag#1274) - DOM,(Tag#744) - JavaScript" name="keywords" />
+<meta content="http://krasimirtsonev.com/blog/article/Mastering-the-DOM-access-JavaScript-set-get-value" name="syndication-source" />    <link href="//tpstatic.com/bundles/css/articles?v=EQfOqo4nU9CyJouvBN3hsMhX2_iWLl0AjcDqOPdXvuY1" rel="stylesheet"/>
+
+
+    <script type="text/javascript">window.tprq=[];TP = { ready: function (f) { tprq.push(f); } };</script>
+    <!--[if lt IE 9]>
+        <script src="//tpstatic.com/scripts/ext/html5shiv.js"></script>
+        <script src="//tpstatic.com/scripts/splash/js/vendor/html5-3.6-respond-1.1.0.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="tp-alerts">
+        
+    </div>
+
+    <div class="bg-container">
+        <span id="mobile_menu_link">Menu</span>
+        <div class="container">
+
+            <div id="navbar" class="navbar">
+                <div id="top-nav">
+    <span itemscope="" itemtype="http://schema.org/Organization" >
+        <a class="logo" href="/" itemprop="url">Tech.Pro</a>
+        <meta itemprop="img" content="http://tech.pro/apple-touch-icon-144x144.png"/>
+    </span>
+    <ul id="nav-tools" class="navigation pull-right">
+        <li>
+            <a id="createProfile" href="/register?returnUrl=%2Ftutorial%2F1910%2Fmastering-the-dom-access-100-lines-of-javascript%3Futm_source%3Djavascriptweekly%26utm_medium%3Demail&amp;returnTitle=Mastering%20the%20DOM%20access%20%28100%20lines%20of%20JavaScript%29" rel="nofollow">Create a Profile</a>
+            <span class="muted" style="margin: 0 6px;display: inline-block;">or</span>
+            <a class="-login" href="/login?returnUrl=%2Ftutorial%2F1910%2Fmastering-the-dom-access-100-lines-of-javascript%3Futm_source%3Djavascriptweekly%26utm_medium%3Demail" rel="nofollow">Login</a>
+        </li>
+    </ul>
+    <ul id="tp-main-nav" class="navigation">
+        <li class="dropdown active">
+            <a href="http://tech.pro/">Content</a>
+            <ul class="dropdown-menu">
+                <li><a href="/">Feed</a></li>
+                <li><a href="/tutorials">Tutorials</a></li>
+                <li><a href="/blogs">Blogs</a></li>
+                <li><a href="/links">Links</a></li>
+                <li><a href="/questions">Q&amp;A</a></li>
+                <li><a href="/how-it-works">Contribute</a></li>
+            </ul>
+            <div class="indicator"></div>
+        </li>
+        <li class="dropdown ">
+            <a href="http://tech.pro/profiles">Network</a>
+            <ul class="dropdown-menu">
+                <li><a href="/profiles">Profiles</a></li>
+                <li><a href="/authors">Authors</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/companies">Companies</a></li>
+                <li><a href="/network">My Network</a></li>
+                <li><a href="/account/invite-others">Invite Others</a></li>
+            </ul>
+            <div class="indicator"></div>
+        </li>
+        <li class="dropdown ">
+            <a href="http://tech.pro/about-us">More</a>
+            <ul class="dropdown-menu">
+                <li><a href="/how-it-works">How Tech.Pro Works</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/contact-us">Contact Us</a></li>
+                <li><a href="/sitemap">Site Map</a></li>
+            </ul>
+            <div class="indicator"></div>
+        </li>
+            <li class="mobile-nav"><a href="/login?returnUrl=%2Ftutorial%2F1910%2Fmastering-the-dom-access-100-lines-of-javascript%3Futm_source%3Djavascriptweekly%26utm_medium%3Demail">Login</a></li>
+            <li class="mobile-nav"><a href="/register?returnUrl=%2Ftutorial%2F1910%2Fmastering-the-dom-access-100-lines-of-javascript%3Futm_source%3Djavascriptweekly%26utm_medium%3Demail">Create a Profile</a></li>
+    </ul>
+</div>
+<div id="sub-nav">
+    
+    <ul class="navigation pull-right">
+        <li><a class="" href="/how-it-works">How Tech.Pro Works</a></li>
+    </ul>
+
+    
+
+    <!-- ko stopBinding: true -->
+    <div id="global-search" class="tp-global-search">
+    
+        <div>
+            <input type="text" class="search-input" placeholder="Search Tech.Pro"
+                   data-bind="offset: menuPosition, value: query, valueUpdate: 'afterkeydown', event: inputEvents"/>
+            
+            
+        </div>
+
+        <ul class="results-list unstyled" 
+            data-bind="position: menuPosition, visible: isMenuVisible, on: listEvents, event: listElementEvents" style="display:none;">
+        <!-- ko foreach: items.grouped -->
+
+            <li class="category" data-bind="text: $parent.categories[$data.type]"></li>
+
+            <!-- ko template: { name: 'gs_item_template', foreach: $data } -->
+            <!-- /ko -->
+        
+        <!-- /ko -->
+        </ul>
+    
+    
+    
+    </div>
+    <!-- /ko -->
+    
+
+</div>
+
+            </div>
+            
+
+
+
+<table class="tp-signup-banner" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+<td class="signup-logo"><img src="//tpstatic.com/img/layout/techpro/joinBannerImage.png" /></td>        <td class="tagline"><span class="tagline-text">The nerd table is now the cool table.</span></td>
+        <td class="signup-action">
+            <a id="signupbannerjoinnow" class="btn btn-yellow" href="/how-it-works">
+                learn more
+            </a>
+        </td>
+    </tr>
+</table>
+<script>
+    TP.ready(function () {
+        $("#signupBannerJoinNow").click(function() {
+            TP.trackEvent({ category: "join_now_click", action: "The nerd table is now the cool table." });
+        });
+    })
+</script>
+
+
+
+<div id="content-wrapper">
+
+    <div class="sidebar-wrapper clearfix">       
+        <div class="pane content-pane main-body clearfix">
+            
+
+
+
+<div itemscope="" itemtype="http://schema.org/Article"  class="-entity" data-tp="{&quot;id&quot;:1910,&quot;type&quot;:&quot;article&quot;,&quot;score&quot;:2}">
+    <div class="clearfix -article-profile">
+        <div class="pull-right" style="text-align: right; margin: 0 0 8px 0;">
+
+            <ul class="tp-tag-list" itemprop="keywords">
+    <a class="tp-tag" data-tp="{&quot;id&quot;:1274}" >
+        DOM
+    </a>
+    <a class="tp-tag" data-tp="{&quot;id&quot;:744}" >
+        JavaScript
+    </a>
+            </ul>
+
+        </div>
+
+            <span class="tp-author-card pull-left" itemscope itemprop="author" itemtype="http://schema.org/Person">
+            <a href="http://tech.pro/krasimir" class="tp-gravatar small pull-left" data-tp="{&quot;id&quot;:16459}">
+        <img width="24" height="24"  alt="Krasimir Tsonev" src="http://www.gravatar.com/avatar/ac92c93f447d217e2ece66d84a0e0d3c.png?d=retro&amp;s=24"  itemprop="image"/>
+    </a>
+
+        <span>
+            <a class="author" href="http://tech.pro/krasimir" itemprop="url">
+                <span itemprop="name">Krasimir Tsonev</span>
+            </a>
+                <br />
+                <span class="post-date">posted <time datetime="2014-02-28T17:46:22" itemprop="datePublished">7 days ago</time></span>
+        </span>
+    </span>
+
+
+        <span class="tp-entity-tools">
+
+                            <span title="Flag Post" class="-flag -tooltip"><i class="tp-di-icon">K</i> </span> 
+        </span>
+    </div>
+
+
+    <div class="tp-article-difficulty beginner detail">
+        BEGINNER
+    </div>
+    <div>
+        
+        <h1 class="tp-article-title" itemprop="headline">Mastering the DOM access (100 lines of JavaScript)</h1>
+    </div>
+    <div class="tp-body clean-type center-images clearfix" itemprop="articleBody">
+        
+        <!-- ko stopBinding: true --><p>If you build web applications you probably communicate with the DOM a lot. Accessing and manipulating DOM elements is the thing which we do almost every day. Very often we collect information from different controls, we need to set values, change the content of <i>div</i> or <i>span</i> tags. Of course there are million libraries which handle these actions. The most popular jQuery, is de factor a standard. However, sometimes you need something smaller. In this article we will build our own class for managing DOM elements.</p>
+
+<h2 id="the_api">The API</h2>
+
+<p>As developers we take decisions every day. I believe in the test-driven development and one of the things which I really like is the fact that we are taking design decisions before to start the actual coding. Here is how I want the class's API to look like at the end.</p>
+
+<pre><code>// returns DOM element
+dom('.selector').el
+// returns the value/content of the element
+dom('.selector').val() 
+// sets the value/content of the element
+dom('.selector').val('value') 
+</code></pre>
+
+<p>That's good. It covers most of the possible use cases. However it will be even better if we could manipulate several objects at once. And it will be great if we generate a JavaScript object.</p>
+
+<pre><code>// generates an object containing DOM elements
+dom({
+    structure: {
+        propA: '.selector',
+        propB: '.selector'
+    },
+    propC: '.selector'
+}) 
+</code></pre>
+
+<p>Once we have our elements stored we could easily execute the <i>val</i> method for all of them.</p>
+
+<pre><code>// retrieving the values of several DOM elements
+dom({
+    structure: {
+        propA: '.selector',
+        propB: '.selector'
+    },
+    propC: '.selector'
+}).val()
+</code></pre>
+
+<p>This will be effective method for translating data from the DOM directly into JavaScript object.</p>
+
+<p>We have an idea about the API and our class starts with the following code:</p>
+
+<pre><code>var dom = function(el) {
+    var api = { el: null }
+    api.val = function(value) {
+        // ...
+    }
+    return api;
+}
+</code></pre>
+
+<h2 id="scoping">Scoping</h2>
+
+<p>It is clear that we are going to use methods like <i>getElementById</i>, <i>querySelector</i> or <i>querySelectorAll</i>. Normally we access the DOM like that:</p>
+
+<pre><code>var header = document.querySelector('.header');
+</code></pre>
+
+<p>What is really interesting here is that the <i>querySelector</i> for example is not only method of the <i>document</i> object, but also of any other DOM element. This means that we are able to run the query in specific context. For example:</p>
+
+<pre><code>&lt;header&gt;
+    &lt;p&gt;Big&lt;/p&gt;
+&lt;/header&gt;
+&lt;footer&gt;
+    &lt;p&gt;Small&lt;/p&gt;
+&lt;/footer&gt;
+
+var header = document.querySelector('header');
+var footer = document.querySelector('footer');
+console.log(header.querySelector('p').textContent); // Big
+console.log(footer.querySelector('p').textContent); // Small
+</code></pre>
+
+<p>This means that we are able to operate in specific part of the DOM tree and our class should support passing of scope. So, together with selector it will be good if it accepts a parent element.</p>
+
+<pre><code>var dom = function(el, parent) {
+    var api = { el: null }
+    api.val = function(value) {
+        // ...
+    }
+    return api;
+}
+</code></pre>
+
+<h2 id="reaching_the_dom_element">Reaching the DOM element</h2>
+
+<p>As we said above we are going to use <i>querySelector</i> and <i>querySelectorAll</i> to reach the DOM elements. Let's create two shortcuts for these functions.</p>
+
+<pre><code>var qs = function(selector, parent) {
+    parent = parent || document;
+    return parent.querySelector(selector);
+};
+var qsa = function(selector, parent) {
+    parent = parent || document;
+    return parent.querySelectorAll(selector);
+};
+</code></pre>
+
+<p>After that we should use the passed <i>el</i> argument. Normally this will be a string (selector) but we may support:</p>
+
+<ul>
+<li>DOM element - the <i>val</i> method of the class will be pretty handy so we may need to use the class with already referenced element</li>
+<li>A JavaScript object - in order to create JavaScript object containing multiple DOM elements</li>
+</ul>
+
+<p>The following switch will cover both cases:</p>
+
+<pre><code>switch(typeof el) {
+    case 'string':
+        parent = parent &amp;&amp; typeof parent === 'string' ? qs(parent) : parent;
+        api.el = qs(el, parent);
+    break;
+    case 'object': 
+        if(typeof el.nodeName != 'undefined') {
+            api.el = el;
+        } else {
+            var loop = function(value, obj) {
+                obj = obj || this;
+                for(var prop in obj) {
+                    if(typeof obj[prop].el != 'undefined') {
+                        obj[prop] = obj[prop].val(value);
+                    } else if(typeof obj[prop] == 'object') {
+                        obj[prop] = loop(value, obj[prop]);
+                    }
+                }
+                delete obj.val;
+                return obj;
+            }
+            var res = { val: loop };
+            for(var key in el) {
+                res[key] = dom.apply(this, [el[key], parent]);
+            }
+            return res;
+        }
+    break;
+}
+</code></pre>
+
+<p>The first case is executed if the developer passes a string. We prepare the parent and call the <i>querySelector</i> shortcut. The second part of the statement is for the cases where we have a DOM element sent or a JavaScript object. We are checking if the object has <i>nodeName</i> property, and if yes then we directly apply it as a value of the <i>api.el</i> property. If not then we go through all the parts of the object and initialize a class instance for every property. Here are some test cases involving the following markup:</p>
+
+<pre><code>&lt;p&gt;text&lt;/p&gt;
+&lt;header&gt;
+    &lt;p&gt;Big&lt;/p&gt;
+&lt;/header&gt;
+&lt;footer&gt;
+    &lt;p&gt;Small&lt;/p&gt;
+&lt;/footer&gt;
+</code></pre>
+
+<p>Accessing the first paragraph:</p>
+
+<pre><code>dom('p').el
+</code></pre>
+
+<p>Accessing the paragraph in the <i>header</i> node:</p>
+
+<pre><code>dom('p', 'header').el
+</code></pre>
+
+<p>Passing a DOM element:</p>
+
+<pre><code>dom(document.querySelector('header')).el
+</code></pre>
+
+<p>Passing JavaScript object:</p>
+
+<pre><code>var els = dom({
+    footer: 'footer',
+    paragraphs: {
+        header: 'header p',
+        footer: 'footer p'
+    }
+}))
+// At the end we have again JavaScript object.
+// It's properties are actually results
+// of dom function execution. For example, to get
+// the paragraph in the footer:
+els.paragraphs.footer.el
+</code></pre>
+
+<h2 id="getting_or_setting_the_value_of_an_element">Getting or setting the value of an element</h2>
+
+<p>The value of the form elements like <i>input</i> or <i>select</i> could be retrieve easily - we may use the <i>value</i> property of the element. And we already have an access to the DOM element - it is stored in <i>api.el</i>. However, it is a little bit tricky when we are working with radio or check boxes. For the other HTML nodes like divs, sections or spans for example we need to get the value of the <i>textContent</i> property. If there is no <i>textContent</i> defined then <i>innerHTML</i> will produce similar results. Let's use again a <i>switch</i> statement:</p>
+
+<pre><code>api.val = function(value) {
+    if(!this.el) return null;
+    var set = !!value;
+    var useValueProperty = function(value) {
+        if(set) { this.el.value = value; return api; }
+        else { return this.el.value; }
+    }
+    switch(this.el.nodeName.toLowerCase()) {
+        case 'input':
+        break;
+        case 'textarea':
+        break;
+        case 'select':              
+        break;
+        default:
+    }
+    return set ? api : null;
+} 
+</code></pre>
+
+<p>First of all we should have <i>api.el</i> defined. The variable <i>set</i> is a boolean telling us if we are retrieving or setting the value of the element. There is a helper method defined for those elements which have <i>.value</i> property. The <i>switch</i> will contain the actual logic of the method. At the end we are returning the API itself in order to chain the methods of the class. Of course we are doing this only if we are using the function as a setter.</p>
+
+<p>Let's see how to handle the different types of elements. For example the <i>input</i> node:</p>
+
+<pre><code>case 'input':
+    var type = this.el.getAttribute('type');
+    if(type == 'radio' || type == 'checkbox') {
+        var els = qsa('[name="' + this.el.getAttribute('name') + '"]', parent);
+        var values = [];
+        for(var i=0; i&lt;els.length; i++) {
+            if(set &amp;&amp; els[i].checked &amp;&amp; els[i].value !== value) {
+                els[i].removeAttribute('checked');
+            } else if(set &amp;&amp; els[i].value === value) {
+                els[i].setAttribute('checked', 'checked');
+                els[i].checked = 'checked';
+            } else if(els[i].checked) {
+                values.push(els[i].value);
+            }
+        }
+        if(!set) { return type == 'radio' ? values[0] : values; }
+    } else {
+        return useValueProperty.apply(this, [value]);
+    }
+break;
+</code></pre>
+
+<p>This is maybe the most interesting case. There are two types of elements which need to be process differently - radio and check boxes. These elements are grouped into sets and we need to have this in mind. That's why we are using <i>querySelectorAll</i> to fetch the whole group and find out which one is selected/checked. It's even more complex, because a group of check boxes could have more then one value. The method above successfully handles all these situations.</p>
+
+<p>The processing of <i>textarea</i> element is pretty simple thankfully to the helper which we wrote above.</p>
+
+<pre><code>case 'textarea': 
+    return useValueProperty.apply(this, [value]); 
+break;
+</code></pre>
+
+<p>Handling of a drop down:</p>
+
+<pre><code>case 'select':
+    if(set) {
+        var options = qsa('option', this.el);
+        for(var i=0; i&lt;options.length; i++) {
+            if(options[i].getAttribute('value') === value) {
+                this.el.selectedIndex = i;
+            } else {
+                options[i].removeAttribute('selected');
+            }
+        }
+    } else {
+        return this.el.value;
+    }
+break;
+</code></pre>
+
+<p>Processing of everything else:</p>
+
+<pre><code>default: 
+    if(set) {
+        this.el.innerHTML = value;
+    } else {
+        if(typeof this.el.textContent != 'undefined') {
+            return this.el.textContent;
+        } else if(typeof this.el.innerText != 'undefined') {
+            return typeof this.el.innerText;
+        } else {
+            return this.el.innerHTML;
+        }
+    }
+break;
+</code></pre>
+
+<p>With these lines of code we are finishing our <i>val</i> method. Here is a short HTML form and its corresponding test:</p>
+
+<pre><code>&lt;form&gt;
+    &lt;input type="text" value="sample text" /&gt;
+    &lt;input type="radio" name="options" value="A"&gt;
+    &lt;input type="radio" name="options" checked value="B"&gt;
+    &lt;select&gt;
+        &lt;option value="10"&gt;&lt;/option&gt;
+        &lt;option value="20"&gt;&lt;/option&gt;
+        &lt;option value="30" selected&gt;&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;footer&gt;version: 0.3&lt;/footer&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p>If we use the following code:</p>
+
+<pre><code>dom({
+    name: '[type="text"]',
+    data: {
+        options: '[type="radio"]',
+        count: 'select'
+    },
+    version: 'footer'
+}, 'form').val();
+</code></pre>
+
+<p>We will get:</p>
+
+<pre><code>{
+    data: {
+        count: "30",
+        options: "B"
+    },
+    name: "sample text",
+    version: "version: 0.3"
+}
+</code></pre>
+
+<p>This method could be really helpful if you want to translate a data from HTML form into JavaScript object. It's actually pretty common task and I'm sure that we are doing this almost every day.</p>
+
+<h2 id="final_result">Final result</h2>
+
+<p>The produced class is only 100 lines of code. We could use it to access DOM elements, to get or set their value/content.</p>
+
+<pre><code>var dom = function(el, parent) {
+    var api = { el: null }
+    var qs = function(selector, parent) {
+        parent = parent || document;
+        return parent.querySelector(selector);
+    };
+    var qsa = function(selector, parent) {
+        parent = parent || document;
+        return parent.querySelectorAll(selector);
+    };
+    switch(typeof el) {
+        case 'string':
+            parent = parent &amp;&amp; typeof parent === 'string' ? qs(parent) : parent;
+            api.el = qs(el, parent);
+        break;
+        case 'object': 
+            if(typeof el.nodeName != 'undefined') {
+                api.el = el;
+            } else {
+                var loop = function(value, obj) {
+                    obj = obj || this;
+                    for(var prop in obj) {
+                        if(typeof obj[prop].el != 'undefined') {
+                            obj[prop] = obj[prop].val(value);
+                        } else if(typeof obj[prop] == 'object') {
+                            obj[prop] = loop(value, obj[prop]);
+                        }
+                    }
+                    delete obj.val;
+                    return obj;
+                }
+                var res = { val: loop };
+                for(var key in el) {
+                    res[key] = dom.apply(this, [el[key], parent]);
+                }
+                return res;
+            }
+        break;
+    }
+    api.val = function(value) {
+        if(!this.el) return null;
+        var set = !!value;
+        var useValueProperty = function(value) {
+            if(set) { this.el.value = value; return api; }
+            else { return this.el.value; }
+        }
+        switch(this.el.nodeName.toLowerCase()) {
+            case 'input':
+                var type = this.el.getAttribute('type');
+                if(type == 'radio' || type == 'checkbox') {
+                    var els = qsa('[name="' + this.el.getAttribute('name') + '"]', parent);
+                    var values = [];
+                    for(var i=0; i&lt;els.length; i++) {
+                        if(set &amp;&amp; els[i].checked &amp;&amp; els[i].value !== value) {
+                            els[i].removeAttribute('checked');
+                        } else if(set &amp;&amp; els[i].value === value) {
+                            els[i].setAttribute('checked', 'checked');
+                            els[i].checked = 'checked';
+                        } else if(els[i].checked) {
+                            values.push(els[i].value);
+                        }
+                    }
+                    if(!set) { return type == 'radio' ? values[0] : values; }
+                } else {
+                    return useValueProperty.apply(this, [value]);
+                }
+            break;
+            case 'textarea': 
+                return useValueProperty.apply(this, [value]); 
+            break;
+            case 'select':
+                if(set) {
+                    var options = qsa('option', this.el);
+                    for(var i=0; i&lt;options.length; i++) {
+                        if(options[i].getAttribute('value') === value) {
+                            this.el.selectedIndex = i;
+                        } else {
+                            options[i].removeAttribute('selected');
+                        }
+                    }
+                } else {
+                    return this.el.value;
+                }
+            break;
+            default: 
+                if(set) {
+                    this.el.innerHTML = value;
+                } else {
+                    if(typeof this.el.textContent != 'undefined') {
+                        return this.el.textContent;
+                    } else if(typeof this.el.innerText != 'undefined') {
+                        return typeof this.el.innerText;
+                    } else {
+                        return this.el.innerHTML;
+                    }
+                }
+            break;
+        }
+        return set ? api : null;
+    }
+    return api;
+}
+</code></pre>
+
+<p><a href="http://jsbin.com/locap/5/embed?html,js,console">Here</a> is a jsbin to play with.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>The class above is part of <a href="http://absurdjs.com/pages/client-side-components/">AbsurdJS client-side components</a>. The full documentation of the module could be found <a href="http://absurdjs.com/pages/api/build-in-components/#dom">here</a>. The aim of the code is not to replace jQuery or the dozen popular available libraries. The idea of the function is to be independent, to do only one thing and to do it well. Which is the main concept behind <a href="http://absurdjs.com/">AbsurdJS</a> and its build-in modules like the <a href="http://absurdjs.com/pages/api/build-in-components/#router">router</a> or <a href="http://absurdjs.com/pages/api/build-in-components/#ajax">Ajax</a> wrapper.</p>
+<!-- /ko -->
+    </div>
+    
+    
+    <span class="hide" itemscope itemprop="publisher" itemtype="http://schema.org/Organization">
+        <a href="http://tech.pro/" itemprop="url">Tech.Pro</a>
+    </span>
+
+        <div>
+            
+            The original source for this post <a href="http://krasimirtsonev.com/blog/article/Mastering-the-DOM-access-JavaScript-set-get-value" target="_blank">can be found here</a>.
+        </div>
+    
+    
+
+        <table class="tp-like-bar">
+        <tr>
+            <td class="tp-like-cell">
+                <a class="btn btn-large btn-like -vote -article1910 no-tooltip" data-tp='{"id":1910,"type":"article","score":2}'>
+                    <span class="icon-thumbs-up icon-white"></span>
+                    <span class="unlike-lbl">Unlike this</span>
+                    <span class="like-lbl">Like this post</span>
+                </a>
+            </td>
+            <td width="100%" height="45"><hr/></td>
+                <td nowrap="true" valign="middle">
+                    <div class="social-media">
+                        <ul class="social-list unstyled horizontal-list pull-right">
+                            <li title="Tweet this Post" class="btn-social twitter -tooltip"></li>
+                            <li title="Share on Facebook" class="btn-social facebook -tooltip"></li>
+                            <li title="Share on Google+" class="btn-social googleplus -tooltip"></li>
+                        </ul>
+                    </div>
+                </td>
+        </tr>
+    </table>
+
+    
+    
+    
+        <div id="W9GJtC2jDUO1gjQYuW4TSg" class=""></div>
+    <script type="text/javascript">
+        TP.ready(function () {
+            $.get('/ajax/post/related-inline?id=1910&title=Mastering+the+DOM+access+(100+lines+of+JavaScript)', function (response, status) {  
+                $('#W9GJtC2jDUO1gjQYuW4TSg').html(response);
+                TP.minSidebarHeight();
+            });
+        });
+    </script>
+
+    
+    
+    
+    
+
+<div class="tp-inline-register">
+    
+    <div class="login">
+        <form method="POST" action="/login" class="clearfix" onsubmit="TP.trackEvent({category:'user_action',action:'inline_login'})">
+            <h3>Login</h3>
+            <input type="hidden" name="returnUrl" value="/tutorial/1910/mastering-the-dom-access-100-lines-of-javascript?utm_source=javascriptweekly&amp;utm_medium=email" />
+            <div class="control-group">
+                <div class="controls">
+                    <input class="box-sized-input" type="text" name="email" placeholder="Email Address"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="box-sized-input" name="password" type="password" placeholder="Password" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary pull-right">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="separator"></div>
+
+    <!-- ko stopBinding: true -->
+    <div class="register" id="inlineRegister">
+        <form data-bind="submit: register" class="clearfix" onsubmit="TP.trackEvent({category:'user_action',action:'inline_register'})">
+            <h3>Register</h3>
+            <input type="hidden" name="returnUrl" value="/tutorial/1910/mastering-the-dom-access-100-lines-of-javascript?utm_source=javascriptweekly&amp;utm_medium=email" />
+            <div style="display: none; color: red; font-size: 12px; padding: 0 20px;" data-bind="text: errorMessage, visible: !!errorMessage()"></div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="box-sized-input" type="text" placeholder="Email Address" 
+                           data-bind="value: ui.email, valueUpdate: 'afterkeydown', hasfocus: email.hasFocus"/>
+                    <span class="message" data-bind="text: email.message, css: email.css"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls clearfix">
+                    <div class="tb-half-wrapper left">
+                        <input class="box-sized-input" type="text" placeholder="First Name" 
+                               data-bind="value: ui.firstName, valueUpdate: 'afterkeydown', hasfocus: firstName.hasFocus" />    
+                        <span class="message" data-bind="text: firstName.message, css: firstName.css"></span>
+                    </div>
+                    <div class="tb-half-wrapper right">
+                        <input class="box-sized-input" type="text" placeholder="Last Name"
+                               data-bind="value: ui.lastName, valueUpdate: 'afterkeydown', hasfocus: lastName.hasFocus" />
+                        <span class="message" data-bind="text: lastName.message, css: lastName.css"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input class="box-sized-input" type="password" placeholder="Password"
+                           data-bind="value: password, valueUpdate: 'afterkeydown', hasfocus: password.hasFocus" />
+                    <span class="message" data-bind="text: password.message, css: password.css"></span>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox pull-left">
+                        <input type="checkbox" data-bind="checked: agreesToTerms, hasfocus: agreesToTerms.hasFocus" />
+                        I agree to <a href="/terms-and-conditions">Tech.Pro's Terms</a>
+                    </label>
+
+                    <button type="submit" class="btn btn-primary pull-right">Register</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- /ko -->
+</div>
+
+<script type="text/javascript">
+    TP.ready(function () {
+        $.getScript("/scripts/vm.register.js").done(function() {
+            var registerVM = new RegisterVM({"firstName":null,"lastName":null,"email":null,"username":null,"password":null,"key":"u8Xs1ko54EaE8TiQuq2zUaHr6WDgOKP3sg3nbPwwJUI=","redirect":"/tutorial/1910/mastering-the-dom-access-100-lines-of-javascript?utm_source=javascriptweekly&utm_medium=email","redirectTitle":"Mastering the DOM access (100 lines of JavaScript)","code":null,"registrationMessage":null,"trialId":null,"autoUsername":true});
+            registerVM.email.hasFocus(false);
+            ko.applyBindings(registerVM, document.getElementById("inlineRegister"));
+        });
+    });
+</script>        <div id="comment-container">
+                            <h3 class="tp-comment-header">Comments (<span class="-comment-count"></span>)</h3>    
+                <div class="tp-comment-area">
+                    
+<ul class="tp-comment-list -parents">
+        <li class="-empty-item">
+        <div class="tp-empty-list">There are no comments yet.</div>
+    </li>
+</ul>
+
+
+
+
+
+                </div>
+        </div>
+</div>
+
+
+
+        </div>
+            <div id="sidebar" class="pane sidebar">
+                
+    
+        <div class="stats-sidebar">
+        
+        <div class="stat-widget likes -vote -article1910 -tooltip" data-tp='{"id":1910,"type":"article","score":2}'>
+            <div class="wdg-box">
+                <span class="img"></span>
+                <span class="lbl">Likes</span>
+            </div>
+            <div class="lbl-box">
+                <span class="indicator"></span>
+                <span class="amt -score">2</span>
+            </div>
+        </div>
+        
+        <div class="stat-widget views pull-right">
+            <div class="wdg-box">
+                <span class="img"></span>
+                <span class="lbl">Views</span>
+            </div>
+            <div class="lbl-box">
+                <span class="indicator"></span>
+                <span class="amt">1.3k</span>
+            </div>
+        </div>
+        
+    </div>
+
+    
+    <div class="tp-about-author tp-box">
+        <div class="header">About the Author</div>
+            <a href="http://tech.pro/krasimir" class="tp-gravatar pull-left" data-tp="{&quot;id&quot;:16459}">
+        <img width="36" height="36"  alt="Krasimir Tsonev" src="http://www.gravatar.com/avatar/ac92c93f447d217e2ece66d84a0e0d3c.png?d=retro&amp;s=36"  itemprop="image"/>
+    </a>
+    <div style="margin-top: 2px">
+        <a class="member-name author" href="http://tech.pro/krasimir">Krasimir Tsonev</a>
+    </div>
+    <div>
+                <a class="-follow" data-tp="{&quot;id&quot;:16459,&quot;type&quot;:&quot;m&quot;}">Follow</a>
+
+    </div>
+
+        <br />
+        <p>Krasimir Tsonev is a coder with over ten years of experience in web development. More info on http://krasimirtsonev.com</p>
+        <hr class="full-hr" style="margin-top: 15px;" />
+    </div>
+    
+        <div id="AoXofFASUEa2NYTpO6OViw">
+        <div style="width: 180px; height: 150px; margin-bottom: 20px;"></div>
+    </div>
+    <script type="text/javascript">
+        TP.ready(function () {
+            TP.adQueue.push({ adguid: 'AoXofFASUEa2NYTpO6OViw', sizeId: 4 });
+        });
+    </script>
+
+
+    <div class="tp-box">
+        <h3>Want to write with us?</h3>
+        <p>
+            Anyone can write at Tech.Pro. Writing at Tech.Pro can help you 
+            get recognized, spread knowledge, and
+            inspire others.
+            <br/>
+                    <a style="margin-top: 10px;" class="btn" href="/write-with-us">Write &amp; Win</a>
+        </p>
+    </div>
+<div class="tp-box">
+    <h3 class="header">Invite a Friend</h3>
+    <div class="tp-box-content">
+        <p>
+            Tech.Pro is a communications platform and will become more useful to you as your colleagues join the site.
+            Go ahead and invite a few today and start reaping the benefits of membership.
+            
+        </p>
+        <p>
+            <a class="btn btn-primary" href="/account/invite-others">Invite a Friend</a>
+        </p>
+    </div>
+</div>
+    
+
+    
+        <div id="yew5yFh0G0K4O0jZdsKC3Q" class="tp-box-content"></div>
+    <script type="text/javascript">
+        TP.ready(function () {
+            $.get('/ajax/post/related?id=1910&title=Mastering+the+DOM+access+(100+lines+of+JavaScript)&pg=1', function (response, status) {  
+                $('#yew5yFh0G0K4O0jZdsKC3Q').html(response);
+                TP.minSidebarHeight();
+            });
+        });
+    </script>
+
+    
+    
+    
+    
+        <div class="tp-box">
+        <h3>Tech.Pro Daily Email</h3>
+        <p>
+            Get the latest content from Tech.Pro delivered to your Inbox each day. 
+                Simply create an account to subscribe.
+                <br />
+            <a style="margin-top: 10px;" type="submit" class="btn" href="http://tech.pro/register">Subscribe</a>
+        </p>
+    </div>
+
+
+
+            </div>    
+    </div>
+    <div id="footer">
+
+
+
+        
+
+
+<div class="row-fluid wrapper">
+
+    <div class="span2 logo-wrapper" style="text-align: center">
+        <a id="footerLogo2" href="http://tech.pro/"></a>
+        <div class="footer-copyright">
+            Copyright &copy; 2014 Tech.Pro
+        </div>
+    </div>
+    <div class="span8 link-lists-container">
+
+        <ul class="footer-link-list pull-left">
+            <li><a href="/">Feed</a></li>
+            
+            <li><a href="http://tech.pro/tutorials">Tutorials</a></li>
+            <li><a href="http://tech.pro/blogs">Blogs</a></li>
+            <li><a href="/links">Links</a></li>
+            <li><a href="/questions">Q&amp;A</a></li>
+            <li><a href="/account/invite-others">Invite Others</a></li>
+        </ul>
+
+        <ul class="footer-link-list  pull-left">
+            <li><a href="/profiles">People</a></li>
+            <li><a href="/profiles">Profiles</a></li>
+            <li><a href="/authors">Authors</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li></li>
+            <li><a href="http://tech.pro/network">My Network</a></li>
+            
+        </ul>
+
+        
+
+        <ul class="footer-link-list  pull-left">
+            <li><a href="http://tech.pro/how-it-works">More</a></li>
+            <li><a href="http://tech.pro/how-it-works">How TechPro Works</a></li>
+            
+            <li><a href="http://tech.pro/about-us">About Us</a></li>
+            <li><a href="http://tech.pro/contact-us">Contact Us</a></li>
+            <li><a href="http://tech.pro/privacy">Privacy</a></li>
+            <li><a href="http://tech.pro/sitemap">Site Map</a></li>
+        </ul>
+
+       
+
+    </div>
+    <div class="span2 footer-social-container">
+        <ul class="footer-social-list">
+            <li>
+                <a href="http://blog.tech.pro" target="_blank">
+                    <span class="img blog"></span>
+                    Blog
+                </a>
+            </li>
+            <li>
+                <a href="http://twitter.com/techdotpro" target="_blank">
+                    <span class="img twitter"></span>
+                    Twitter
+                </a>
+            </li>
+            <li>
+                <a href="http://www.linkedin.com/company/tech.pro-" target="_blank">
+                    <span class="img linkedin"></span>
+                    Linkedin
+                </a>
+            </li>
+            <li>
+                <a href="http://www.facebook.com/TechDotPro" target="_blank">
+                    <span class="img facebook"></span>
+                    Facebook
+                </a>
+            </li>
+        </ul>
+        <!--END: Social Icons-->
+
+    </div>
+
+</div>
+
+
+<!--END: Logo & Links-->
+
+
+
+
+
+
+        
+
+
+
+    </div>
+</div>
+
+
+
+
+        </div>
+    </div>
+    <div id="fb-root"></div>
+
+    <script src="//tpstatic.com/bundles/js/core?v=7jXQkd4zcQMn5aix02jHePkFoe1PMg_9gjgDKfVDKOY1"></script>
+
+
+    <script type="text/javascript">
+        window.TP = $.extend({}, TP, new TechProApp($.extend({isAnonymous:true,verbose:false,rootUrl:"tech.pro",staticUrl:"tpstatic.com",userImagesRoot:"http://tpstatic.com/img/usermedia/",tenant:{site:"TechPro",twitterAccount:"techdotpro",title:"Tech.Pro"},needTemplates:true},{$: jQuery})));
+        TP.init();
+        ko.applyBindings(new GlobalSearchViewModel(), document.getElementById("global-search"));
+
+        // Check that cookies are enabled
+        TP.ready(function() {
+            setTimeout(function() {
+                TP.setCookie("__test__", "idkfa", 1);
+                if (TP.getCookie("__test__") !== "idkfa") {
+                    TP.alert({
+                        text: "Cookies must be enabled to correctly use this site. Sorry!",
+                        lifetime: 60000,
+                        type: "alert-error"
+                    });
+                } else {
+                    TP.delCookie("__test__");
+                }
+            },400);
+        });
+
+
+
+            
+                TP.bindNotificationCount();
+    </script>
+    
+    <script type="text/html" id="gs_item_template">
+        <li class="result mb -item" data-bind="css: {'hover':isHover}">
+            <img class="result-img mb_media" data-bind="attr: {src:imageGuid}" />
+            <div class="mb_body">
+                <div class="result-title" data-bind="highlightText: { text: title, term: $root.query }"></div>
+                <div class="result-sub" data-bind="highlightText: { text: subTitle, term: $root.query }"></div>
+            </div>
+        </li>
+    </script>
+    
+
+    <script type="text/javascript">
+        TP.ready(function() {
+            TP.registerView('article', 1910);
+            TP.bindVotingArea(".stats-sidebar, .tp-like-bar");
+            //todo eventually reimplement along with the follow section
+            TP.bindComments({
+                entityId: 1910,
+                entityType: 'article',
+                listSelector: "#comment-container",
+                countSelector:".-comment-count",
+                currentCount: 0
+            });
+            TP.bindFollowingArea(".sidebar");
+            if (!TP.isAnonymous) {
+                $.get("/ajax/post/votes?ids=1910", function(response) {
+                    TP.showVoteStatus(response.data);
+                });
+            }
+            TP.bindFlags(".-article-profile", "article");
+        });
+        
+        TP.bindSocialShare({"title":"Mastering the DOM access (100 lines of JavaScript)","url":"http://tech.pro/tutorial/1910/mastering-the-dom-access-100-lines-of-javascript","twitterUsername":"@KrasimirTsonev","image":"http://www.gravatar.com/avatar/ac92c93f447d217e2ece66d84a0e0d3c.png?d=retro&s=50","summary":"If you build web applications you probably communicate with the DOM a lot. Accessing and..."});
+
+    </script>
+
+    <script src="//tpstatic.com/scripts/track_reader.js"></script>
+
+
+    <script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-32414873-1']);
+_gaq.push(['_setDomainName', 'tech.pro']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_setCustomVar',2,'Author','16459 - Krasimir Tsonev',3]);
+_gaq.push(['_setCustomVar',4,'PublishDate','02/28/14',3]);
+_gaq.push(['_setCustomVar',3,'Tag','DOM',3]);
+_gaq.push(['_setCustomVar',3,'Tag','JavaScript',3]);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+        <script type="text/javascript">
+            setTimeout(function() {
+                var a = document.createElement("script");
+                var b = document.getElementsByTagName("script")[0];
+                a.src = document.location.protocol + "//dnn506yrbagrg.cloudfront.net/pages/scripts/0014/4685.js?" + Math.floor(new Date().getTime() / 3600000);
+                a.async = true;
+                a.type = "text/javascript";
+                b.parentNode.insertBefore(a, b);
+            }, 1);
+        </script>
+
+    <!--[if lte IE 8]>
+    <script type="text/javascript">
+        var $buoop = {vs:{i:8,f:15,s:4,n:9}} ;
+        $buoop.ol = window.onload;
+        window.onload=function(){
+         try {if ($buoop.ol) $buoop.ol();}catch (e) {}
+         var e = document.createElement("script");
+         e.setAttribute("type", "text/javascript");
+         e.setAttribute("src", "http://browser-update.org/update.js");
+         document.body.appendChild(e);
+        };
+    </script>
+    <![endif]-->
+
+    
+</body>
+</html>

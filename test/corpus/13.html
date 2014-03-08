@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" designation="" enumeration="" data-uuid="db7d2f9d12f54171986f36239b1fdb5a" class="">
+    <head>
+        <meta charset="utf-8" />
+        <link href="../../assets/css/main.css" type="text/css" rel="stylesheet" />
+        <link href="../../assets/css/image_sizes.css" type="text/css" rel="stylesheet" />
+        <title>Brad Neuberg: Inkling Habitat: How a 100,000 Line JavaScript Application Focused on Digital Publishing is Built</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" type="text/css" href="../../assets/css/blog_chrome.css" />
+        <link rel="stylesheet" type="text/css" href="/projects/stretchtext.js/src/stretchtext.css" />
+
+        <link rel="icon" type="image/vnd.microsoft.icon" href="http://www.blogger.com/favicon.ico" />
+
+        <link rel="alternate" type="application/atom+xml" title="Coding In Paradise - Atom" href="http://blog.codinginparadise.org/feeds/posts/default" />
+        <link rel="alternate" type="application/rss+xml" title="Coding In Paradise - RSS" href="http://blog.codinginparadise.org/feeds/posts/default?alt=rss" />
+
+        <script type="text/javascript" src="/projects/stretchtext.js/src/stretchtext.js"></script>
+
+    </head>
+    <body class="card-chapter-reader">
+        <div class="blog-header">
+            <h1><a href="http://codinginparadise.org/">Coding in Paradise</a></h1>
+            <p>Brad Neuberg's Opinions and Reviews on Next Generation eBooks</p>
+        </div>
+
+
+        <header data-uuid="5f1050870f864beeb1de7ad8d93f4727">
+            <h1 data-uuid="9d6a2f5033cd4f288eb913666ca3ef43">Inkling Habitat: How a 100,000 Line JavaScript Application Focused on Digital Publishing is Built&#160;</h1>
+        </header>
+        <figure class="one-whole" data-uuid="bf517d7444ee4d09a89d05d26271d031"> <img src="../../img/chapter03/chapter_overview_2.jpg" data-uuid="081443003d2f46e9b02ea29e26e4422b" />
+        </figure>
+        <p data-uuid="5a4fd0f58e0b4515abf36cf3448ad37b"><a href="http://codinginparadise.org/ebooks/html/blog/books_as_software.html">Last week</a> I introduced you to one of the original animating ideas behind <a href="https://www.inkling.com/habitat/">Inkling Habitat</a>, treating books as software to transform the eBook production process. Today I'd like to take you behind the scenes and show you the technologies and processes we used to build Inkling Habitat itself. How did we build this software?</p>
+        <h2 data-uuid="eb58c062d38344689ed79aec45486c5b">How is Inkling Habitat Built?</h2>
+        <p data-uuid="94c0dfb8c46b4a5287802b55d11f9794">First, Inkling Habitat is a client side application that runs inside your web browser, built with JavaScript, HTML, and CSS. The client-side portion is roughly 100,000 lines of JavaScript, which is a big application.</p>
+        <p data-uuid="caf8e9acee474033bdee2e4f53f61a5a">Going deeper, much of the application follows what's called a <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">Model View Controller</a> (MVC) architecture. We use <a href="http://backbonejs.org/">Backbone.js</a> as our general MVC system, while using <a href="https://github.com/wycats/handlebars.js/">Handlebars.js</a> as the templating language for rendering our views.</p>
+        <p data-uuid="1a4ebff4c6804eecac887ad62cd46b21">Our philosophy on the team is to only use small targeted micro-libraries like Backbone.js rather than large encompassing frameworks like <a href="http://jquery.com/">JQuery</a> or <a href="http://emberjs.com/">Ember.js</a>. We target plain JavaScript, taking advantage of the fact that the web platform has gotten much stronger the last few years with additions like <code><a href="https://developer.mozilla.org/en-US/docs/Web/API/document.querySelector">querySelector</a></code> and <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes">CSS Flex Box layout</a>.</p>
+        <figure class="quote one-half right" data-uuid="2bdd7e96e9544e5b9cc4461b2f213c49">
+            <blockquote data-uuid="85f08c77ce694004a55988849fa59986">Our philosophy on the team is to only use small targeted micro-libraries like Backbone.js rather than large encompassing frameworks like JQuery or Ember.js<br />
+            </blockquote>
+        </figure>
+        <p data-uuid="facb3a94aa374684ba67af0522814ac1">We are aided by the fact that we only target the latest version of Chrome, making it a joy to develop as we get to target the leading edge of the web rather than the trailing edge, such as old versions of Internet Explorer or old versions of Safari. This lets us stay very nimble and focus on interesting functionality and user experiences rather than suffering from annoying browser bugs. We get to be very modern in our JavaScript and web development practices.</p>
+        <p data-uuid="66bf9c69b77547dd9878d013d35c53a9">Early in our history we used a little bit of <a href="http://mootools.net/">MooTools</a>, but found it frankly unnecessary. We have mostly ripped all of it out of the system and are close to eliminating it.<br />
+        </p>
+        <p data-uuid="0ee0ac613fb24275a63309731e1a5f2f">In order to keep our CSS manageable we use <a href="http://sass-lang.com/">SASS</a>, which makes large scale development with CSS much easier. We also use <a href="http://compass-style.org/">Compass</a> above that as a kind of reusable set of SASS primitives that we can lean on.<br />
+        </p>
+        <p data-uuid="7e2be76e3273454f9ddd070ecf98277b">We have a very strong testing culture at Inkling with 100% unit test coverage on the Inkling Habitat team. All code checked in is required to have tests. A rule of thumb is that you will have 2X as many lines of testing code as you will of application code. This has held true for us, and we have roughly 200,000 lines of testing code to our 100,000 lines of application code. This has allowed us to scale the team in terms of people and features in a way that can be difficult with traditional JavaScript. Since JavaScript can be such a loose, run-time language, you really need a strong testing infrastructure to catch development time problems and allow many people to work together on such a large JavaScript application as Inkling Habitat.</p>
+        <p data-uuid="6b17759688d54e808fb3b67117b54007">Our unit testing framework is <a href="http://jasmine.github.io/">Jasmine.js</a>, which I've really enjoyed working with. Our integration testing framework is <a href="http://docs.seleniumhq.org/">Selenium</a> driven through <a href="https://code.google.com/p/selenium/wiki/WebDriverJs">Node.js</a>, so all of our integration tests are themselves written in JavaScript.<br />
+        </p>
+        <figure class="quote one-half right" data-uuid="48b33034b139495a9b40c20d35e19853">
+            <blockquote data-uuid="6edea03849c24f5f8bbe71259e40dc56">We have a very strong testing culture at Inkling with 100% unit test coverage on the Inkling Habitat team<br />
+            </blockquote>
+        </figure>
+        <p data-uuid="1cebedaf88744a09842def6c424b6ed5">We lean on a number of other small open source libraries in places, such as <a href="https://github.com/medialize/URI.js">URI.js</a> for parsing and modifying URLs; <a href="https://github.com/mathjax/MathJax/">MathJax</a> for rendering MathML; <a href="http://ace.ajax.org/">Ace</a> for our HTML code editing; <a href="https://github.com/kriskowal/q">Q</a> for JavaScript promises to make asynchronous code easier to work with; <a href="http://gildas-lormeau.github.com/zip.js/">zip.js</a> for efficiently generating client-side ZIP files using Web Workers; <a href="http://underscorejs.org/">Underscore.js</a> as a small helper library for basic functions; the <a href="https://github.com/zynga/scroller">Zynga Scroller</a> for displaying larger images in a way that can be 'zoomed' around in an attractive way; and <a href="https://github.com/einars/js-beautify/">js-beautify</a> for pretty printing HTML and XML code.</p>
+        <p data-uuid="f61ada21208942d2b825842b614a108f">Inkling Habitat on the client side is well encapsulated from the server. The server exposes clean <a href="http://stackoverflow.com/questions/671118/what-exactly-is-restful-programming">RESTian APIs </a>that have a number of resources we can lean on, creating a nice division of responsibilities. Behind these RESTian APIs is a mix of Python and Scala; I won't go into the server side of the system as I concentrate on the client side, and we are well encapsulated on the client side from those details.</p>
+        <h2 data-uuid="d94f069b03684c03845fe09903247db0">Going Deeper into the Architecture</h2>
+        <p data-uuid="a006cb7ecebb4321947da112d8936274">The system itself is divided into several major areas of functionality. We have our blueprints, which are interactive pieces of functionality that a user can add to content, such as slide lines, assessments, audio/video, maps, etc. These blueprints can be previewed and edited. Behind these blueprints is actually an XML-based dialect rather than HTML. We have a simple XML binding infrastructure to pull these different blueprints in and turn them into Backbone models. Backbone views can then manipulate the Backbone models behind these blueprints for editing and previewing; as they do the XML behind them seamlessly update and can be saved when the user is finished. We call this simple binding system XML Templates, as they are roughly similar to Handlebars templates but for XML.</p>
+        <p data-uuid="1802b5a3fd8b458ebf387f92c047a09f">Next, we have a general document infrastructure to deal with our different kinds of documents, whether they are HTML5-based or the XML-based blueprints. The general application shell works with this document layer in order to provide consistent navigation, saving, URL history, etc. independent of the kind of document we are dealing with. Layered on top of our general document types is our proofing infrastructure, which allows us to create tickets on either blueprints or HTML content.</p>
+        <p data-uuid="ebf9f05b94db4078bf31deb551ff56a9">Next, we have our rich text editing system. This includes our code editor based on Ace and the rich text editor itself for visually editing HTML. These two editors are bidirectional, allowing someone to either directly edit the markup or visually edit the preview depending on their needs.</p>
+        <p data-uuid="70b4fe3de16949209cc38450de2cb614">The visual HTML editor itself wraps <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_Editable">ContentEditable</a> under the covers and includes several fixes for ContentEditable to work as expected, mostly around ensuring that visually edited markup stays as semantic HTML. We also have a bidirectional undo/redo system that works across both the HTML code editor and visual editor. The rich text editor also includes our pattern picker, which makes it easy to drop in chunks of content.</p>
+        <p data-uuid="274b860b7bf54354b7db095876ec9ea1">Finally we have other general parts of the system, such as our automated reports to discover problems in content; advanced find across the ebook being worked on; chapter overview for getting a birds eye view of all the content in the system; templates; the dashboard to view many projects at once; etc. All of these are built with JavaScript on top of Backbone.</p>
+        <h2 data-uuid="2bbeaf851eeb42a885312f5deebe1df4">Build System &amp; Middleware</h2>
+        <p data-uuid="c87e712e2cb3433e92213141948a865d">Our JavaScript build system is currently based on Ruby; we use <a href="https://github.com/sstephenson/sprockets">Sprockets</a> in order to deal with dependencies and to merge together all of our JavaScript and CSS assets into larger resources to make page loads much quicker. We are actively moving towards <a href="http://nodejs.org/">Node.js</a> for our build system.</p>
+        <p data-uuid="f35b780b0afd441ca83d1acbbc3e4d13">We also have a small middleware layer that is based on Python and <a href="https://www.djangoproject.com/">Django</a> that allows us to inject all of our resources at page load into the initial page request so that page load performance is much faster. We are also actively moving to Node.js for this as well, so that we can have a single JavaScript stack for our application, our build system, and our very small middleware layer. The server-side RESTian APIs will remain as Python and Scala.</p>
+        <h2 data-uuid="0f6a87b8cf7c4ba3bdf58da513750b70">Team Culture &amp; Processes</h2>
+        <p data-uuid="3f042c8683ce4d5f9628d5ee0c587175">We have a very strong culture of shipping, are action oriented, and work iteratively. We are on two week sprints and are continuously getting code out the door.</p>
+        <p data-uuid="be5bca73a18b4152b6c7202590bc7de9">At the same time we also have a very strong product and UX culture, so we're constantly asking "are these the right features that serve peoples' needs" and "is this the best user experience possible?" We actively work with prototypes, visual design, and user research as we are developing, creating a great mix of shipping (<a href="http://c2.com/cgi/wiki?RealArtistsShip">Real Artists Ship</a>) and continuously refining the direction that we are going. This produces a nimble culture of shipping and doing the right thing at the same time.</p>
+        <figure class="quote one-half right" data-uuid="592f264f8a964ea7a422eae8d399a26a">
+            <blockquote data-uuid="baf007b294ee478d829b98c46b1ecba6">...we're constantly asking "are these the right features that serve peoples' needs" and "is this the best user experience possible?"<br />
+            </blockquote>
+        </figure>
+        <p data-uuid="919347cb39024a238d96f7ffd1989496">We internally use <a href="https://enterprise.github.com/">GitHub</a> and have a strong code review culture. Everything that lands on master is reviewed by two people. GitHub is great to work with; our internal revision control system is <a href="http://git-scm.com/">Git</a> itself for all of our code. The combination of strong tests and code reviews makes for a robust culture in terms of quality.</p>
+        <p data-uuid="a023032a3bc94642817e0b20db9e0d6d">In all of our sprints we generally try to spend ten to fifteen percent of our time addressing tech debt, and work hard to both ship great features and UX while also addressing tech debt and making sure that we keep our code and architecture elegant and straightforward.</p>
+        <p data-uuid="ba6e4ac385bb45659e6ac85efed24b2b">We also have a strong <a href="http://manifesto.softwarecraftsmanship.org/">software craftmanship ethos</a>. We think both the little things and the big things are important. If the small things are clean in your code (and in the UX!), then the big things will also be clean. We really take pride in the code we create.</p>
+        <p data-uuid="3b0197a7c4af41d69f611bebf8bca329">Engineers are a big part of also having empathy with our users and working in conjunction with product managers and user experience folks to craft what's the right thing for our users and customers. Engineers regularly meet with actual customers and work in conjunction with the team to craft the best solution to problems.</p>
+        <p data-uuid="4c8047b414514791a96ae4e5e2836f23">Sound like an interesting way to pass the time? Consider <a href="https://www.inkling.com/careers/">joining the Inkling Habitat team</a> and redefining how digital publishing is done! Feel free to <a href="http://mailhide.recaptcha.net/d?k=012A0XaYCBpqD8W6or0Sm1Mw==&amp;c=HoZP09zEXrRCTtNaNRjms1VDGCFZK_I9tsv_vFwLowE=">email me</a> if you are interested.</p>
+        <p><a href="http://blog.codinginparadise.org/feeds/posts/default">Subscribe to my RSS feed</a> and <a href="https://twitter.com/bradneuberg">follow me on Twitter</a> to stay up to date on new posts.</p>
+
+        <p><i>Please note that this is my personal blog — the views expressed on these pages are mine alone and not those of my employer.</i>
+        </p>
+
+        <a href="http://codinginparadise.org" class="callout callout-web">
+            <h5>Back to Codinginparadise.org</h5>
+        </a>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-44466353-1', 'codinginparadise.org');
+            ga('send', 'pageview');
+        </script>
+    </body>
+</html>

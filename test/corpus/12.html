@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Lorenzo Planas - Good workflows, better business</title>
+    <meta charset="UTF-8">
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+    <meta name="author" content="Lorenzo Planas">
+    <meta name="description" content="a blog about code with business sense">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400|Merriweather:400,700,900" type="text/css">
+    <link rel="stylesheet" href="/css/lorenzoplanas.css">
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="main"><article><h1><a href="/blog/20140302-headless-javascript-testing-with-jasmine-20">Headless Javascript testing with Jasmine 2.0</a></h1>
+
+<h3>Published by Lorenzo Planas on March 2, 2013</h3>
+
+<p>I have been updating my Javascript projects to use Jasmine 2.0, noticing it includes an improved console reporter. It certainly works better in headless setups using PhantomJS, but you&#39;ll need to tweak your configuration to have it working correctly.</p>
+
+<p>First, you&#39;ll need to initialize the ConsoleReporter, passing the print() function that Jasmine will use to report the results:</p>
+
+<script src="http://gist-it.appspot.com/github/qindio/headless-jasmine-sample/blob/master/spec/SpecRunner.js"></script>
+
+<p>In this case, we just call console.log(). The call will trigger an event we can capture in the PhantomJS runner, and then print the message to the standard ouput. I got the right syntax to initialize the ConsoleReporter from <a href="http://stackoverflow.com/questions/21766034/jasmine-never-executes-it-when-running-in-phantomjs">this question on StackOverflow</a></p>
+
+<p>To run the suite with PhantomJS, I used the <a href="https://github.com/ariya/phantomjs/blob/master/examples/run-jasmine.js">sample Jasmine runner from PhantomJS</a>, removing some code we won&#39;t need with the new console reporter. </p>
+
+<script src="http://gist-it.appspot.com/github/qindio/headless-jasmine-sample/blob/master/spec/run-jasmine.js"></script>
+
+<p>Notice that to print each message coming from Jasmine&#39;s console.log() calls, this PhantomJS runner uses system.stdout.write(), instead of further console.log() calls. This will avoid extra new lines in the output. To access the standard output this way you will need PhantomJS 1.9+ -- otherwise, you&#39;ll have to stick with console.log() and suffer those extra new lines.</p>
+
+<p>With this setup we can now run PhantomJS, passing as arguments the Jasmine runner and the HTML page where the target code, specs and ConsoleReporter configuration is wired up:</p>
+
+<p><img src="/img/jasmine-console.png" /></p>
+
+<p>PhantomJS will print a nice test output in the console. I&#39;ve noticed PhantomJS reports an unwieldy stack trace for failing tests -- I need to investigate further and reduce the trace to the most meaningful lines.</p>
+
+<p>With this configuration we can also run the same test suite through Jasmine&#39;s default HTML interface:</p>
+
+<p><img src="/img/jasmine-browser.png" /></p>
+
+<p><a href="https://github.com/qindio/headless-jasmine-sample">Check the full sample setup on GitHub</a>. It uses the same sample files included in Jasmine&#39;s standalone distribution. It also includes the necessary changes to run the tests both through the HTML interface and the headless / command-line runner.</p>
+
+<p>If you want to receive more updates related to Javascript programming and testing, please <a href="https://twitter.com/lorenzoplanas">follow me on Twitter</a>.</p>
+</article></div>
+      <div class="footer">
+        Copyright &copy; 2013 Lorenzo Planas
+      </div>
+    </div><!-- content -->
+    <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :
+    "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost +
+    "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try{
+    var pageTracker = _gat._getTracker("UA-374290-6");
+    pageTracker._trackPageview();
+    } catch(err) {}
+    </script>
+  </body>
+</html>
+

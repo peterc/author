@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en-US" id="hacks-mozilla-org">
+<head>
+  <meta name="viewport" content="width=1024">
+  <meta charset="UTF-8">
+
+  <!-- OpenGraph metadata -->
+  <meta property="og:site_name" content="Mozilla Hacks &#8211; the Web developer blog">
+  <meta property="og:title" content="Custom Elements for Custom Applications &#8211; Web Components with Mozilla&#8217;s Brick and X-Tag">
+  <meta property="og:url" content="https://hacks.mozilla.org/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/">
+  <meta property="og:description" content="In this article, we will explore the use of Mozilla's Brick and X-Tag libraries. First we'll use Brick to rapidly prototype a simple application. Then, ...">
+
+  <!--[if IE]>
+  <meta name="MSSmartTagsPreventParsing" content="true">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="shortcut icon" type="image/ico" href="https://hacks.mozilla.org/wp-content/themes/Hacks2013/favicon.ico">
+  <link rel="home" href="/">
+  <link rel="copyright" href="#copyright">
+  <link rel="stylesheet" type="text/css" media="screen,projection" href="https://hacks.mozilla.org/wp-content/themes/Hacks2013/style.css">
+  <link rel="stylesheet" type="text/css" media="print,handheld" href="https://hacks.mozilla.org/wp-content/themes/Hacks2013/css/print.css">
+  <link rel="stylesheet" type="text/css" media="all" href="https://www.mozilla.org/tabzilla/media/css/tabzilla.css">
+    <link rel="stylesheet" type="text/css" media="all" href="https://hacks.mozilla.org/wp-content/themes/Hacks2013/css/socialshare.css">
+    <link rel="alternate" type="application/rss+xml" title="Mozilla Hacks &#8211; the Web developer blog RSS Feed" href="https://hacks.mozilla.org/feed/">
+  <link rel="pingback" href="https://hacks.mozilla.org/xmlrpc.php">
+  <link rel="canonical" href="https://hacks.mozilla.org/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/">
+  <!--[if lte IE 7]><link rel="stylesheet" type="text/css" media="all" href="https://hacks.mozilla.org/wp-content/themes/Hacks2013/css/ie7.css" /><![endif]-->
+  <!--[if lte IE 6]><link rel="stylesheet" type="text/css" media="all" href="https://hacks.mozilla.org/wp-content/themes/Hacks2013/css/ie6.css" /><![endif]-->
+
+  <title>  Custom Elements for Custom Applications &#8211; Web Components with Mozilla&#8217;s Brick and X-Tag &#10025;
+        Mozilla Hacks &#8211; the Web developer blog  </title>
+
+  
+  <script type="text/javascript">
+    // http://cfsimplicity.com/61/removing-analytics-clutter-from-campaign-urls
+    var removeUtms  =   function(){
+        var l = window.location;
+        if( l.hash.indexOf( "utm" ) != -1 ){
+            var anchor = l.hash.match(/#(?!utm)[^&]+/);
+            anchor  =   anchor? anchor[0]: '';
+            if(!anchor && window.history.replaceState){
+                history.replaceState({},'', l.pathname + l.search);
+            } else {
+                l.hash = anchor;
+            }
+        };
+    };
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35433268-8'],
+              ['_setAllowAnchor', true]);
+    _gaq.push(['_trackPageview']);
+    _gaq.push( removeUtms );
+    (function(d, k) {
+      var ga = d.createElement(k); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == d.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = d.getElementsByTagName(k)[0]; s.parentNode.insertBefore(ga, s);
+    })(document, 'script');
+  </script>
+
+  <link rel="alternate" type="application/rss+xml" title="Mozilla Hacks - the Web developer blog &raquo; Custom Elements for Custom Applications &#8211; Web Components with Mozilla&#8217;s Brick and X-Tag Comments Feed" href="https://hacks.mozilla.org/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/feed/" />
+<link rel='stylesheet' id='ace_responsive-css'  href='https://hacks.mozilla.org/wp-content/plugins/simple-embed-code/css/ace-video-container.css?ver=3.8.1' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='https://hacks.mozilla.org/wp-content/plugins/wp-syntax/css/wp-syntax.css?ver=1.0' type='text/css' media='all' />
+<script type='text/javascript' src='https://hacks.mozilla.org/wp-includes/js/comment-reply.min.js?ver=3.8.1'></script>
+<script type='text/javascript' src='https://hacks.mozilla.org/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+<script type='text/javascript' src='https://hacks.mozilla.org/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript' src='https://hacks.mozilla.org/wp-content/themes/Hacks2013/js/fc-checkcomment.js?ver=3.8.1'></script>
+<script type='text/javascript' src='https://hacks.mozilla.org/wp-content/themes/Hacks2013/js/socialshare.min.js?ver=3.8.1'></script>
+<script type='text/javascript' src='https://hacks.mozilla.org/wp-content/themes/Hacks2013/js/socialtrack.js?ver=3.8.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://hacks.mozilla.org/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://hacks.mozilla.org/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='The Making of the Time Out Firefox OS app' href='https://hacks.mozilla.org/2014/02/the-making-of-the-time-out-firefox-os-app/' />
+<link rel='next' title='Lessons learnt building ViziCities' href='https://hacks.mozilla.org/2014/03/lessons-learnt-building-vizicities/' />
+<link rel='canonical' href='https://hacks.mozilla.org/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/' />
+<link rel='shortlink' href='https://hacks.mozilla.org/?p=23195' />
+</head>
+
+<body class="single single-post postid-23195 single-format-standard">
+<div id="outer-wrapper">
+  <ul id="nav-access" role="navigation">
+    <li><a href="#content-main">Skip to content</a></li>
+  </ul>
+
+  <header id="branding">
+        <h4 id="logo">hacks.mozilla.org <a href="https://hacks.mozilla.org" title="Go to the home page">Home</a></h4>
+    
+    <form id="fm-search" method="get" action="https://hacks.mozilla.org/" role="search">
+  <p><input type="search" placeholder="Search hacks.mozilla.org" value="" name="s" id="s" /> <button type="submit">Go</button></p>
+</form>
+    <nav id="nav-main">
+      <ul role="navigation">
+        <li ><a href="https://hacks.mozilla.org">Home</a></li>
+        <li ><a href="https://hacks.mozilla.org/articles/">Articles</a></li>
+        <li ><a href="https://hacks.mozilla.org/demos/">Demos</a></li>
+        <li ><a href="https://hacks.mozilla.org/about/">About</a></li>
+      </ul>
+    </nav>
+    <a href="http://www.mozilla.org/" id="tabzilla">Mozilla</a>
+  </header><!-- /#branding -->
+
+  <div id="content">
+    
+
+  
+<div id="content-head">
+  <ul class="nav-crumbs">
+    <li><a href="https://hacks.mozilla.org" title="Go to the home page">Home</a></li>
+    <li><a href="https://hacks.mozilla.org/articles/">Articles</a></li>
+  </ul>
+
+  <h1 class="page-title">Custom Elements for Custom Applications &#8211; Web Components with Mozilla&#8217;s Brick and X-Tag</h1>
+
+  <ul class="nav-paging">
+    <li class="prev"><a href="https://hacks.mozilla.org/2014/02/the-making-of-the-time-out-firefox-os-app/" rel="prev">Older Article</a></li>    <li class="next"><a href="https://hacks.mozilla.org/2014/03/lessons-learnt-building-vizicities/" rel="next">Newer Article</a></li>  </ul>
+
+
+  <div id="content-bar" class="single">
+    <div class="entry-meta">
+      <p class="entry-posted">on <abbr class="published" title="2014-03-04T06:54:19+00:00">March 4, 2014</abbr>
+      by <a href="https://hacks.mozilla.org/author/angelinafabbro/" title="Posts by Angelina Fabbro" rel="author">Angelina Fabbro</a></p>
+      <p class="entry-cat">in
+      <a href="https://hacks.mozilla.org/category/apps/" title="View all posts in Apps" rel="category tag">Apps</a> <a href="https://hacks.mozilla.org/category/brick/" title="View all posts in Brick" rel="category tag">Brick</a> <a href="https://hacks.mozilla.org/category/firefox-os/" title="View all posts in Firefox OS" rel="category tag">Firefox OS</a> <a href="https://hacks.mozilla.org/category/mobile/" title="View all posts in Mobile" rel="category tag">Mobile</a> <a href="https://hacks.mozilla.org/category/web-components/" title="View all posts in Web Components" rel="category tag">Web Components</a> <a href="https://hacks.mozilla.org/category/x-tag/" title="View all posts in X-Tag" rel="category tag">X-Tag</a>      </p>
+    </div>
+
+    <ul class="entry-extra">
+      <li class="comments">
+              <a href="https://hacks.mozilla.org/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/#comments">1 comment</a>
+            </li>
+          <li class="share"><div class="socialshare" data-type="small-bubbles"></div></li>
+        </ul>
+  </div>
+</div><!-- /#content-head -->
+
+<main id="content-main" class="hfeed">
+  <article class="post" role="article">
+    <p>In this article, we will explore the use of Mozilla&#8217;s Brick and X-Tag libraries. First we&#8217;ll use Brick to rapidly prototype a simple application. Then, we&#8217;ll build a custom web component using X-Tag.</p>
+<h2>The Technology</h2>
+<h3>Brick: Curated Web Components</h3>
+<p><a href="http://mozilla.github.io/brick" alt="Mozilla's Brick Components">Brick</a> is a set of modular, reusable UI components. The components are designed for adaptive, responsive applications and are a great choice for going <a href="http://designshack.net/articles/css/mobilefirst/" alt="Mobile First article by Joshua Johnson">mobile first</a>, which is by and large how web-based applications should be developed. This philosophy and its design patterns accomodate a wide range of devices.  Brick components aren&#8217;t just for <em>mobile</em> apps, they are for <em>modern apps</em>.</p>
+<p>Brick is kind of like a library, but really you should think of it as <em>a curated collection of web components</em>.</p>
+<p>Brick&#8217;s collection of components are used declaratively in your HTML <code>&lt;like-this&gt;</code> and can be styled with CSS like regular non-custom elements. Brick components have their own micro-APIs for interacting with them. These components are building blocks. Do you like Lego? Good. You will like Brick.</p>
+<p>Brick web components are made using the X-Tag custom elements polyfill.</p>
+<h2>What is X-Tag?</h2>
+<p>X-Tag is a library that polyfills several (and soon all) features that enable <a href="http://www.w3.org/TR/components-intro/" alt="W3C Intro to Web Components">web components</a> in the browser. In particular, X-Tag is focused on <a href="http://stackoverflow.com/questions/6599815/what-is-the-difference-between-a-shim-and-a-polyfill" alt="StackOverflow explains shims and polyfills">polyfilling</a> the creation of Custom Elements so that you can extend the DOM using your own declarative syntax and element-specific API.</p>
+<p>When you are using components from Brick, you are using web components made using the X-Tag library. Brick includes X-Tag core, so if you include Brick and then decide to make your own custom elements &#8212; you do not need to include X-Tag to do so, all the features of X-Tag are already available for you.</p>
+<h2>Download Demo Project Files</h2>
+<p><a href="https://github.com/afabbro/brick-and-x-tags-tutorial" alt="Brick and X-Tag Demo Files">Download the demo project files</a>. First we&#8217;ll use the material in the <a href="https://github.com/afabbro/brick-and-x-tags-tutorial/tree/master/simple-app-with-bricks" alt="Simple App with Bricks Folder">simple-app-with-bricks</a> folder.</p>
+<h2>Using Bricks in an app</h2>
+<p>Here we will build a simple skeleton app using <code>&lt;x-appbar&gt;</code>, <code>&lt;x-deck&gt;</code>, and <code>&lt;x-card&gt;</code>. <a href="http://mozilla.github.io/brick/docs.html#x-tag-appbar" alt="x-appbar documentation">x-appbar</a> provides a tidy header bar for our application, and x-cards placed as children of an <a href="http://mozilla.github.io/brick/docs.html#x-tag-deck" alt="x-deck documentation">x-deck</a> give us multiple views with transitions.</p>
+<p>First, we start with a barebones HTML document and then include Brick&#8217;s CSS and JS, along with our own application-specific code (<code>app.css</code> and <code>app.js</code> respectively in the example to follow).</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="html5" style="font-family:monospace;"><span style="color: #00bbdd;">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">html</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">head</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">meta</span> <span style="color: #000066;">charset</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;utf-8&quot;</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">meta</span> <span style="color: #000066;">name</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;viewport&quot;</span> <span style="color: #000066;">content</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;width=device-width&quot;</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">link</span> <span style="color: #000066;">rel</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;stylesheet&quot;</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/css&quot;</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;css/brick.min.css&quot;</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">link</span> <span style="color: #000066;">rel</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;stylesheet&quot;</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/css&quot;</span> <span style="color: #000066;">href</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;css/app.css&quot;</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">title</span>&gt;</span>Simple - Brick Demo<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">title</span>&gt;</span> 
+  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">head</span>&gt;</span> 
+  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">body</span>&gt;</span> 
+    <span style="color: #808080; font-style: italic;">&lt;!--- Some Brick components will go here --&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;js/brick.min.js&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;js/app.js&quot;</span>&gt;&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">body</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">html</span>&gt;</span></pre></td></tr></table></div>
+
+<p>Now we add some Brick elements:</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="html5" style="font-family:monospace;"><span style="color: #009900;">&lt;x-appbar <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;bar&quot;</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">header</span>&gt;</span>Simple Brick App<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">header</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">button</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;view-prev&quot;</span>&gt;</span>Previous View<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">button</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">button</span> <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;view-next&quot;</span>&gt;</span>Next View<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">button</span>&gt;</span>
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>x-appbar&gt;</span></pre></td></tr></table></div>
+
+<p>Below your <code>x-appbar</code>, create an <code>x-deck</code> with some <code>x-card</code>s as children. You can give the <code>x-card</code>s any content you like.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="html5" style="font-family:monospace;"><span style="color: #808080; font-style: italic;">&lt;!-- Place your x-deck directly after your x-appbar --&gt;</span>
+<span style="color: #009900;">&lt;x-deck <span style="color: #000066;">id</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;views&quot;</span>&gt;</span>
+  <span style="color: #009900;">&lt;x-card&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">h1</span>&gt;</span>View 1<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h1</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">p</span>&gt;</span>Hello, world!<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">p</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>x-card&gt;</span>
+  <span style="color: #009900;">&lt;x-card&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">h1</span>&gt;</span>Pick a Date<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h1</span>&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">p</span>&gt;</span><span style="color: #ddbb00;">&amp;lt;</span>x-datepicker<span style="color: #ddbb00;">&amp;gt;</span>s are a polyfill for <span style="color: #ddbb00;">&amp;lt;</span>input type=&quot;date&quot;<span style="color: #ddbb00;">&amp;gt;</span><span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">p</span>&gt;</span>
+    <span style="color: #009900;">&lt;x-datepicker&gt;&lt;<span style="color: #66cc66;">/</span>x-datepicker&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">p</span>&gt;</span>Just here to show you another tag in action!<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">p</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>x-card&gt;</span>
+  <span style="color: #009900;">&lt;x-card&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">h1</span>&gt;</span>A Random Cat To Spice Things Up<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">h1</span>&gt;</span>
+    <span style="color: #808080; font-style: italic;">&lt;!-- Fetches from the Lorem Pixel placeholder content service --&gt;</span>
+    <span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">img</span> <span style="color: #000066;">src</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;http://lorempixel.com/300/300/cats&quot;</span>&gt;</span>
+  <span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>x-card&gt;</span>
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span>x-deck&gt;</span></pre></td></tr></table></div>
+
+<p>We have already almost completed the structure for a simple application. All we need now is a little bit of CSS and Javascript to tie it together.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">document.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'DOMComponentsLoaded'</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> 
+  <span style="color: #006600; font-style: italic;">// Run any code here that depends on Brick components being loaded first </span>
+  <span style="color: #006600; font-style: italic;">// Very similar to jQuery's document.ready() </span>
+&nbsp;
+  <span style="color: #006600; font-style: italic;">// Grab the x-deck and the two buttons found in our x-appbar and assign to local vars</span>
+  <span style="color: #000066; font-weight: bold;">var</span> deck <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;views&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+  nextButton <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;view-next&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">,</span>
+  prevButton <span style="color: #339933;">=</span> document.<span style="color: #660066;">getElementById</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;view-prev&quot;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+&nbsp;
+  <span style="color: #006600; font-style: italic;">// Add event listeners so that when we click the buttons, our views transition between one another</span>
+  prevButton.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span> deck.<span style="color: #660066;">previousCard</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> 
+  nextButton.<span style="color: #660066;">addEventListener</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">&quot;click&quot;</span><span style="color: #339933;">,</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span> deck.<span style="color: #660066;">nextCard</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<p><img src="https://hacks.mozilla.org/wp-content/uploads/2014/02/Screen-Shot-2014-02-18-at-4.09.33-PM.png" alt="&lt;x-calendar&gt; example in our demo application" /></p>
+<p>Some simple CSS to style our fledgling application:</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="css" style="font-family:monospace;">html<span style="color: #00AA00;">,</span> body <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">margin</span><span style="color: #00AA00;">:</span> <span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span> <span style="color: #cc66cc;">0</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">font-family</span><span style="color: #00AA00;">:</span> <span style="color: #993333;">sans-serif</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">height</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+h1 <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">font-size</span><span style="color: #00AA00;">:</span> <span style="color: #933;">100%</span><span style="color: #00AA00;">;</span>
+<span style="color: #00AA00;">&#125;</span>
+&nbsp;
+x-deck <span style="color: #00AA00;">&gt;</span> x-card <span style="color: #00AA00;">&#123;</span>
+  <span style="color: #000000; font-weight: bold;">background</span><span style="color: #00AA00;">:</span> <span style="color: #cc00cc;">#eee</span><span style="color: #00AA00;">;</span>
+  <span style="color: #000000; font-weight: bold;">padding</span><span style="color: #00AA00;">:</span> <span style="color: #933;">0.6em</span>
+<span style="color: #00AA00;">&#125;</span></pre></td></tr></table></div>
+
+<p>Ka-bam! With a little bit of declarative markup and a few tweaks, we have a skeleton that anyone can use to make a multi-view app within a single HTML document. If you check out the markup in the developer tools, you&#8217;ll see the Brick custom elements living happily alongside vanilla HTML elements &#8211; you can use the developer tools to inspect and manipulate them in the same way as regular old HTML.</p>
+<p><img src="https://hacks.mozilla.org/wp-content/uploads/2014/02/Screen-Shot-2014-02-18-at-4.09.13-PM.png" alt="Custom elements alongside HTML elements in the Firefox Developer Tools" /></p>
+<p>Now let&#8217;s learn how to make our own custom element using X-Tag.</p>
+<h2>Creating Custom Elements (Your Own &#8216;Bricks&#8217;) Using X-Tag</h2>
+<p>Let&#8217;s say we have a mobile application in which the user takes an action that results in a blocking task. Maybe the application is waiting for an external service. The program&#8217;s next instruction to complete the user-initiated task depends on the data from the server, so unfortunately we have to wait. For the sake of our purposes here, let&#8217;s pretend we can&#8217;t modify our program too much and assume an entrenched architecture &#8211; maybe we can&#8217;t do much else other than communicate to the user until we find a way to deal with the blocking better. We have to do the best with what we have.</p>
+<p>We will create a custom modal spinner that will tell the user to wait. It&#8217;s important to give your users feedback on what&#8217;s happening in your app when they don&#8217;t get to complete their task in a timely manner. A frustrated or confused user might give up on using your app.</p>
+<p>You will want to switch to the <a href="https://github.com/afabbro/brick-and-x-tags-tutorial/tree/master/x-status-hud" alt="x-status-hud folder">x-status-hud</a> folder inside of the demo materials now.</p>
+<h3>1. Registering Your Custom Element</h3>
+<p>X-Tag relies on several different events to detect and upgrade elements to custom elements. X-Tag will work whether the element was present in the original source document, added by setting the innerHTML property, or created dynamically via <code>document.createElement</code>. You should take a look at <a href="http://x-tags.org/docs#helpers">the Helpers section</a> of the X-Tag documentation as it covers various functions that will allow you to work with your custom elements just like vanilla ones.</p>
+<p>The first thing that we need to do is <em>register</em> our custom element with X-Tag so that X-Tag knows what to do if and when it encounters our custom element. We do that by calling <code>xtag.register</code>.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">xtag.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'x-status-hud'</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #006600; font-style: italic;">// We will give our tag custom behavior here for our status indicating spinner</span>
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<p><strong>!IMPORTANT:</strong> All custom element names <em>must contain a hyphen</em>. Why is this? The idea here is that there are no standard HTML elements with a hyphen in them, so we don&#8217;t trample existing namespaces and have collisions. You <strong>do not have to prefix with &#8216;x-&#8217;</strong>, this is just a convention used for components create with X-Tag in the Brick ecosystem. Once upon a time in the early days of the W3C specification for custom elements, it was speculated that <em>all</em> custom elements would have an <code>x-</code> prefix; this restriction was relaxed in later versions of the specification. If you were to name an element &#8216;bacon-eggs&#8217; or &#8216;adorable-kitten&#8217;, both of these would be perfectly valid names. Choose a name that describes what your element <em>is</em> or <em>does</em>.</p>
+<p>If we wanted to, we could choose to set what HTML element is being used as our base element before upgrading. We can also set a specific prototype for our element if we want to involve functionality from a different element. You can declare these as follows:</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">xtag.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'x-superinput'</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+  <span style="color: #FF0000;">extends</span><span style="color: #339933;">:</span> <span style="color: #3366CC;">'input'</span><span style="color: #339933;">,</span>
+  <span style="color: #000066; font-weight: bold;">prototype</span><span style="color: #339933;">:</span> <span style="">Object</span>.<span style="color: #660066;">create</span><span style="color: #009900;">&#40;</span>HTMLInputElement.<span style="color: #000066; font-weight: bold;">prototype</span><span style="color: #009900;">&#41;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<p>The element we are building doesn&#8217;t require these properties to be set explicitly. They are worth mentioning because they will be useful to you when you write more advanced components and want a specific level of control over them.</p>
+<h3>2. The Element Lifecycle</h3>
+<p>Custom elements have events that fire at certain times during their lifetime. Events are fired when an element is created, inserted into the DOM, removed from the DOM, and when attributes are set. You can take advantage of none or all of these events.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">lifecycle<span style="color: #339933;">:</span><span style="color: #009900;">&#123;</span>
+  created<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #006600; font-style: italic;">// fired once at the time a component</span>
+    <span style="color: #006600; font-style: italic;">// is initially created or parsed</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+  inserted<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #006600; font-style: italic;">// fired each time a component</span>
+    <span style="color: #006600; font-style: italic;">// is inserted into the DOM</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+  removed<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #006600; font-style: italic;">// fired each time an element</span>
+    <span style="color: #006600; font-style: italic;">// is removed from DOM</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+  attributeChanged<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+    <span style="color: #006600; font-style: italic;">// fired when attributes are set</span>
+  <span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+
+<p>Our element is going to use the <code>created</code> event. When this event fires, our code will add some child elements.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">xtag.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'x-status-hud'</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+  lifecycle<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+    created<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'strong'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'div'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinner</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'div'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span>.<span style="color: #660066;">className</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">'spinner'</span><span style="color: #339933;">;</span>
+&nbsp;
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinner</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span>
+  <span style="color: #006600; font-style: italic;">// More configuration of our element will follow here</span>
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<h3>3. Adding Custom Methods</h3>
+<p>We need to have control over when we show or hide our status HUD. To do that, we need to add some methods to our component. Let&#8217;s add some functions to do that. A simple <code>toggle()</code> may suffice for some use cases, but let&#8217;s throw in individual <code>hide()</code> and <code>show()</code> functions too.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">&nbsp;
+xtag.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'x-status-hud'</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+  lifecycle<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+    created<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'strong'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'div'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinner</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'div'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span>.<span style="color: #660066;">className</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">'spinner'</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinner</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+  methods<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+    toggle<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">?</span> <span style="color: #003366; font-weight: bold;">false</span> <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+    show<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+    hide<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span></pre></td></tr></table></div>
+
+<h3>4. Adding Custom Accessors</h3>
+<p>Something important to note about properties on custom elements: they do not have to map to an attribute. This is by design because some setters could be very complex and not have a sensible attribute equivalent.</p>
+<p>If you would like an attribute and property to be linked, pass in an empty object literal to the <code>attribute</code>. You&#8217;ll see below where this has been done for the <code>label</code> attribute.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="javascript" style="font-family:monospace;">xtag.<span style="color: #660066;">register</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'x-status-hud'</span><span style="color: #339933;">,</span> <span style="color: #009900;">&#123;</span>
+  lifecycle<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+    created<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'strong'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'div'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinner</span> <span style="color: #339933;">=</span> document.<span style="color: #660066;">createElement</span><span style="color: #009900;">&#40;</span><span style="color: #3366CC;">'div'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span>.<span style="color: #660066;">className</span> <span style="color: #339933;">=</span> <span style="color: #3366CC;">'spinner'</span><span style="color: #339933;">;</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinner</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">spinnerContainer</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">appendChild</span><span style="color: #009900;">&#40;</span><span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+  methods<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+    toggle<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">=</span> <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">?</span> <span style="color: #003366; font-weight: bold;">false</span> <span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+    show<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">true</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+    hide<span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span> <span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #009900;">&#123;</span>
+      <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">visible</span> <span style="color: #339933;">=</span> <span style="color: #003366; font-weight: bold;">false</span><span style="color: #339933;">;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+  accessors<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+    visible<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+      attribute<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span> <span style="color: #FF0000;">boolean</span><span style="color: #339933;">:</span> <span style="color: #003366; font-weight: bold;">true</span> <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+    label<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span>
+      attribute<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span><span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span>
+&nbsp;
+      <span style="color: #000066; font-weight: bold;">set</span><span style="color: #339933;">:</span> <span style="color: #000066; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span>text<span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span>
+        <span style="color: #000066; font-weight: bold;">this</span>.<span style="color: #660066;">xtag</span>.<span style="color: #660066;">textEl</span>.<span style="color: #660066;">innerHTML</span> <span style="color: #339933;">=</span> text<span style="color: #339933;">;</span>
+      <span style="color: #009900;">&#125;</span>
+    <span style="color: #009900;">&#125;</span>
+  <span style="color: #009900;">&#125;</span>
+<span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> <span style="color: #006600; font-style: italic;">// End tag declaration</span></pre></td></tr></table></div>
+
+<p>If the difference between attributes and properties is unclear to you, <a href="http://stackoverflow.com/questions/6003819/properties-and-attributes-in-html" alt="attributes vs properties disambiguation">take a look at the top answer to this Stack Overflow question</a>. Although the question being asked is about something else entirely (jQuery), the top answer has a great explanation that will help you understand the relationship between attributes and properties.</p>
+<h3>The Finished Component</h3>
+<p>When we write code that depends on custom elements having been loaded already, we add an event listener that fires when the components have finished loading. This is sort of like jQuery&#8217;s <code>document.ready</code>.</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="html5" style="font-family:monospace;"><span style="color: #009900;">&lt;<span style="color: #000000; font-weight: bold;">script</span> <span style="color: #000066;">type</span><span style="color: #66cc66;">=</span><span style="color: #ff0000;">&quot;text/javascript&quot;</span>&gt;</span>
+document.addEventListener('DOMComponentsLoaded', function(){
+  // Any HUD customizations should be done here.
+  // We just pop up the HUD here to show you it works!
+  var testHUD = document.getElementById(&quot;test&quot;);
+  testHUD.label = &quot;Please Wait...&quot;;
+  testHUD.show();
+}, false);
+<span style="color: #009900;">&lt;<span style="color: #66cc66;">/</span><span style="color: #000000; font-weight: bold;">script</span>&gt;</span></pre></td></tr></table></div>
+
+<p><img src="https://hacks.mozilla.org/wp-content/uploads/2014/02/Screen-Shot-2014-02-18-at-4.06.17-PM.png" alt="X-Tag Status HUD Demo" /></p>
+<p>There you have it. We&#8217;ve created a simple modular, reusable widget for our client-side code. It&#8217;s a good starting point. But is it really finished?</p>
+<p>Some ways we may improve this element:</p>
+<ul>
+<li>Have the element recalculate it&#8217;s size when the <code>attributeChanged</code> event is fired and have the component resize to fit the label as it is updated rather than truncate the label with an ellipsis</li>
+<li>Let the developer set an image, such as an animated GIF, in place of the CSS spinner to customize the user experience further</li>
+<li>Have a progress bar instead of a spinner to give the user some additional information about task progress</li>
+</ul>
+<p>Use your creativity to come up with a small set of practical features and improvements beyond these as an exercise on your own.</p>
+<p>After following this tutorial you should understand how to extend the DOM with your own custom elements. If you&#8217;re stuck, leave a comment and we&#8217;ll do our best to get you back on track. If you&#8217;re not stuck, post your GitHub repo and show us what you&#8217;ve made with Brick and X-Tag. Happy hacking!</p>    <footer class="entry-meta">
+      <p>Posted by <a href="https://hacks.mozilla.org/author/angelinafabbro/" title="Posts by Angelina Fabbro" rel="author">Angelina Fabbro</a> 
+      on <time datetime="2014-03-04T06:54:19+00:00">March 4, 2014</time> 
+      at <time datetime="UTC06:54:19+00:00">06:54</time></p>
+          <div class="share"><div class="socialshare" data-type="small-bubbles"></div></div>
+        </footer>
+  </article>
+
+    
+    
+    
+
+<section id="comments">
+  <div id="comment-stream">
+    <header class="comments-head">
+      <h3>One comment</h3>
+              <p class="open"><a href="#respond">Post a comment</a></p>
+          </header>
+
+      <ol id="comment-list" class="hfeed av">
+    
+ <li id="comment-2158272" class="comment even thread-even depth-1 hentry">
+           <p class="entry-title vcard">
+       <a href="http://felipenmoura.org/" class="url" rel="nofollow external" title="http://felipenmoura.org/">
+         <span class="photo"><img alt='' src='https://secure.gravatar.com/avatar/929ed9958756c5c829a9eed068910646?s=48&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D48&amp;r=G' class='avatar avatar-48 photo' height='48' width='48' /></span>         <cite class="author fn">Felipe N. Moura</cite>
+       </a>
+       <span class="comment-meta">wrote on <a href="https://hacks.mozilla.org/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/comment-page-1/#comment-2158272" rel="bookmark" title="Permanent link to this comment by Felipe N. Moura"><abbr class="published" title="2014-03-05">March 5th, 2014</abbr> at 05:26</a>:</span>
+     </p>
+      
+    
+    <blockquote class="entry-content">
+      <p>bricks is very useful and easy to use, indeed!<br />
+I am looking forward to seeing the day every browser will have support to webcomponents&#8230;but while we wait for that to come&#8230;</p>
+    </blockquote>
+
+      <p class="comment-util"><a class='comment-reply-link' href='/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=2158272#respond' onclick='return addComment.moveForm("comment-2158272", "2158272", "respond", "23195")'>Reply</a> </p>
+  </li><!-- #comment-## -->
+    </ol>
+
+        </div>
+  <div id="respond">
+        <form id="comment-form" action="https://hacks.mozilla.org/wp-comments-post.php" method="post">
+      <fieldset>
+        <legend><span>Post Your Comment</span></legend>
+        <p id="cancel-comment-reply"><a rel="nofollow" id="cancel-comment-reply-link" href="/2014/03/custom-elements-for-custom-applications-web-components-with-mozillas-brick-and-x-tag/?utm_source=javascriptweekly&amp;utm_medium=email#respond" style="display:none;">Cancel Reply</a></p>
+        <ol>
+                  <li id="cmt-name">
+            <label for="author">Your name <abbr title="(required)">*</abbr></label>
+            <input type="text" name="author" id="author" size="25" required aria-required='true'>
+          </li>
+          <li id="cmt-email">
+            <label for="email">Your e-mail <abbr title="(required)">*</abbr></label>
+            <input type="email" name="email" id="email" size="25" required aria-required='true'>
+          </li>
+          <li id="cmt-web">
+            <label for="url">Your website</label>
+            <input type="url" name="url" id="url" size="25">
+          </li>
+          <li id="cmt-ackbar">
+            <label for="age">Spam robots, please fill in this field. Humans should leave it blank.</label>
+            <input type="text" name="age" id="age" size="4" tabindex="-1">
+          </li>
+                  <li id="cmt-cmt"><label for="comment">Your comment</label> <textarea name="comment" id="comment" cols="50" rows="10" required="required" aria-required="true"></textarea></li>
+          <li id="comment-submit"><button name="submit" type="submit">Submit Comment</button>
+          <input type='hidden' name='comment_post_ID' value='23195' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+          <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="8307e7aa93" /></p>
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+</li>
+        </ol>
+      </fieldset>
+    </form>
+      </div></section><script>jQuery("#comment-form").submit(function() { return fc_checkform('req'); });</script>
+
+
+
+  </main><!-- /#content-main -->
+
+<div id="content-sub">
+  <ul id="widgets">
+  <li class="widget author">
+      <h3>About the Author</h3>
+        <div class="vcard">
+      <h4 class="fn">
+              <a class="url" href="http://realityhacking.net" rel="external me">Angelina Fabbro            <span class="photo"><img alt='' src='https://secure.gravatar.com/avatar/32ab7c2e34fa4afa320ad325c2aa38df?s=48&amp;d=https%3A%2F%2Fsecure.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D48&amp;r=G' class='avatar avatar-48 photo' height='48' width='48' /></span>      </a></h4>
+          <p>I'm a developer from Vancouver, BC Canada working at Mozilla as a Technical Evangelist and developer advocate for Firefox OS. I love JavaScript, web components, Node.js, mobile app development, and this cool place I hang out a lot called the world wide web. Oh, and let's not forget Firefox OS. 
+
+In my spare time I take singing lessons, play Magic: The Gathering, teach people to program, and collaborate with scientists for better programmer-scientist engagement.</p>
+        <ul class="author-meta"><li><a href="http://realityhacking.net" class="website" rel="me">realityhacking.net</a></li><li><a href="http://twitter.com/angelinamagnum" class="twitter" rel="me">@angelinamagnum</a></li><li><a href="https://plus.google.com/117339576748577555094" class="gplus" rel="me">Google+</a></li></ul>      <p><a class="url" href="https://hacks.mozilla.org/author/angelinafabbro/">Read more articles by Angelina Fabbro&hellip;</a></p>
+    </div>
+    </li>
+  <li class="widget categories">
+    <h3>Articles by Category</h3>
+    <ul class="cat-list" role="navigation">
+     	<li class="cat-item cat-item-4"><a href="https://hacks.mozilla.org/category/35-days/" title="View all posts filed under 35 Days">35 Days</a> (45)
+</li>
+	<li class="cat-item cat-item-11"><a href="https://hacks.mozilla.org/category/font-face/" title="View all posts filed under @font-face">@font-face</a> (9)
+</li>
+	<li class="cat-item cat-item-393"><a href="https://hacks.mozilla.org/category/a-node-js-holiday-season/" title="View all posts filed under A Node.JS Holiday Season">A Node.JS Holiday Season</a> (12)
+</li>
+	<li class="cat-item cat-item-38"><a href="https://hacks.mozilla.org/category/abouthacks/" title="View all posts filed under about:hacks">about:hacks</a> (2)
+</li>
+	<li class="cat-item cat-item-384"><a href="https://hacks.mozilla.org/category/accessibility/" title="View all posts filed under Accessibility">Accessibility</a> (1)
+</li>
+	<li class="cat-item cat-item-89"><a href="https://hacks.mozilla.org/category/add-ons/" title="View all posts filed under Add-ons">Add-ons</a> (15)
+</li>
+	<li class="cat-item cat-item-190"><a href="https://hacks.mozilla.org/category/javascript/animations/" title="View all posts filed under Animations">Animations</a> (4)
+</li>
+	<li class="cat-item cat-item-253"><a href="https://hacks.mozilla.org/category/apps/" title="View all posts filed under Apps">Apps</a> (69)
+</li>
+	<li class="cat-item cat-item-198"><a href="https://hacks.mozilla.org/category/ask-mdn/" title="View all posts filed under Ask MDN">Ask MDN</a> (3)
+</li>
+	<li class="cat-item cat-item-9"><a href="https://hacks.mozilla.org/category/audio/" title="View all posts filed under Audio">Audio</a> (35)
+</li>
+	<li class="cat-item cat-item-376"><a href="https://hacks.mozilla.org/category/bleeding-edge/" title="View all posts filed under Bleeding edge">Bleeding edge</a> (12)
+</li>
+	<li class="cat-item cat-item-181"><a href="https://hacks.mozilla.org/category/boottogecko/" title="View all posts filed under Boot to Gecko (B2G)">Boot to Gecko (B2G)</a> (12)
+</li>
+	<li class="cat-item cat-item-601"><a href="https://hacks.mozilla.org/category/brick/" title="View all posts filed under Brick">Brick</a> (1)
+</li>
+	<li class="cat-item cat-item-228"><a href="https://hacks.mozilla.org/category/browserid-2/" title="View all posts filed under BrowserID">BrowserID</a> (4)
+</li>
+	<li class="cat-item cat-item-6"><a href="https://hacks.mozilla.org/category/canvas/" title="View all posts filed under Canvas">Canvas</a> (40)
+</li>
+	<li class="cat-item cat-item-94"><a href="https://hacks.mozilla.org/category/challenge/" title="View all posts filed under Challenge">Challenge</a> (9)
+</li>
+	<li class="cat-item cat-item-127"><a href="https://hacks.mozilla.org/category/conferences/" title="View all posts filed under Conferences">Conferences</a> (36)
+</li>
+	<li class="cat-item cat-item-14"><a href="https://hacks.mozilla.org/category/css/" title="View all posts filed under CSS">CSS</a> (103)
+</li>
+	<li class="cat-item cat-item-23"><a href="https://hacks.mozilla.org/category/debugging/" title="View all posts filed under Debugging">Debugging</a> (6)
+</li>
+	<li class="cat-item cat-item-3"><a href="https://hacks.mozilla.org/category/demo/" title="View all posts filed under Demo">Demo</a> (93)
+</li>
+	<li class="cat-item cat-item-144"><a href="https://hacks.mozilla.org/category/mdn/demo-studio/" title="View all posts filed under Demo Studio">Demo Studio</a> (11)
+</li>
+	<li class="cat-item cat-item-165"><a href="https://hacks.mozilla.org/category/dev-derby/" title="View all posts filed under Dev Derby">Dev Derby</a> (56)
+</li>
+	<li class="cat-item cat-item-163"><a href="https://hacks.mozilla.org/category/developer-tools/" title="View all posts filed under Developer Tools">Developer Tools</a> (51)
+</li>
+	<li class="cat-item cat-item-31"><a href="https://hacks.mozilla.org/category/device-apis/" title="View all posts filed under Device APIs">Device APIs</a> (10)
+</li>
+	<li class="cat-item cat-item-73"><a href="https://hacks.mozilla.org/category/docs/" title="View all posts filed under Docs">Docs</a> (96)
+</li>
+	<li class="cat-item cat-item-16"><a href="https://hacks.mozilla.org/category/dom/" title="View all posts filed under DOM">DOM</a> (20)
+</li>
+	<li class="cat-item cat-item-32"><a href="https://hacks.mozilla.org/category/drag-and-drop/" title="View all posts filed under Drag and Drop">Drag and Drop</a> (10)
+</li>
+	<li class="cat-item cat-item-158"><a href="https://hacks.mozilla.org/category/drumbeat/" title="View all posts filed under Drumbeat">Drumbeat</a> (2)
+</li>
+	<li class="cat-item cat-item-372"><a href="https://hacks.mozilla.org/category/evangelism-reps/" title="View all posts filed under Evangelism Reps">Evangelism Reps</a> (2)
+</li>
+	<li class="cat-item cat-item-88"><a href="https://hacks.mozilla.org/category/event/" title="View all posts filed under Event">Event</a> (24)
+</li>
+	<li class="cat-item cat-item-5"><a href="https://hacks.mozilla.org/category/feature/" title="View all posts filed under Feature">Feature</a> (44)
+</li>
+	<li class="cat-item cat-item-39"><a href="https://hacks.mozilla.org/category/featured/" title="View all posts filed under Featured Article">Featured Article</a> (149)
+</li>
+	<li class="cat-item cat-item-40"><a href="https://hacks.mozilla.org/category/demo/featured-demo/" title="View all posts filed under Featured Demo">Featured Demo</a> (27)
+</li>
+	<li class="cat-item cat-item-37"><a href="https://hacks.mozilla.org/category/fileapi/" title="View all posts filed under FileAPI">FileAPI</a> (17)
+</li>
+	<li class="cat-item cat-item-35"><a href="https://hacks.mozilla.org/category/firebug/" title="View all posts filed under Firebug">Firebug</a> (15)
+</li>
+	<li class="cat-item cat-item-25"><a href="https://hacks.mozilla.org/category/firefox/" title="View all posts filed under Firefox">Firefox</a> (209)
+</li>
+	<li class="cat-item cat-item-157"><a href="https://hacks.mozilla.org/category/firefox/firefox-aurora/" title="View all posts filed under Firefox Aurora">Firefox Aurora</a> (30)
+</li>
+	<li class="cat-item cat-item-339"><a href="https://hacks.mozilla.org/category/firefox/firefox-beta/" title="View all posts filed under Firefox Beta">Firefox Beta</a> (3)
+</li>
+	<li class="cat-item cat-item-383"><a href="https://hacks.mozilla.org/category/firefox/firefox-development-highlights/" title="View all posts filed under Firefox Development Highlights">Firefox Development Highlights</a> (9)
+</li>
+	<li class="cat-item cat-item-322"><a href="https://hacks.mozilla.org/category/firefox/firefox-nightly/" title="View all posts filed under Firefox Nightly">Firefox Nightly</a> (9)
+</li>
+	<li class="cat-item cat-item-382"><a href="https://hacks.mozilla.org/category/firefox-os/" title="View all posts filed under Firefox OS">Firefox OS</a> (76)
+</li>
+	<li class="cat-item cat-item-249"><a href="https://hacks.mozilla.org/category/games-2/" title="View all posts filed under Games">Games</a> (33)
+</li>
+	<li class="cat-item cat-item-13"><a href="https://hacks.mozilla.org/category/geolocation/" title="View all posts filed under Geolocation">Geolocation</a> (10)
+</li>
+	<li class="cat-item cat-item-56"><a href="https://hacks.mozilla.org/category/hackability/" title="View all posts filed under hackability">hackability</a> (2)
+</li>
+	<li class="cat-item cat-item-298"><a href="https://hacks.mozilla.org/category/hackdays/" title="View all posts filed under hackdays">hackdays</a> (7)
+</li>
+	<li class="cat-item cat-item-217"><a href="https://hacks.mozilla.org/category/history-api/" title="View all posts filed under History API">History API</a> (1)
+</li>
+	<li class="cat-item cat-item-41"><a href="https://hacks.mozilla.org/category/html5/" title="View all posts filed under HTML5">HTML5</a> (164)
+</li>
+	<li class="cat-item cat-item-62"><a href="https://hacks.mozilla.org/category/identity/" title="View all posts filed under Identity">Identity</a> (8)
+</li>
+	<li class="cat-item cat-item-21"><a href="https://hacks.mozilla.org/category/images/" title="View all posts filed under Images">Images</a> (6)
+</li>
+	<li class="cat-item cat-item-64"><a href="https://hacks.mozilla.org/category/indexeddb/" title="View all posts filed under IndexedDB">IndexedDB</a> (15)
+</li>
+	<li class="cat-item cat-item-379"><a href="https://hacks.mozilla.org/category/interviews/" title="View all posts filed under Interviews">Interviews</a> (2)
+</li>
+	<li class="cat-item cat-item-58"><a href="https://hacks.mozilla.org/category/jagermonkey/" title="View all posts filed under JägerMonkey">JägerMonkey</a> (5)
+</li>
+	<li class="cat-item cat-item-12"><a href="https://hacks.mozilla.org/category/javascript/" title="View all posts filed under JavaScript">JavaScript</a> (103)
+</li>
+	<li class="cat-item cat-item-254"><a href="https://hacks.mozilla.org/category/labs/" title="View all posts filed under Labs">Labs</a> (3)
+</li>
+	<li class="cat-item cat-item-154"><a href="https://hacks.mozilla.org/category/mdn/learning/" title="View all posts filed under Learning">Learning</a> (4)
+</li>
+	<li class="cat-item cat-item-153"><a href="https://hacks.mozilla.org/category/localstorage/" title="View all posts filed under localStorage">localStorage</a> (4)
+</li>
+	<li class="cat-item cat-item-33"><a href="https://hacks.mozilla.org/category/mdn/" title="View all posts filed under MDN">MDN</a> (80)
+</li>
+	<li class="cat-item cat-item-242"><a href="https://hacks.mozilla.org/category/css/media-queries/" title="View all posts filed under Media Queries">Media Queries</a> (5)
+</li>
+	<li class="cat-item cat-item-209"><a href="https://hacks.mozilla.org/category/missionmozilla/" title="View all posts filed under Mission:Mozilla">Mission:Mozilla</a> (8)
+</li>
+	<li class="cat-item cat-item-36"><a href="https://hacks.mozilla.org/category/mobile/" title="View all posts filed under Mobile">Mobile</a> (36)
+</li>
+	<li class="cat-item cat-item-156"><a href="https://hacks.mozilla.org/category/mozilla/" title="View all posts filed under Mozilla">Mozilla</a> (24)
+</li>
+	<li class="cat-item cat-item-182"><a href="https://hacks.mozilla.org/category/mozilla-hacks-weekly/" title="View all posts filed under Mozilla Hacks Weekly">Mozilla Hacks Weekly</a> (64)
+</li>
+	<li class="cat-item cat-item-27"><a href="https://hacks.mozilla.org/category/multi-touch/" title="View all posts filed under Multi-touch">Multi-touch</a> (6)
+</li>
+	<li class="cat-item cat-item-159"><a href="https://hacks.mozilla.org/category/news/" title="View all posts filed under News">News</a> (5)
+</li>
+	<li class="cat-item cat-item-392"><a href="https://hacks.mozilla.org/category/node-js/" title="View all posts filed under Node.js">Node.js</a> (18)
+</li>
+	<li class="cat-item cat-item-55"><a href="https://hacks.mozilla.org/category/offline/" title="View all posts filed under Offline">Offline</a> (10)
+</li>
+	<li class="cat-item cat-item-515"><a href="https://hacks.mozilla.org/category/payments/" title="View all posts filed under Payments">Payments</a> (6)
+</li>
+	<li class="cat-item cat-item-315"><a href="https://hacks.mozilla.org/category/people-of-games/" title="View all posts filed under People of Games">People of Games</a> (1)
+</li>
+	<li class="cat-item cat-item-105"><a href="https://hacks.mozilla.org/category/people-of-html5/" title="View all posts filed under People of HTML5">People of HTML5</a> (11)
+</li>
+	<li class="cat-item cat-item-34"><a href="https://hacks.mozilla.org/category/performance/" title="View all posts filed under Performance">Performance</a> (29)
+</li>
+	<li class="cat-item cat-item-373"><a href="https://hacks.mozilla.org/category/persona-2/" title="View all posts filed under Persona">Persona</a> (3)
+</li>
+	<li class="cat-item cat-item-259"><a href="https://hacks.mozilla.org/category/presentation-2/" title="View all posts filed under Presentation">Presentation</a> (14)
+</li>
+	<li class="cat-item cat-item-317"><a href="https://hacks.mozilla.org/category/privacy/" title="View all posts filed under privacy">privacy</a> (2)
+</li>
+	<li class="cat-item cat-item-72"><a href="https://hacks.mozilla.org/category/qa/" title="View all posts filed under QA">QA</a> (2)
+</li>
+	<li class="cat-item cat-item-168"><a href="https://hacks.mozilla.org/category/release/" title="View all posts filed under Release">Release</a> (4)
+</li>
+	<li class="cat-item cat-item-87"><a href="https://hacks.mozilla.org/category/research/" title="View all posts filed under Research">Research</a> (5)
+</li>
+	<li class="cat-item cat-item-229"><a href="https://hacks.mozilla.org/category/screencast/" title="View all posts filed under Screencast">Screencast</a> (6)
+</li>
+	<li class="cat-item cat-item-30"><a href="https://hacks.mozilla.org/category/security/" title="View all posts filed under Security">Security</a> (13)
+</li>
+	<li class="cat-item cat-item-276"><a href="https://hacks.mozilla.org/category/spdy/" title="View all posts filed under SPDY">SPDY</a> (2)
+</li>
+	<li class="cat-item cat-item-145"><a href="https://hacks.mozilla.org/category/sprints/" title="View all posts filed under Sprints">Sprints</a> (17)
+</li>
+	<li class="cat-item cat-item-24"><a href="https://hacks.mozilla.org/category/standards/" title="View all posts filed under Standards">Standards</a> (50)
+</li>
+	<li class="cat-item cat-item-29"><a href="https://hacks.mozilla.org/category/survey/" title="View all posts filed under Survey">Survey</a> (7)
+</li>
+	<li class="cat-item cat-item-7"><a href="https://hacks.mozilla.org/category/svg/" title="View all posts filed under SVG">SVG</a> (14)
+</li>
+	<li class="cat-item cat-item-164"><a href="https://hacks.mozilla.org/category/test-day/" title="View all posts filed under Test Day">Test Day</a> (1)
+</li>
+	<li class="cat-item cat-item-248"><a href="https://hacks.mozilla.org/category/testing/" title="View all posts filed under Testing">Testing</a> (2)
+</li>
+	<li class="cat-item cat-item-378"><a href="https://hacks.mozilla.org/category/tools/" title="View all posts filed under Tools">Tools</a> (4)
+</li>
+	<li class="cat-item cat-item-20"><a href="https://hacks.mozilla.org/category/tracemonkey/" title="View all posts filed under TraceMonkey">TraceMonkey</a> (9)
+</li>
+	<li class="cat-item cat-item-1"><a href="https://hacks.mozilla.org/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a> (1)
+</li>
+	<li class="cat-item cat-item-8"><a href="https://hacks.mozilla.org/category/video/" title="View all posts filed under Video">Video</a> (54)
+</li>
+	<li class="cat-item cat-item-534"><a href="https://hacks.mozilla.org/category/videoseries/" title="View all posts filed under Videoseries">Videoseries</a> (9)
+</li>
+	<li class="cat-item cat-item-543"><a href="https://hacks.mozilla.org/category/web-components/" title="View all posts filed under Web Components">Web Components</a> (4)
+</li>
+	<li class="cat-item cat-item-377"><a href="https://hacks.mozilla.org/category/web-developer-toolbox/" title="View all posts filed under Web Developer Toolbox">Web Developer Toolbox</a> (5)
+</li>
+	<li class="cat-item cat-item-76"><a href="https://hacks.mozilla.org/category/web-developers/" title="View all posts filed under Web Developers">Web Developers</a> (50)
+</li>
+	<li class="cat-item cat-item-537"><a href="https://hacks.mozilla.org/category/web-workers/" title="View all posts filed under Web Workers">Web Workers</a> (2)
+</li>
+	<li class="cat-item cat-item-246"><a href="https://hacks.mozilla.org/category/webapi/" title="View all posts filed under WebAPI">WebAPI</a> (17)
+</li>
+	<li class="cat-item cat-item-204"><a href="https://hacks.mozilla.org/category/webfwd/" title="View all posts filed under WebFWD">WebFWD</a> (7)
+</li>
+	<li class="cat-item cat-item-28"><a href="https://hacks.mozilla.org/category/webgl/" title="View all posts filed under WebGL">WebGL</a> (35)
+</li>
+	<li class="cat-item cat-item-147"><a href="https://hacks.mozilla.org/category/webinars/" title="View all posts filed under Webinars">Webinars</a> (6)
+</li>
+	<li class="cat-item cat-item-358"><a href="https://hacks.mozilla.org/category/webrtc/" title="View all posts filed under WebRTC">WebRTC</a> (31)
+</li>
+	<li class="cat-item cat-item-60"><a href="https://hacks.mozilla.org/category/websocket/" title="View all posts filed under WebSocket">WebSocket</a> (9)
+</li>
+	<li class="cat-item cat-item-132"><a href="https://hacks.mozilla.org/category/wiki-wednesday/" title="View all posts filed under Wiki Wednesday">Wiki Wednesday</a> (43)
+</li>
+	<li class="cat-item cat-item-602"><a href="https://hacks.mozilla.org/category/x-tag/" title="View all posts filed under X-Tag">X-Tag</a> (1)
+</li>
+	<li class="cat-item cat-item-22"><a href="https://hacks.mozilla.org/category/xmlhttprequest/" title="View all posts filed under XMLHttpRequest">XMLHttpRequest</a> (12)
+</li>
+    </ul>
+  </li>
+  </ul>
+</div><!-- /#content-sub -->
+</div><!-- /#content -->
+
+<footer id="site-info">
+  <nav id="nav-legal">
+    <ul>
+      <li><a href="http://www.mozilla.com/privacy-policy.html" rel="external">Privacy Policy</a></li>
+      <li><a href="http://www.mozilla.com/about/legal.html" rel="external">Legal Notices</a></li>
+      <li><a href="http://www.mozilla.com/legal/fraud-report/" rel="external">Report Trademark Abuse</a></li>
+    </ul>
+  </nav>
+
+  <p id="copyright">Except where otherwise noted, content on this site is licensed under the <br /><a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license external">Creative Commons Attribution Share-Alike License v3.0</a> or any later version.</p>
+
+  <nav id="nav-footer">
+    <h5>hacks.mozilla.org:</h5>
+    <ul role="navigation">
+      <li><a href="https://hacks.mozilla.org">Home</a></li>
+      <li><a href="https://hacks.mozilla.org/articles/">Articles</a></li>
+      <li><a href="https://hacks.mozilla.org/demos/">Demos</a></li>
+      <li><a href="https://hacks.mozilla.org/about/">About</a></li>
+    </ul>
+  </nav>
+</footer>
+
+<script src="https://www.mozilla.org/tabzilla/media/js/tabzilla.js"></script>
+<script>
+// <![CDATA[
+  jQuery(document).ready(function(){
+    jQuery(document.body).addClass("js");
+  });
+// ]]>
+</script>
+
+</div>
+</body>
+</html>

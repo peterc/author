@@ -7,6 +7,10 @@ COMMON PATTERNS
 by (<..>)<a>...</a>
 
 
+ <meta content="..." property="article:author" />
+
+
+
 H1..H6
 
 classnames including 'authorname', 'author'

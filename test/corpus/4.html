@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+    
+  <title>A Detailed Introduction To Custom Elements | Smashing Coding</title>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+
+  <!-- Win8 Tile -->
+  <meta name="application-name" content="Smashing Magazine"/>
+  <meta name="msapplication-TileColor" content="#e53b2c"/>
+  <meta name="msapplication-square70x70logo" content="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/smashing-windows-icon-70-70.png"/>
+  <meta name="msapplication-square150x150logo" content="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/smashing-windows-icon-150-150.png"/>
+  <meta name="msapplication-wide310x150logo" content="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/smashing-windows-icon-310-150.png"/>
+  <meta name="msapplication-square310x310logo" content="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/smashing-windows-icon-310-310.png"/>
+  <meta name="msapplication-notification" content="frequency=30;polling-uri=http://notifications.buildmypinnedsite.com/?feed=http://rss1.smashingmagazine.com/feed/&amp;id=1;polling-uri2=http://notifications.buildmypinnedsite.com/?feed=http://rss1.smashingmagazine.com/feed/&amp;id=2;polling-uri3=http://notifications.buildmypinnedsite.com/?feed=http://rss1.smashingmagazine.com/feed/&amp;id=3;polling-uri4=http://notifications.buildmypinnedsite.com/?feed=http://rss1.smashingmagazine.com/feed/&amp;id=4;polling-uri5=http://notifications.buildmypinnedsite.com/?feed=http://rss1.smashingmagazine.com/feed/&amp;id=5; cycle=1"/>
+  
+  <!-- Apple Touch Icons -->
+  <link rel="apple-touch-icon-precomposed" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/apple-touch-icon-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/apple-touch-icon-57x57-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/apple-touch-icon-72x72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/apple-touch-icon-114x114-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/apple-touch-icon-144x144-precomposed.png" />
+
+  <!-- RSS & Pingback -->
+  <link rel="alternate" type="application/atom+xml" title="News-Feed" href="http://rss1.smashingmagazine.com/feed/" /><link type="application/atom+xml" rel="alternate" title="Smashing Magazine &raquo; Coding Feed" href="http://rss1.smashingmagazine.com/feed/?f=coding-std" /><link rel="pingback" href="http://coding.smashingmagazine.com/xmlrpc.php" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/favicon.ico" />
+  
+  <script type="text/javascript">var globals = {"wp_home":"http:\/\/mobile.smashingmagazine.com","wp_theme_url":"http:\/\/media.smashingmagazine.com\/wp-content\/themes\/smashingv4","wp_media_uploads_url":"http:\/\/media.smashingmagazine.com\/wp-content\/uploads","wp_www_smash_url":"http:\/\/www.smashingmagazine.com"};</script>
+
+  
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.2.2 - http://yoast.com/wordpress/seo/ -->
+<meta name="description" content="This article explains what Custom Elements are for, why they’re so transformative and how to use them."/>
+<link rel="canonical" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/" />
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link type="application/atom+xml" rel="alternate" title="Smashing Magazine &raquo; Feed" href="http://rss1.smashingmagazine.com/feed/" />
+
+
+<link rel='stylesheet' id='main-css'  href='http://coding.smashingmagazine.com/wp-content/themes/smashingv4/stylesheets/main.min.css?ver=2014.3.4' type='text/css' media='all' />
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js?ver=1.8.3'></script>
+<script type='text/javascript' src='http://coding.smashingmagazine.com/wp-content/plugins/wordpress-popup/popover-load-js.php'></script>
+<script type='text/javascript' src='http://coding.smashingmagazine.com/wp-content/themes/smashingv4/javascripts/thirdparty.min.js?ver=5.0.0'></script>
+<script type='text/javascript' src='http://coding.smashingmagazine.com/wp-includes/js/comment-reply.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpAjax = {"noPerm":"You do not have permission to do that.","broken":"An unidentified error has occurred."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://coding.smashingmagazine.com/wp-includes/js/wp-ajax-response.min.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var thickboxL10n = {"next":"Next >","prev":"< Prev","image":"Image","of":"of","close":"Close","noiframes":"This feature requires inline frames. You have iframes disabled or your browser does not support them.","loadingAnimation":"http:\/\/coding.smashingmagazine.com\/wp-includes\/js\/thickbox\/loadingAnimation.gif","closeImage":"http:\/\/coding.smashingmagazine.com\/wp-includes\/js\/thickbox\/tb-close.png"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://coding.smashingmagazine.com/wp-includes/js/thickbox/thickbox.js?ver=3.1-20121105'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var wpajaxeditcomments = {"AEC_PluginUrl":"http:\/\/coding.smashingmagazine.com\/wp-content\/plugins\/smash-edit-comments","AEC_CanScroll":"0","AEC_Minutes":"minutes","AEC_Minute":"minute","AEC_And":"and","AEC_Seconds":"seconds","AEC_Second":"second","AEC_Moderation":"Mark for Moderation?","AEC_Approve":"Approve Comment?","AEC_Spam":"Mark as Spam?","AEC_Delete":"Delete this comment?","AEC_Anon":"Anonymous","AEC_Loading":"Loading...","AEC_Ready":"Ready","AEC_Sending":"Sending...","AEC_Sent":"Message Sent","AEC_LoadSuccessful":"Comment Loaded Successfully","AEC_Saving":"Saving...","AEC_Saved":"Comment Successfully Saved","AEC_Delink":"De-link Successful"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://media.smashingmagazine.com/plugins/smash-edit-comments/js/wp-ajax-edit-comments.js?ver=2.3'></script>
+
+<link rel='shortlink' href='http://coding.smashingmagazine.com/?p=131124' />
+<link rel="stylesheet" href="http://media.smashingmagazine.com/plugins/smash-edit-comments/css/edit-comments.css" type="text/css" media="screen"  /><!-- Ajax Edit Comments -->
+<!--[if IE]>
+<style>
+  .clearfix {display: inline-block;}
+  /* Hides from IE-mac \*/
+  * html .clearfix {height: 1%;}
+  .clearfix {display: block;}
+  /* End hide from IE-mac */
+</style>
+<![endif]-->
+<link rel="stylesheet" href="http://coding.smashingmagazine.com/wp-includes/js/thickbox/thickbox.css" type="text/css" media="all"  />
+  <!--[if IE 8]>
+      <link rel="stylesheet" media="all" type="text/css" href="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/stylesheets/ie8-nu.css" />
+      <script type="text/javascript" src="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/javascripts/respond.min.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript" src="http://auslieferung.commindo-media-ressourcen.de/www/delivery/spcjs.php?id=4&amp;block=1&amp;blockcampaign=1&amp;withtext=1"></script>
+  <script type='text/javascript'>/*<![CDATA[*/ ads_postload(); /*]]>*/</script>
+</head>
+<body class="single single-post postid-131124 single-format-standard coding-section">
+
+	<a id="top"></a>
+	<nav class="toplevel clearfix">
+    <div class="mini">
+      <h1><span class="screen-reader">Smashing Magazine</span><a href="http://www.smashingmagazine.com/"><img src="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/logo.png" alt="Smashing Magazine" title="Jump to the front page" /></a></h1>
+    </div>
+    <div class="mobile-nav-buttons">
+    	<a href="#mobile-navigation-footer" class="nav-toggle-button">Menu</a> <a href="#mobile-search-footer" class="search-toggle-button">Search</a>
+    </div>
+    <ul class="network clearfix">           
+	    <li class="current"><a href="http://www.smashingmagazine.com/"><img src="http://coding.smashingmagazine.com/wp-content/themes/smashingv4/images/logo.png" alt="Smashing Magazine" title="Jump to the front page" /></a></li>
+	    <li><a href="http://www.smashingmagazine.com/books/">Books</a></li>
+	    <li class="cody"><a href="http://www.smashingmagazine.com/ebooks/">Library</a></li>
+	    <li><a href="http://www.smashingmagazine.com/workshops/">Workshops</a></li>
+	    <li><a href="http://jobs.smashingmagazine.com/">Job Board</a></li>
+    </ul>
+    <ul class="channels">
+      <li class="rss"><a href="http://rss1.smashingmagazine.com/feed/" title="Subscribe to our RSS-feed (1200K)">RSS</a></li>
+      <li class="facebook"><a href="http://www.facebook.com/smashmag" title="Join our Facebook page! (190k)">Facebook</a></li>
+      <li class="twitter"><a href="http://twitter.com/smashingmag" title="Follow us on Twitter! (767k)">Twitter</a></li>
+      <li class="newsletter"><a href="http://www.smashingmagazine.com/the-smashing-newsletter/" title="Subscribe to our Email Newsletter (175k)">Newsletter</a></li>
+    </ul>
+  </nav>
+
+	<div id="container">
+	  <div class="fluid clearfix">
+      <div class="grid clearfix">
+        <div class="mini-search wp-search-form clearfix" >           
+          <form id="search" method="get" action="http://www.smashingmagazine.com/search-results/" target="_top">
+            <input name="q" type="text" placeholder="e.g. JavaScript" />
+            <button class="search_submit" type="submit"><span class="first-type">Search</span></button>
+            <input type="hidden" name="cx" value="partner-pub-6779860845561969:5884617103">
+            <input type="hidden" name="cof" value="FORID:10">
+            <input type="hidden" name="ie" value="UTF-8">
+          </form>
+        </div>
+          <div class="col sidebar">
+            <nav class="sections">
+              <ul class="clearfix">
+                <li class="menu-item-coding current">
+                  <a href="http://coding.smashingmagazine.com">Coding</a>
+                  <ul>
+                    <li><a href="http://coding.smashingmagazine.com/tag/css/">CSS</a></li>
+                    <li><a href="http://coding.smashingmagazine.com/tag/html/">HTML</a></li>
+                    <li><a href="http://coding.smashingmagazine.com/tag/javascript/">JavaScript</a></li>
+                    <li><a href="http://coding.smashingmagazine.com/tag/techniques/">Techniques</a></li>
+                  </ul>
+                </li>
+                <li class="menu-item-design">
+                  <a href="http://www.smashingmagazine.com/category/design/">Design</a>
+                  <ul>
+                    <li><a href="http://www.smashingmagazine.com/tag/web-design/">Web Design</a></li>
+                    <li><a href="http://www.smashingmagazine.com/tag/typography/">Typography</a></li>
+                    <li><a href="http://www.smashingmagazine.com/tag/inspiration/">Inspiration</a></li>
+                    <li><a href="http://www.smashingmagazine.com/tag/business/">Business</a></li>
+                  </ul>
+                </li>
+                <li class="menu-item-mobile">
+                  <a href="http://mobile.smashingmagazine.com">Mobile</a>
+                  <ul>
+                    <li><a href="http://mobile.smashingmagazine.com/tag/responsive-design/">Responsive</a></li>
+                    <li><a href="http://mobile.smashingmagazine.com/tag/ios/">iPhone &amp; iPad</a></li>
+                    <li><a href="http://mobile.smashingmagazine.com/tag/android/">Android</a></li>
+                    <li><a href="http://mobile.smashingmagazine.com/tag/design-patterns/">Design Patterns</a></li>
+                  </ul>
+                </li>
+                <li class="menu-item-graphics">
+                  <a href="http://www.smashingmagazine.com/category/graphics/">Graphics</a>
+                  <ul>
+                    <li><a href="http://www.smashingmagazine.com/tag/photoshop/">Photoshop</a></li>
+                    <li><a href="http://fireworks.smashingmagazine.com">Fireworks</a></li>
+                    <li><a href="http://www.smashingmagazine.com/tag/wallpapers/">Wallpapers</a></li>
+                    <li><a href="http://www.smashingmagazine.com/tag/freebies/">Freebies</a></li>
+                  </ul>
+                </li>
+                <li class="menu-item-uxdesign">
+                  <a href="http://uxdesign.smashingmagazine.com">UX Design</a>
+                  <ul>
+                    <li><a href="http://uxdesign.smashingmagazine.com/tag/usability/">Usability</a></li>
+                    <li><a href="http://uxdesign.smashingmagazine.com/tag/user-experience/">User Experience</a></li>
+                    <li><a href="http://uxdesign.smashingmagazine.com/tag/ui/">UI Design</a></li>
+                    <li><a href="http://uxdesign.smashingmagazine.com/tag/e-commerce/">E-Commerce</a></li>
+                  </ul>
+                </li>
+                <li class="menu-item-wordpress">
+                  <a href="http://wp.smashingmagazine.com" class="clearfix"><span class="short">WP</span><span class="long"><span>Word</span><span>Press</span></span></a>
+                  <ul>
+                    <li><a href="http://wp.smashingmagazine.com/tag/essentials/">Essentials</a></li>
+                    <li><a href="http://wp.smashingmagazine.com/tag/techniques/">Techniques</a></li>
+                    <li><a href="http://wp.smashingmagazine.com/tag/plugins/">Plugins</a></li>
+                    <li><a href="http://wp.smashingmagazine.com/tag/themes/">Themes</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <br class="clearboth" />
+          	</nav>
+      		</div><!-- .col.sidebar -->
+      		<div class="col main single">    <article class="post-131124 post type-post status-publish format-standard hentry category-html category-javascript category-programming-techniques category-workflow-2 tag-html tag-javascript tag-techniques tag-workflow post">
+                    <h2><a href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/" rel="bookmark" title="Read 'A Detailed Introduction To Custom Elements'">A Detailed Introduction To Custom Elements</a></h2>
+                <ul class="postmetadata clearfix">
+            <li class="author">By <a rel="author" href="http://coding.smashingmagazine.com/author/peter-gasston/?rel=author" title="Posts by Peter Gasston"  >Peter Gasston</a></li>
+            <li id="logoedtarget" class="inline"></li>            <li class="date">March 4th, 2014</li>
+            <li class="tags"><a href="http://coding.smashingmagazine.com/tag/html/">HTML</a>, <a href="http://coding.smashingmagazine.com/tag/javascript/">JavaScript</a>, <a href="http://coding.smashingmagazine.com/tag/techniques/">Techniques</a></li>
+            <li class="comments"><a href="#comments" title="Comment on A Detailed Introduction To Custom Elements">52 Comments</a></li>
+                    </ul>
+                <div class="ad ed">
+            <span class="declare">Advertisement</span>
+            <div id="cad">
+                <script type='text/javascript'>// <![CDATA[
+                    OA_show('Medium Rectangle');
+                // ]]> </script>
+            </div>
+        </div>
+                                    <p>You’ve probably heard all the noise about <a href="http://w3c.github.io/webcomponents/explainer/">Web Components</a> and how they’re going to change Web development forever. If you haven’t, you’ve either been living under a rock, are reading this article by accident, or have a full, busy life that doesn’t leave you time to read about unstable and speculative Web technologies. Well, not me.</p>
+<p>Web Components are a suite of connected technologies aimed at making elements reusable across the Web. The lion’s share of the conversation has been around Shadow DOM, but probably the most transformative technology of the suite is Custom Elements, <strong>a method of defining your own elements</strong>, with their own behavior and properties.</p>
+<p>That’s quite an ambiguous description, so the point of this article is to explain what Custom Elements are for, why they’re so transformative and how to use them. Please note, first, that I’ll talk about <strong>custom elements </strong>(common noun) when discussing the concept and <strong>Custom Elements</strong> (proper name) when discussing the technology, and secondly, that my humor tends to wear very thin very quickly. Let’s push forward.</p>
+<h3>“What’s The Point Of Custom Elements?”</h3>
+<p>The basic idea is that if you create an element that always performs the same role and has the same set of properties and functions applied to it, then you should be able to name it after what it does. We have the <code>video</code> element for displaying video, the <code>select</code> element for displaying a select box, the <code>img</code> element for displaying images (and saving us from typing two characters whenever we write it). A lot of elements describe their own function.</p>
+<p>But <strong>the Web today has to do a lot more work than it did previously</strong>, and HTML can’t always keep up with the rate of change. So Custom Elements are about giving us, the developers, flexibility to create elements based on their function and giving us low-level access to define their properties.</p>
+<p>If the elements we create become well established, they could become a fully standardized part of a future HTML specification. The things we make could define the future of the things we make.</p>
+<h3>“But Can’t We Create Custom Elements Right Now In HTML?”</h3>
+<p>You’re right, notional reader, we can. It’s disgustingly easy. Just open your favorite text editor and make up an element in an HTML document, like so:</p>
+<pre><code class="language-markup">&lt;apes&gt;…&lt;/apes&gt;
+</code></pre>
+<p>Open it in a browser. It works. You can style it, attach JavaScript events to it. It may not be “valid” (who cares about that these days, right, kids?), but it works. You can do it with any name you like, and it’ll create a new inline element.</p>
+<p>Well, yes. Sure. You could certainly do that, and perhaps it would even make your markup a little more understandable to other people &mdash; but that’s really the only advantage it brings. Custom Elements are smarter than that, and they bring real, measurable benefits. We’ll get to the benefits of Custom Elements in a moment; first, I want to show how easy it is to make one.</p>
+<h3>“Are Custom Elements Easy To Create?”</h3>
+<p>They are, I just told you so in the previous sentence. The first step is to think of a good name. The only rule here is that, to avoid clashing with current or future HTML elements, you must use a hyphen somewhere in the name. For example:</p>
+<pre><code class="language-markup">&lt;great-apes&gt;…&lt;/great-apes&gt;
+</code></pre>
+<p>When you’ve decided on a name, the next step is to register it in the DOM, which is done by passing the name in as an argument in the JavaScript <code>registerElement()</code> method, like so:</p>
+<pre><code class="language-javascript">document.registerElement('great-apes');
+</code></pre>
+<p>Now the DOM will recognize your newly registered <code>great-apes</code> element and the real fun can start. By the way, to confuse the terminology even further, an element created like this that’s not defined in the HTML specification is known as a “custom tag,” so don’t be surprised if I use that term.</p>
+<h3>“I Still Don’t Get What The Big Deal Is”</h3>
+<p>Bear with me, impatient notional reader. The big difference between puny custom elements and mighty custom tags (I hope you’re not surprised by me using that term) is the interface that’s exposed to the DOM. Custom elements, unregistered and unrecognized, use the <code>HTMLUnknownElement</code> interface, whereas registered and recognized custom tags use the <code>HTMLElement</code> interface.</p>
+<p>What’s the difference? With an <code>HTMLElement</code>, we can add our own methods and properties, creating essentially a per-element API. Wait, I understated how amazing that is: <strong>a per-element API!!!</strong> Yes, every custom tag can have its own API.</p>
+<p>To initiate this, you would first define a new prototype, then attach your properties and methods to it. In this example, I’m creating a method named <code>hoot()</code> that logs a message to the console:</p>
+<pre><code class="language-javascript">var apeProto = Object.create(HTMLElement.prototype);
+apeProto.hoot = function() {
+	console.log('Apes are great!');
+}
+</code></pre>
+<p>The next step is to register the element, just as before, only this time adding an argument in the options of <code>registerElement()</code> to state that it should use our newly defined prototype:</p>
+<pre><code class="language-javascript">document.registerElement('great-apes', {prototype: apeProto});
+</code></pre>
+<p>When this is done, you can query your element in the DOM and call the method:</p>
+<pre><code class="language-javascript">var apes = document.querySelector('great-apes');
+apes.hoot();
+</code></pre>
+<p>Now, this is the simplest example I could possibly think of, but just take a minute to consider how this could be extended further still: adding unique properties, attributes and events to each element; putting markup in your element that renders with content passed in as attribute values; even having elements with no UI at all but that perform functions such as database queries. Honestly, the opportunity here is <em>huge</em>.</p>
+<p>As a quick example of just how exceptionally useful Custom Elements can be, see <a href="https://github.com/eduardolundgren/google-maps-element">Eduardo Lundgren’s <code>google-maps</code></a> element, which embeds a Google Map and can have options passed in through attribute values, like this:</p>
+<pre><code class="language-markup">&lt;google-maps latitude="-8.034881" longitude="-34.918377"&gt;&lt;/google-maps&gt;
+</code></pre>
+<h3>“Can Existing Elements Be Extended To Use This API?”</h3>
+<p>Wow, you really ask the most convenient questions. Yes, excitingly, we <em>can</em> make Custom Elements that extend existing elements. Yes, we can create a whole new API for existing HTML elements! I know, this sounds like the ramblings of a madman, right? But it’s true!</p>
+<p>As an example, let’s create a table that has our <code>hoot()</code> method attached. To do this, we’d follow all of the steps in the previous section, then make the small addition of a new argument in the options of the <code>registerElement()</code> method, a l&#225;:</p>
+<pre><code class="language-javascript">document.registerElement('great-apes', {
+	prototype: apeProto,
+	extends: 'table'
+});
+</code></pre>
+<p>The value of the <code>extends</code> argument informs the DOM that the custom element is intended to extend the <code>table</code> element. Now, we have to make the <code>table</code> element inform the DOM that it wants to be extended, using the <code>is</code> attribute:</p>
+<pre><code class="language-markup">&lt;table is="great-apes"&gt;…&lt;/table&gt;
+</code></pre>
+<p>The humble <code>table</code> element may now have its own API. For example, it could query its own data in a standardized interface. <strong>A table that has an API to query its own data!!!</strong> How can you not be excited by that?</p>
+<p>For a real-world example of an extended element, take a look at <a href="https://github.com/eduardolundgren/video-camera-element">Eduardo Lundgren’s <code>video-camera</code></a>, which extends the <code>video</code> element to use live input from <code>getUserMedia():</code></p>
+<pre><code class="language-markup">&lt;video is="video-camera"&gt;&lt;/video&gt;
+</code></pre>
+<h3>“OK, This Is Cool. What Else?”</h3>
+<p>A set of callback events (with brilliantly prosaic names) are fired throughout the lifecycle of Custom Events: when an element is created (<code>createdCallback</code>), attached to the DOM (<code>attachedCallback</code>) or detached from the DOM (<code>detachedCallback</code>), or when an attribute is changed (<code>attributeChangedCallback</code>). For example, to run an anonymous function each time a new instance of a custom tag is created in a page, you’d use this:</p>
+<pre><code class="language-javascript">apeProto.createdCallback = function () {…};
+</code></pre>
+<h3>“How Do Custom Elements Work With Other Web Components Features?”</h3>
+<p>Custom Elements have been designed for complete interoperability with the companion features of the Web Components suite (and other generally related features). For example, you could include markup in the <a href="http://www.broken-links.com/2013/04/10/the-template-element/"><code>template</code> element</a>, which wouldn’t be parsed by the browser until the element is initiated.</p>
+<pre><code class="language-markup">&lt;great-apes&gt;
+	&lt;template&gt;…&lt;/template&gt;
+&lt;/great-apes&gt;
+</code></pre>
+<p>You could ensure that the internal code is encapsulated from the browser and hidden from the end user with Shadow DOM. And sharing your element across multiple files and websites would be simplicity itself using HTML Imports.</p>
+<p>If you’re not familiar with any of these other technologies yet, don’t worry: Custom Elements also work perfectly well on their own.</p>
+<h3>“Can I Use Custom Elements Today?”</h3>
+<p>Well, no. And yes. These aren’t just some pie-in-the-sky concepts; browser vendors are already working on them: the latest releases of Chrome and Opera have implemented the <code>registerElement()</code> method, and it also recently landed in Firefox Nightly. But, raw Custom Elements aren’t really ready for use in production just yet.</p>
+<p><a href="http://www.flickr.com/photos/mape_s/333862026/"><img src="http://media.smashingmagazine.com/wp-content/uploads/2014/03/gorillas.jpg" width="500" height="375" alt="Gorillas are great apes... Look, it was either this or a screenshot of some JavaScript." title="Gorillas are great apes... Look, it was either this or a screenshot of some JavaScript." /></a><br /><em>Gorillas are great apes&#8230; Look, it was either this or a screenshot of even more JavaScript code. (Image credits: <a href="http://www.flickr.com/photos/mape_s/333862026/">Marieke IJsendoorn-Kuijpers</a>)</em></p>
+<p>However, there is a way around this, and that’s to use Polymer. In case you haven’t heard of it, it’s an open community project set up to make future Web technologies usable today, and that includes Web Components and, through them, Custom Elements. Polymer is both a development library, which uses native implementations where available and polyfills where not, and a UI library, with common elements and patterns built using its own technology.</p>
+<p>If you’re at all interested in Custom Elements &mdash; and, as you’ve read almost to the end of this article, I’d suggest you probably are &mdash; then Polymer is your best option for learning and making.</p>
+<h3>“What About Accessibility?”</h3>
+<p>Ah, notional reader, here you have me. Using Custom Elements comes with one big caveat: <strong>JavaScript is required</strong>. Without it, your brand new element simply won’t work and will fall back to being a plain old <code>HTMLUnknownElement</code>. Unless your element gets adopted natively by browsers, there’s simply no way around this. Just plan for a graceful fallback, as you should be doing with JavaScript anyway.</p>
+<p>As for further accessibility, it’s really down to you. I strongly suggest adding <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA">ARIA</a> roles and attributes to your custom elements, just as browser default UI elements have today, to ensure that everyone gets a first-class experience of them.</p>
+<h3>“Where Do I Go Next?”</h3>
+<p>Home, to have a good lay down. Or, if you prefer to carry on reading about Custom Elements, try some of these links:</p>
+<ul>
+<li><a href="http://www.polymer-project.org/">Polymer</a><br />
+This the project that I talked about three paragraphs ago. Do you really need me to explain it again?</li>
+<li><a href="http://customelements.io/">Custom Elements</a><br />
+This is a community-owned gallery of Web Components.</li>
+<li>“<a href="http://www.html5rocks.com/en/tutorials/webcomponents/customelements/">Custom Elements: Defining New Elements in HTML</a>,” Eric Bidelman, HTML5 Rocks<br />
+Bidelman’s article was invaluable to me in writing this piece.</li>
+<li>“<a href="http://w3c.github.io/webcomponents/spec/custom/">Custom Elements</a>,” W3C<br />
+The specification is fairly impenetrable, but maybe you’ll get more out of it than I did.</li>
+</ul>
+<p><em>(Huge thanks to Addy Osmani and Bruce Lawson for their feedback during the writing of this article.)</em></p>
+<p><em>(al, il)</em></p>
+<p><em>Front page image credits: <a href="http://www.flickr.com/photos/dmitry-baranovskiy/2378867408/">Dmitry Baranovskiy</a>.</em></p>
+                        	<div id="textadtarget"><script type="text/javascript">// <![CDATA[
+                    OA_show("Textad");
+            	// ]]> </script></div>
+	                    <div class="tagsdata">
+            <p class="tags longtags"><strong>Tags:</strong><a href="http://coding.smashingmagazine.com/tag/html/" title="View all articles tagged 'HTML' (39)">HTML</a><a href="http://coding.smashingmagazine.com/tag/javascript/" title="View all articles tagged 'JavaScript' (81)">JavaScript</a><a href="http://coding.smashingmagazine.com/tag/techniques/" title="View all articles tagged 'Techniques' (80)">Techniques</a><a href="http://coding.smashingmagazine.com/tag/workflow/" title="View all articles tagged 'Workflow' (16)">Workflow</a></p>            <p><a href="#top" class="backtotop single" title="Jump to the top of the page">&uarr; Back to top</a><a href="https://twitter.com/intent/tweet?original_referer=http%3A%2F%2Fcoding.smashingmagazine.com%2F2014%2F03%2F04%2Fintroduction-to-custom-elements%2F&amp;source=tweetbutton&amp;text=A%20Detailed%20Introduction%20To%20Custom%20Elements&amp;url=http%3A%2F%2Fcoding.smashingmagazine.com%2F2014%2F03%2F04%2Fintroduction-to-custom-elements%2F&amp;via=smashingmag" class="share-on-twitter single" title="Share on Twitter!">Share on Twitter</a></p>
+        </div>
+    </article>	
+    <div class="bio clearfix">
+        <div class="gravatar">
+            <img alt='' src='http://1.gravatar.com/avatar/9d9f17e37b751b9f83081ba3dd44bab4?s=78&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D78&amp;r=G' class='avatar avatar-78 photo' height='78' width='78' />        </div>
+        <div class="about">
+            <a rel="author" href="http://coding.smashingmagazine.com/author/peter-gasston/?rel=author" title="Posts by Peter Gasston"  class="post-author">Peter Gasston</a>            <p>Peter is a front-end technologist, developer, writer, speaker, and author of <a href="http://thebookofcss3.com">The Book of CSS3</a> and <a href="http://modernwebbook.com/">The Modern Web</a>. He blogs at <a href="http://broken-links.com">Broken Links</a> and tweets as <a href="http://twitter.com/stopsatgreen">@stopsatgreen</a>. He lives in London, England.</p>
+        </div>
+    </div>
+            
+        <div class="related-articles">
+            <h2>Related Articles</h2>                                        <div class="related-article clearfix">
+                        <a class="post-picture" href="http://coding.smashingmagazine.com/2013/11/18/the-future-of-video-in-web-design/"><img src="http://provide.smashingmagazine.com/related-posts/rel-posts-Nov2013-085.jpg" alt="The Future Of Video In Web Design" /></a>
+                        <h3><a href="http://coding.smashingmagazine.com/2013/11/18/the-future-of-video-in-web-design/">The Future Of Video In Web Design</a></h3>
+                    </div>                                        <div class="related-article clearfix">
+                        <a class="post-picture" href="http://coding.smashingmagazine.com/2013/10/25/hidden-productivity-secrets-with-alfred/"><img src="http://provide.smashingmagazine.com/related-posts/rel-posts-Nov2013-070.png" alt="Hidden Productivity Secrets With Alfred" /></a>
+                        <h3><a href="http://coding.smashingmagazine.com/2013/10/25/hidden-productivity-secrets-with-alfred/">Hidden Productivity Secrets With Alfred</a></h3>
+                    </div>                                        <div class="related-article clearfix">
+                        <a class="post-picture" href="http://www.smashingmagazine.com/2010/04/14/what-if-oscars-were-given-to-movie-websites/"><img src="http://provide.smashingmagazine.com/related-posts/related-393.jpg" alt="What If Oscars Were Given To Movie Websites?" /></a>
+                        <h3><a href="http://www.smashingmagazine.com/2010/04/14/what-if-oscars-were-given-to-movie-websites/">What If Oscars Were Given To Movie Websites?</a></h3>
+                    </div>        </div>
+        
+<a id="comments"></a>
+
+<!-- Smashing Magazine - Comment spnsr ed spot -->
+<div class="singlepost advertisement">                                                                                                       
+    <span class="declare">Advertising</span>                                                                                                 
+    <div id="commentspnsrtarget"><script type="text/javascript">/* <![CDATA[ */ OA_show("Comment Sponsor"); /* ]]> */ </script></div>
+</div>
+
+<ul class="sub-tabs clearfix">
+    <li><a href="#show-comments" class="active">52 Comments</a></li>
+    <li><a href="#best-comments">Best Comments</a></li></ul>
+
+<div id="discussion" class="subtab-pages">
+    <div id="show-comments">
+                <ol id="comments-overview" class="commentlist">
+                <li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">1</span>
+    <div class="comment" id="comment-1018748">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/57a16b972f965c17a89ae512a6f0f57b?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Frontendjim</h3> 
+        		<span class="datetime"><a title="Commentlink #1" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018748">March 4th, 2014 5:45 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Nice article. However, I find the way it&#8217;s written a bit demeaning. Might just be me though. :)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018748#respond' onclick='return addComment.moveForm("comment-1018748", "1018748", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment byuser comment-author-peter-gasston bypostauthor odd alt depth-2 clearfix ">
+    <span class="commentnumber">2</span>
+    <div class="comment" id="comment-1018758">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/9d9f17e37b751b9f83081ba3dd44bab4?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Peter Gasston</h3> 
+        		<span class="datetime"><a title="Commentlink #2" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018758">March 4th, 2014 6:04 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>I promise you that certainly wasn’t the intention; I was aiming for ‘funny’, but that can be very subjective…</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018758#respond' onclick='return addComment.moveForm("comment-1018758", "1018758", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment even depth-3 clearfix ">
+    <span class="commentnumber">3</span>
+    <div class="comment" id="comment-1018837">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/10d21fa8b8d31248d7b72763587848cb?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Kriss Watt</h3> 
+        		<span class="datetime"><a title="Commentlink #3" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018837">March 4th, 2014 7:47 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Seemed pretty on the money to me. Good read, thanks. I&#8217;m really excited to start building things using Custom Elements, even moreso after reading this and seeing Addy’s talk about Web Components at London JS Conf.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018837#respond' onclick='return addComment.moveForm("comment-1018837", "1018837", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">4</span>
+    <div class="comment" id="comment-1018763">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/f5c80b6e18af825429d9b72a7a03b8dd?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Daniel Schwarz</h3> 
+        		<span class="datetime"><a title="Commentlink #4" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018763">March 4th, 2014 6:11 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>I found it a little condescending, and a bit silly. Not the usual standard of SM. But that aside, I did learn something new, so thanks.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018763#respond' onclick='return addComment.moveForm("comment-1018763", "1018763", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment even depth-3 clearfix ">
+    <span class="commentnumber">5</span>
+    <div class="comment" id="comment-1018788">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/c620790ae5bf5b50c245b2e0ef95f338?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">deanomachino</h3> 
+        		<span class="datetime"><a title="Commentlink #5" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018788">March 4th, 2014 6:49 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Agreed &#8211; useful article, but the tone is very condescending.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018788#respond' onclick='return addComment.moveForm("comment-1018788", "1018788", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">6</span>
+    <div class="comment" id="comment-1018891">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/4e954a7b8e22e1fbea17bf8e2afb09ff?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Rory</h3> 
+        		<span class="datetime"><a title="Commentlink #6" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018891">March 4th, 2014 8:44 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>whooooooosh!</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018891#respond' onclick='return addComment.moveForm("comment-1018891", "1018891", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment even thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">7</span>
+    <div class="comment" id="comment-1018775">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/3adeec576c1de6d642cc8f64c52e2b81?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">David</h3> 
+        		<span class="datetime"><a title="Commentlink #7" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018775">March 4th, 2014 6:27 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>It&#8217;s 2014. If you don&#8217;t have a javascript capable browser or have javascript turned off you don&#8217;t deserve graceful fallback. ;P</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018775#respond' onclick='return addComment.moveForm("comment-1018775", "1018775", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">8</span>
+    <div class="comment" id="comment-1019951">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/f85dd90f263cc1d9a86a727fb26c21dc?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Dmitri</h3> 
+        		<span class="datetime"><a title="Commentlink #8" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019951">March 5th, 2014 8:30 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Nothing works with javascript off these days &#8211; agreed. I think the the reason we want to cut our reliance on it though is for SEO (I know bots can render HTML, but we are introducing some extra difficulties with bunch of code they have to crunch). Also, I have worked on too many projects with JS libraries all over the place, thousands upon thousands of lines of code in dozens of files. That is a total nightmare for me and for the poor hardware that has to deal with it for the inpatient user. Less is more.</p>
+<p>I didn&#8217;t mind the article style by the way &#8211; I have been very busy lately and literally just read the headlines here on SM but this one made me stop and admire the style a bit. I can see why some people might perceive it as condescending, which is OK. Better than sterile.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019951#respond' onclick='return addComment.moveForm("comment-1019951", "1019951", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">9</span>
+    <div class="comment" id="comment-1018779">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/8f948e21406de4f8b1515bcdcfcf8b68?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Uzair</h3> 
+        		<span class="datetime"><a title="Commentlink #9" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018779">March 4th, 2014 6:33 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Great article. And I don&#8217;t mind your sense of humor. :-)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018779#respond' onclick='return addComment.moveForm("comment-1018779", "1018779", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">10</span>
+    <div class="comment" id="comment-1018821">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/6c323b13b43d4f85aeb474a657f5ab94?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Drazen Mokic</h3> 
+        		<span class="datetime"><a title="Commentlink #10" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018821">March 4th, 2014 7:32 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Overall good info but i think you tried a little bit too hard to be funny at some point. No offense, you can&#8217;t please everyone anyway.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018821#respond' onclick='return addComment.moveForm("comment-1018821", "1018821", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">11</span>
+    <div class="comment" id="comment-1018831">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/b09af9cd6f3816c9375ef6ddf77cb9ff?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Ben</h3> 
+        		<span class="datetime"><a title="Commentlink #11" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018831">March 4th, 2014 7:41 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Funny and, my god, what a wealth of possibility this opens!</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018831#respond' onclick='return addComment.moveForm("comment-1018831", "1018831", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">12</span>
+    <div class="comment" id="comment-1018833">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/84276296ba878a17d05864f794451f6f?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">spencer</h3> 
+        		<span class="datetime"><a title="Commentlink #12" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018833">March 4th, 2014 7:45 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Thanks for this. It is written in a way I can understand it &#8211; and I like your touch of humor too :)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018833#respond' onclick='return addComment.moveForm("comment-1018833", "1018833", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">13</span>
+    <div class="comment" id="comment-1018849">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/52f6ef89e0e7c8d31ef56d7ffa971546?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Farax</h3> 
+        		<span class="datetime"><a title="Commentlink #13" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018849">March 4th, 2014 8:02 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Very nice. I think it is worth noting that you can also have custom attributes, as well as elements.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018849#respond' onclick='return addComment.moveForm("comment-1018849", "1018849", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">14</span>
+    <div class="comment" id="comment-1018851">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/ab67e39358d5bb055edc7a2c510aab01?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Jon Hobbs-Smith</h3> 
+        		<span class="datetime"><a title="Commentlink #14" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018851">March 4th, 2014 8:03 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Great article, and I didn&#8217;t find it condescending.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018851#respond' onclick='return addComment.moveForm("comment-1018851", "1018851", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">15</span>
+    <div class="comment" id="comment-1018853">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/7c7e2dffb5b0e323b4001505cf3a899c?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Dean</h3> 
+        		<span class="datetime"><a title="Commentlink #15" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018853">March 4th, 2014 8:09 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Good article, a little bit different from other SM&#8217;s articles, but in a good sense ;-)  However&#8230; I don&#8217;t really see a big advantage here…. Except direct function binding to the HTML elements, or am I mssing the point?</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018853#respond' onclick='return addComment.moveForm("comment-1018853", "1018853", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment byuser comment-author-peter-gasston bypostauthor odd alt depth-2 clearfix ">
+    <span class="commentnumber">16</span>
+    <div class="comment" id="comment-1019649">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/9d9f17e37b751b9f83081ba3dd44bab4?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Peter Gasston</h3> 
+        		<span class="datetime"><a title="Commentlink #16" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019649">March 5th, 2014 1:40 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Direct function binding is a big advantage, definitely, but also being able to keep functionality contained within a single, appropriate tag, and giving existing elements an extended API.</p>
+<p>Also, I only hinted at how this can be extended with other Web Components features, but when you see them all combined, you see the potential realised.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019649#respond' onclick='return addComment.moveForm("comment-1019649", "1019649", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment even thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">17</span>
+    <div class="comment" id="comment-1018893">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/10fb9678c4b8e82879bbd74b7b6181b8?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Adam</h3> 
+        		<span class="datetime"><a title="Commentlink #17" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018893">March 4th, 2014 8:47 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Exciting possibilities on the horizon. Great article. I enjoyed the humor.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018893#respond' onclick='return addComment.moveForm("comment-1018893", "1018893", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-even depth-1 clearfix ">
+    <span class="commentnumber">18</span>
+    <div class="comment" id="comment-1018920">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/56fac549d0a1915427b4928c5fb86585?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">AdamG</h3> 
+        		<span class="datetime"><a title="Commentlink #18" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018920">March 4th, 2014 9:15 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Informative, and as a smart-ass myself, your humor was not lost on me.<br />
+I think I have looked at Polymer a handful of times and did not see it&#8217;s total usefulness until today</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018920#respond' onclick='return addComment.moveForm("comment-1018920", "1018920", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">19</span>
+    <div class="comment" id="comment-1018991">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/87064da4aa895d027bded486b341af9d?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Brendan</h3> 
+        		<span class="datetime"><a title="Commentlink #19" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1018991">March 4th, 2014 11:05 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>People are being too hard on you, man! Loved the article; will have to keep it in mind moving forward. Thanks for opening it up to me!</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1018991#respond' onclick='return addComment.moveForm("comment-1018991", "1018991", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-even depth-1 clearfix ">
+    <span class="commentnumber">20</span>
+    <div class="comment" id="comment-1019026">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/52b0769623db80ea3f92449720de2e9e?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Adam</h3> 
+        		<span class="datetime"><a title="Commentlink #20" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019026">March 4th, 2014 11:54 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>A big collection of custom elements can be found here: <a href="http://gdriv.es/polymer/polymer-docs/" rel="nofollow">http://gdriv.es/polymer/polymer-docs/</a></p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019026#respond' onclick='return addComment.moveForm("comment-1019026", "1019026", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">21</span>
+    <div class="comment" id="comment-1019027">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/f12e933f5e8a7f6daf1933f71dce7435?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">sunpietro</h3> 
+        		<span class="datetime"><a title="Commentlink #21" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019027">March 4th, 2014 11:54 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>When people will start using custom elements, then the HTML will fail as XML did in some cases. There will be no standard. Everyone will have his/her own standard of custom HTML. That will be a disaster.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019027#respond' onclick='return addComment.moveForm("comment-1019027", "1019027", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">22</span>
+    <div class="comment" id="comment-1020639">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/57b871fa33b661e45c3bcec9fe02d44b?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Alex Bondarev</h3> 
+        		<span class="datetime"><a title="Commentlink #22" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020639">March 6th, 2014 12:40 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>That&#8217;s a good point. You also got me wondering about semantics. If I use <code>&lt;article&gt;</code> today it has a certain semantic meaning. If I use a <code>&lt;blog-post&gt;</code> tomorrow &#8211; what will happen to my semantics? Hm&#8230;</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020639#respond' onclick='return addComment.moveForm("comment-1020639", "1020639", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">23</span>
+    <div class="comment" id="comment-1019045">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/c2e8b23ad9915befed1842048eb92ee8?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">burkanov</h3> 
+        		<span class="datetime"><a title="Commentlink #23" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019045">March 4th, 2014 12:19 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Sorry, but I still see no practical use at all. What are those things good for? I see no reason why someone should prefer custom elements over existing ones.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019045#respond' onclick='return addComment.moveForm("comment-1019045", "1019045", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">24</span>
+    <div class="comment" id="comment-1019152">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/83392c7f6e5a8c6723a2c7cf12d91584?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Matt</h3> 
+        		<span class="datetime"><a title="Commentlink #24" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019152">March 4th, 2014 2:29 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Not too many since you can just use CSS/jquery and use regular tags to make it as you wish&#8230;</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019152#respond' onclick='return addComment.moveForm("comment-1019152", "1019152", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even depth-2 clearfix ">
+    <span class="commentnumber">25</span>
+    <div class="comment" id="comment-1019271">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/ac1514317918b7810594431832d3adae?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Taufik Nurrohman</h3> 
+        		<span class="datetime"><a title="Commentlink #25" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019271">March 4th, 2014 5:11 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Regardless of any flexibility there, I feel these features are like <strong>anti-standard</strong> approach :(</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019271#respond' onclick='return addComment.moveForm("comment-1019271", "1019271", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">26</span>
+    <div class="comment" id="comment-1019354">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/b22affd588024dfcec157c599f332252?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Sean</h3> 
+        		<span class="datetime"><a title="Commentlink #26" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019354">March 4th, 2014 7:09 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>The point of preferring the custom elements is pretty self-evident if you already have use for them.</p>
+<p>If you had a `media-player` element, for example, you can define how it operates and how it initializes, and how it reacts to input, and how it deals with the server, one time, ever, providing attributes for configuration, much like they were constructor arguments.</p>
+<p>With that in place you could just copy and paste that code from project to project, and it would work.  No worrying about how to bootstrap this whole module to the page and how to initialize it, no worrying about whether the bootstrap is taking place before/after the DOM is content-ready, or dealing with whether it should be a singleton or an instance, et cetera.</p>
+<p>An IMG tag just works. You feed it one or a few attributes, and it does its job, and provides a semi-unique set of element properties in JS.</p>
+<p>Don&#8217;t you occasionally wish you had tables that could .sort( ) or .filter( ) themselves?<br />
+Adding a new row of data would be as easy as calling myTable.insert(rowData), and it would automatically put itself in the right spot, sorted/filtered by the correct dimensions.<br />
+Or it could contain a summary-row, which automatically kept itself updated with a .reduce( ) algorithm, which was based on callbacks from rows being added/removed from the DOM (because the rows themselves might be simple &#8220;data-record&#8221; components.</p>
+<p>Much like writing Angular directives, if you do it well, and you keep your code well-structured, you could then just drag and drop this anywhere, in the future.  If everyone agrees to write these components in a highly self-contained way, and agrees to use vanilla JS and stable APIs, for the underlying implementations, then in the future, we have a zero-dependency set of infinitely-reusable community created components, which are all standards compliant, and require no more effort than including the JS *anywhere* in your distribution (with no effort to require or initialize or bootstrap), initializing is as easy as writing an HTML element, and you need to know none of the implementation, merely the interfaces provided for instantiation and interaction.</p>
+<p>Personally, I consider that much, much nicer than reinventing the wheel, every time I want to create some carousel, or playlist.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019354#respond' onclick='return addComment.moveForm("comment-1019354", "1019354", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment byuser comment-author-peter-gasston bypostauthor even depth-3 clearfix ">
+    <span class="commentnumber">27</span>
+    <div class="comment" id="comment-1019651">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/9d9f17e37b751b9f83081ba3dd44bab4?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Peter Gasston</h3> 
+        		<span class="datetime"><a title="Commentlink #27" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019651">March 5th, 2014 1:42 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Not much I can add to that. A great answer!</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019651#respond' onclick='return addComment.moveForm("comment-1019651", "1019651", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt depth-3 clearfix ">
+    <span class="commentnumber">28</span>
+    <div class="comment" id="comment-1019790">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/c2e8b23ad9915befed1842048eb92ee8?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">burkanov</h3> 
+        		<span class="datetime"><a title="Commentlink #28" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019790">March 5th, 2014 4:48 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Thank you, Sean<br />
+A very constructive answer.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019790#respond' onclick='return addComment.moveForm("comment-1019790", "1019790", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even depth-3 clearfix ">
+    <span class="commentnumber">29</span>
+    <div class="comment" id="comment-1021549">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/1ac14312025dbbcdf7a1369139bb356d?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Jonathan de Jong</h3> 
+        		<span class="datetime"><a title="Commentlink #29" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1021549">March 6th, 2014 11:08 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>It&#8217;s times like these when I&#8217;d like an upvote button..<br />
+Just the fact that we could have advanced reusable elements independent of external libraries (I hate seeing a js folder with 30 files in it (for me as a developer. Minification, merging blabla)) is infinitely exciting in itself. </p>
+<p>With a little imagination there&#8217;s no telling what this might result in. Personally I&#8217;d want to play around with this and HTML5 games..</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1021549#respond' onclick='return addComment.moveForm("comment-1021549", "1021549", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">30</span>
+    <div class="comment" id="comment-1019062">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/0889e8e738bbce12df3479cf6c09f633?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Steve</h3> 
+        		<span class="datetime"><a title="Commentlink #30" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019062">March 4th, 2014 12:35 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Does it remind anyone of HTML components (.HTC files) that Microsoft introduced back in Internet Explorer 5.5?</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019062#respond' onclick='return addComment.moveForm("comment-1019062", "1019062", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment even depth-2 clearfix ">
+    <span class="commentnumber">31</span>
+    <div class="comment" id="comment-1019463">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/758a46ff6118d93bd67ce22c0ef1e01a?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Ayyash</h3> 
+        		<span class="datetime"><a title="Commentlink #31" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019463">March 4th, 2014 9:36 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>IE4 :)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019463#respond' onclick='return addComment.moveForm("comment-1019463", "1019463", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-3 clearfix ">
+    <span class="commentnumber">32</span>
+    <div class="comment" id="comment-1020153">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/f6ba58ab63b70926586218680ae90748?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">sascha fuchs</h3> 
+        		<span class="datetime"><a title="Commentlink #32" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020153">March 5th, 2014 12:54 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Is not the first time that an old practice come back &#8211; remember the revival off the old new Box-Model with &#8216;box-sizing: border-box&#8217; ;)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020153#respond' onclick='return addComment.moveForm("comment-1020153", "1020153", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">33</span>
+    <div class="comment" id="comment-1019085">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/e3e1a1ba32d0a30a930746ff8a67b5d0?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Ian Burns</h3> 
+        		<span class="datetime"><a title="Commentlink #33" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019085">March 4th, 2014 12:56 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Pitched exactly right &#8211; totally engaged me.</p>
+<p>This has totally come out of the blue to me. Coming from a back-end development path, it is going to be marvellous to be able to apply that same level of control at the front end.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019085#respond' onclick='return addComment.moveForm("comment-1019085", "1019085", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">34</span>
+    <div class="comment" id="comment-1019460">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/758a46ff6118d93bd67ce22c0ef1e01a?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Ayyash</h3> 
+        		<span class="datetime"><a title="Commentlink #34" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019460">March 4th, 2014 9:32 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>I remember when IE4 adopted custom tags back in the day, you had to define the xml namespace in the html tag, and attach an HTC behavior through css, which by the way, I found brilliant , you have no idea how abusive I got with using them. The fact that you can wrap it all up in one tag and reuse, made application development much easier. This new standard is -I must say- neater, although the My:TagName of IE was better looking, but at least defining behavior in JS rather than CSS is better. Today that is not very hard to do, all you have to do is create a DIV and attach some sort of behavior to it in JS. Two things thought:</p>
+<p>- Accessibility: already mentioned.</p>
+<p>- Abuse: I can only imagine the amount of HTML mark-up that will be injected through JS to make them look right. And poor next-developer, he/she has a mount of gibberish to sort through (think unobtrusive JS! this is a tiny bit better)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019460#respond' onclick='return addComment.moveForm("comment-1019460", "1019460", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">35</span>
+    <div class="comment" id="comment-1019880">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/5ad15775681f6027aed7f6f7d6203ca4?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Tim</h3> 
+        		<span class="datetime"><a title="Commentlink #35" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1019880">March 5th, 2014 7:00 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>These seem pretty cool.<br />
+I have such a pet peeve with coders and programmers writing elements with a lowercase and then uppercase letter, such as: registerElement<br />
+I know it&#8217;s somewhat standard to write things that way in code now, but why not just write it like RegisterElement? It is easier to read that way, especially if there is code in front of RegisterElement. Just a personal opinion, but it irks me when I see that and I cannot be un-irked.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1019880#respond' onclick='return addComment.moveForm("comment-1019880", "1019880", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">36</span>
+    <div class="comment" id="comment-1020387">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/3e11d09a4f5ef6fcbb20b27e6240e501?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">TJ</h3> 
+        		<span class="datetime"><a title="Commentlink #36" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020387">March 5th, 2014 6:46 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Starting with a capital letter in a name tells a developer that it&#8217;s a class/constructor, for instance:</p>
+<p>function CustomElement () {<br />
+&#8230;<br />
+}</p>
+<p>var customElement = new CustomElement();</p>
+<p>When that code is referrenced, we will know that customElement is the instance, while CustomElement is the class/constructor it came from.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020387#respond' onclick='return addComment.moveForm("comment-1020387", "1020387", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment even depth-3 clearfix ">
+    <span class="commentnumber">37</span>
+    <div class="comment" id="comment-1021173">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/5ad15775681f6027aed7f6f7d6203ca4?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Tim</h3> 
+        		<span class="datetime"><a title="Commentlink #37" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1021173">March 6th, 2014 1:20 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Then why not use all lowercase for the instance?</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1021173#respond' onclick='return addComment.moveForm("comment-1021173", "1021173", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">38</span>
+    <div class="comment" id="comment-1020073">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/322a1e2a5bd439c1e9ff939d68aa49c2?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Timothy</h3> 
+        		<span class="datetime"><a title="Commentlink #38" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020073">March 5th, 2014 11:02 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Several other programming platforms have also adopted this method of create new component types so that they can be reused in an application.  Flex has has this for years in what they call MXML.  Microsoft also uses this with XAML.  And as some had mentioned, Microsoft had added something similar to this to earlier version of Internet Explorer.  Unfortunately, it never really became part of the HTML standard.</p>
+<p>Creating a component takes a little bit of work, but then it becomes reusable.  This ultimately reduces the total amount of code in an application and makes the HTML look extremely clean.</p>
+<p>Not only could you create components, but you could also create component containers to hold other components, such as, ,  or perhaps .</p>
+<p>Also, think , , etc.  There is so much potential here!</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020073#respond' onclick='return addComment.moveForm("comment-1020073", "1020073", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">39</span>
+    <div class="comment" id="comment-1020105">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/5cbad4ccbdbabd275c74962f0c5798d6?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Sylvain Pollet-Villard</h3> 
+        		<span class="datetime"><a title="Commentlink #39" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020105">March 5th, 2014 11:54 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Am I the only one here to think Web Components, and especially Shadow DOM, are pure evil? I see Web Components as the official fig-leaf of &#8220;div soup jQueryUI-style™&#8221;, the kind of crappy DOM that ruins the semantics and accessibility of web pages.</p>
+<p>We were close to a correct support of input type=&#8221;date&#8221; with optimized inputs and ergonomics for each device class, then an army of overexcited guys arrived yelling their super own datepicker Web Component rocks the house&#8230; of course, it looks nice and shiny and&#8230; very poorly suited to some atypical browsers / use cases. Oh, and about accessibility&#8230; well, no fucks given for people with disabilities. Bonus point : since custom elements are by definition custom, browser editors are completely helpless to try to repair the damage.</p>
+<p>&#8220;Shadow DOM&#8221;, just the name should convince you that this is pure evil, standardized anti-standard&#8230;</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020105#respond' onclick='return addComment.moveForm("comment-1020105", "1020105", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">40</span>
+    <div class="comment" id="comment-1020932">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/820d0e4ee14e986a44d33782ca852f51?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Bob</h3> 
+        		<span class="datetime"><a title="Commentlink #40" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020932">March 6th, 2014 7:31 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Agreed.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020932#respond' onclick='return addComment.moveForm("comment-1020932", "1020932", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment even thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">41</span>
+    <div class="comment" id="comment-1020113">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/71fbed828ef619e0c14118a20af64c04?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">A. Henson</h3> 
+        		<span class="datetime"><a title="Commentlink #41" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020113">March 5th, 2014 12:05 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Nice article, love the writing style. I thought the humor was spot on, by the way, and even read several paragraphs to my team. Thanks for the post.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020113#respond' onclick='return addComment.moveForm("comment-1020113", "1020113", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-even depth-1 clearfix ">
+    <span class="commentnumber">42</span>
+    <div class="comment" id="comment-1020318">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/ac781f6b65d1a0dc1316bdf192f12f22?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">stephen</h3> 
+        		<span class="datetime"><a title="Commentlink #42" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020318">March 5th, 2014 4:59 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Great article! Thanks buddy</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020318#respond' onclick='return addComment.moveForm("comment-1020318", "1020318", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">43</span>
+    <div class="comment" id="comment-1020389">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/3e11d09a4f5ef6fcbb20b27e6240e501?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">TJ</h3> 
+        		<span class="datetime"><a title="Commentlink #43" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020389">March 5th, 2014 6:54 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Would you recommend this be used on websites and web apps? I love the concept but this goes against performance a bit. To my understanding, the JavaScript used to make these elements would have to go in the head so that it is run before the browser finds the custom tag. This adds a network request (unless you inline it) and parsing of a script file before the browser can fully load the dom. In a game where milliseconds matter, I don&#8217;t know that we can afford that loss, at least on a website.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020389#respond' onclick='return addComment.moveForm("comment-1020389", "1020389", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            <ul class='children'>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">44</span>
+    <div class="comment" id="comment-1020754">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/f5c80b6e18af825429d9b72a7a03b8dd?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Daniel Schwarz</h3> 
+        		<span class="datetime"><a title="Commentlink #44" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020754">March 6th, 2014 3:04 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>And especially on a mobile website.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020754#respond' onclick='return addComment.moveForm("comment-1020754", "1020754", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even depth-2 clearfix ">
+    <span class="commentnumber">45</span>
+    <div class="comment" id="comment-1021012">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/97e2e3bfcb81883ff25152cc38eb3f4d?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Rob Dodson</h3> 
+        		<span class="datetime"><a title="Commentlink #45" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1021012">March 6th, 2014 9:44 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>The JavaScript to register an element can come later in the document or be async. Before the JS has loaded the browser will regard any element it doesn&#8217;t recognize as HTMLUnkownElement. So it won&#8217;t break, it just won&#8217;t have any special abilities yet. Once the JS loads, all the elements will go through a process known as &#8220;upgrade&#8221;, and at that point they&#8217;re real custom elements. If you&#8217;re using a library like Polymer you&#8217;ll get a &#8216;polymer-ready&#8217; event which informs you when this process is complete.</p>
+<p>There is a small trade off because you&#8217;re loading something into your project that you didn&#8217;t hand code, but we do that all the time with javascript frameworks/libraries so I don&#8217;t really see the difference.</p>
+<p>The real value comes in the fact that I can give you an element that: runs at 60fps, is totally responsive, works in *any* JS framework and has encapsulated CSS (if it&#8217;s using Shadow DOM). It also means that a really successful web component can be shown to the W3C, we can all agree that it rocks, and it can very quickly become a new standard in all the browsers (making it essentially zero cost for any site). The current practice of standardization involves theorizing about how we *think* an element should work, we debate it for years, and then maybe some syntax gets implemented that is a mixture of good and bad parts.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1021012#respond' onclick='return addComment.moveForm("comment-1021012", "1021012", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt depth-2 clearfix ">
+    <span class="commentnumber">46</span>
+    <div class="comment" id="comment-1021148">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/3e11d09a4f5ef6fcbb20b27e6240e501?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">TJ</h3> 
+        		<span class="datetime"><a title="Commentlink #46" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1021148">March 6th, 2014 12:42 pm</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>After doing some more digging, I found that you can declare your custom element asynchronously, however you then deal with FOUC (Flash of Unstyled Content).</p>
+<p>You can fight FOUC with the :unresolved pseudo class in css to style a custom element that hasn&#8217;t been registered yet.</p>
+<p>Here&#8217;s the article I got this from: <a href="http://www.stevesouders.com/blog/2013/11/26/performance-and-custom-elements/" rel="nofollow">http://www.stevesouders.com/blog/2013/11/26/performance-and-custom-elements/</a></p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1021148#respond' onclick='return addComment.moveForm("comment-1021148", "1021148", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+</ul>
+</li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">47</span>
+    <div class="comment" id="comment-1020645">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/004528f3c7643162b3160c57877a1e63?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Stan</h3> 
+        		<span class="datetime"><a title="Commentlink #47" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020645">March 6th, 2014 12:49 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>This is so cool! Thanks for this article! :)</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020645#respond' onclick='return addComment.moveForm("comment-1020645", "1020645", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">48</span>
+    <div class="comment" id="comment-1020842">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/f8aa7cabae1eea55e25e5916092f4109?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">ales</h3> 
+        		<span class="datetime"><a title="Commentlink #48" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020842">March 6th, 2014 5:36 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Might as well just use angular.. it&#8217;s exactly what directives are anyway. I know having native APIs and stuff is cool, but think vanilla javascript vs. jquery or other libraries. Only few people would nowadays opt for pure javascript if they were to do some more advanced dom manipulation.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020842#respond' onclick='return addComment.moveForm("comment-1020842", "1020842", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">49</span>
+    <div class="comment" id="comment-1020866">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/0a209c9a23a405b0f0167b6295fd4082?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Mark santiago</h3> 
+        		<span class="datetime"><a title="Commentlink #49" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020866">March 6th, 2014 6:12 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Just read this last night and I was totally excited by the opportunities presented. As for the tone, i enjoyed it, no need to be so serious.This is cool stuff, let&#8217;s have fun with it!</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020866#respond' onclick='return addComment.moveForm("comment-1020866", "1020866", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">50</span>
+    <div class="comment" id="comment-1020929">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/820d0e4ee14e986a44d33782ca852f51?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Bob</h3> 
+        		<span class="datetime"><a title="Commentlink #50" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020929">March 6th, 2014 7:29 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Everyone who doesn&#8217;t agree with me is wrong: this article was well written and amusing.</p>
+<p>However&#8230; can&#8217;t I just do all this anyway, with jQuery..? </p>
+<p>Now.<br />
+Today.<br />
+Across all browsers.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020929#respond' onclick='return addComment.moveForm("comment-1020929", "1020929", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment even thread-even depth-1 clearfix ">
+    <span class="commentnumber">51</span>
+    <div class="comment" id="comment-1020956">
+        <div class="comment-author">
+		<img alt='' src='http://0.gravatar.com/avatar/8aa2dc648f2476a97c2f2c3e8df0ad32?s=38&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Ajay Zala</h3> 
+        		<span class="datetime"><a title="Commentlink #51" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020956">March 6th, 2014 8:04 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Amazing Post&#8230; Although I have googled many designing sites but finding all in single post is time saving..really good job.</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020956#respond' onclick='return addComment.moveForm("comment-1020956", "1020956", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+<li class="comment odd alt thread-odd thread-alt depth-1 clearfix ">
+    <span class="commentnumber">52</span>
+    <div class="comment" id="comment-1020987">
+        <div class="comment-author">
+		<img alt='' src='http://1.gravatar.com/avatar/97e2e3bfcb81883ff25152cc38eb3f4d?s=38&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D38&amp;r=G' class='avatar avatar-38 photo' height='38' width='38' />        	<div class="authormeta">
+       			<h3 class="comment-author">Rob Dodson</h3> 
+        		<span class="datetime"><a title="Commentlink #52" href="http://coding.smashingmagazine.com/2014/03/04/introduction-to-custom-elements/#comment-1020987">March 6th, 2014 9:10 am</a></span>            
+        	</div>
+        </div>
+        <div class="comment-text">
+        	<p>Really great post Peter. One thing I want to point out, if you&#8217;re extending a table element you&#8217;ll also need to extend its prototype.</p>
+<p>var apeProto = Object.create(HTMLTableElement.prototype);<br />
+document.registerElement(&#8216;great-ape&#8217;, {prototype: apeProto, extends: &#8216;table&#8217;});</p>
+        </div>
+        <div class="commentmeta">
+            <div class="reply">
+                        <a class='comment-reply-link' href='/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&#038;utm_medium=email&#038;replytocom=1020987#respond' onclick='return addComment.moveForm("comment-1020987", "1020987", "respond", "131124")'>Reply</a>            </div>
+                            	        	<div class="commentrating clearfix">
+        		        		        	</div>
+        	        </div>
+    </div>
+            </li>
+        </ol>
+                        </div>
+		    <div id="best-comments">
+			<ol id="ratedcomments-overview" class="commentlist">
+						</ol>
+				    </div>
+	</div>
+
+
+<div id="respond">
+
+    <h3>Leave a Comment</h3>
+
+    <p class="desc">Yay! You've decided to leave a comment. That's fantastic! Please keep in mind that comments are moderated and <code>rel="nofollow"</code> is in use. So, please do not use a spammy keyword or a domain as your name, or else it will be deleted. Let's have a personal and meaningful conversation instead. Thanks for dropping by!</p>
+
+        
+            <a rel="nofollow" id="cancel-comment-reply-link" href="/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&amp;utm_medium=email#respond" style="display:none;">Click here to cancel reply.</a>								<div id="respond">
+				<h3 id="reply-title"> <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2014/03/04/introduction-to-custom-elements/?utm_source=javascriptweekly&amp;utm_medium=email#respond" style="display:none;">Click here to cancel reply.</a></small></h3>
+									<form action="http://coding.smashingmagazine.com/wp-comments-post.php" method="post" id="commentform">
+																										<div class="clearfix"><p class="input-half"><label for="comment_author">Your name<span class="required">*</span></label><input type="text" name="author" id="comment_author" value="" tabindex="1" class="input" /></p>
+<p class="input-half"><label for="email">Your email<span class="required">*</span></label><input type="text" name="email" id="email" value="" tabindex="2" class="input" /></p></div>
+<input type="text" name="44ea7dwebsite" id="44ea7dwebsite" value="" class="_hidden hide"  />
+												<div id="message-box"><div class="cancel-comment-reply right"><small></small></div><label for="comment">Your message<span class="required">*</span></label><textarea name="comment" id="comment" rows="10" tabindex="4" class="input textarea"></textarea></div>												<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Submit Comment" />
+							<input type='hidden' name='comment_post_ID' value='131124' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="4cd73021cc" /></p>					</form>
+							</div><!-- #respond -->
+						
+        
+</div>
+
+
+    </div><!-- .col.main -->                                                                
+  </div><!-- .grid -->
+  <p><a href="#top" class="backtotop" title="Jump to the top of the page">&uarr; Back to top</a></p>
+</div><!-- .fluid -->
+<div id="footer-navigation">
+  <div class="searching-on-mobile-device" id="mobile-search-footer">
+    <a href="#top" class="backtotop footer-mobile" title="Jump to the top of the page">&uarr; Back to top</a>
+    <form id="searching" class="search-for-mobile" method="get" action="http://www.smashingmagazine.com/search-results/" target="_top">
+      <div class="clearfix">
+        <input name="q" id="mobile-search-input" type="text" placeholder="e.g. CSS" />
+        <button class="search_submit" type="submit">Search</button>
+        <input type="hidden" name="cx" value="partner-pub-6779860845561969:5884617103">
+        <input type="hidden" name="cof" value="FORID:10">
+        <input type="hidden" name="ie" value="UTF-8">
+      </div>
+    </form>
+  </div> <!-- Search form -->
+  <div class="toggle-nav" id="mobile-navigation-footer">
+    <a href="#top" class="backtotop footer-mobile" title="Jump to the top of the page">&uarr; Back to top</a>
+    <ul class="mobile-nav-ul">
+      <li class="mobile-nav-heading">Categories</li>
+      <li><a href="http://coding.smashingmagazine.com">Coding</a></li>
+      <li><a href="http://www.smashingmagazine.com/category/design/">Design</a></li>
+      <li><a href="http://mobile.smashingmagazine.com/">Mobile</a></li>
+      <li><a href="http://www.smashingmagazine.com/category/graphics/">Graphics</a></li>
+      <li><a href="http://uxdesign.smashingmagazine.com/">UX Design</a></li>
+      <li><a href="http://wp.smashingmagazine.com/">WordPress</a></li>
+    </ul>
+    <ul class="mobile-nav-ul">
+      <li class="mobile-nav-heading">Pages</li>
+      <li><a href="http://www.smashingmagazine.com/books/">Books</a></li>
+      <li><a href="http://www.smashingmagazine.com/ebooks/">eBook Library</a></li>
+      <li><a href="http://www.smashingmagazine.com/workshops/">Workshops</a></li>
+      <li><a href="http://www.smashingmagazine.com/the-smashing-newsletter/">Email Newsletter</a></li>
+      <li><a href="http://jobs.smashingmagazine.com/">Job Board</a></li>
+      <li><a href="http://www.smashingmagazine.com/about/">About us</a></li>
+    </ul>
+  </div> <!-- Mobile Nav uls -->
+</div>
+</div><!-- #container -->
+
+<div id="wpsidebar"><div class="col side">
+<div class="sm-search wp-search-form">
+<form method="get" action="http://www.smashingmagazine.com/search-results/" target="_top">
+<label for="magazine-search">Search on Smashing Magazine</label>
+<input id="magazine-search" name="q" type="text" placeholder="e.g. Responsive design" />
+<button class="search_submit" type="submit">Search</button>
+<input type="hidden" name="cx" value="partner-pub-6779860845561969:5884617103">
+<input type="hidden" name="cof" value="FORID:10">
+<input type="hidden" name="ie" value="UTF-8">
+</form>
+</div><div class="ed spnsrlistwrapper first-ad-container">
+<span class="declare">Advertisement</span>
+<span class="awithus"><a href="mailto:&#97;&#100;&#118;&#101;&#114;&#116;&#105;&#115;&#105;&#110;&#103;&#64;&#115;&#109;&#97;&#115;&#104;&#105;&#110;&#103;&#109;&#97;&#103;&#97;&#122;&#105;&#110;&#101;&#46;&#99;&#111;&#109;" title="Advertise with us!" class="sprite ed-us">Advertise with us!</a></span><script type="text/javascript">/* <![CDATA[ */ SmashingAds.showSponsorList(3); /* ]]> */ </script>
+</div>
+<div class="sidebartabs sm-search smashingwidget">
+<h3><a href="http://www.smashingmagazine.com/the-smashing-newsletter/"><img src="http://www.smashingmagazine.com/files/smashing-widget/v006/img/smnl.png" alt="Smashing Newsletter" /> Smashing Newsletter</a></h3>
+<p>Subscribe to our email newsletter for useful tips and valuable resources, sent out every second Tuesday.</p>
+<form action="http://smashingmagazine.us1.list-manage1.com/subscribe/post?u=16b832d9ad4b28edf261f34df&amp;id=a1666656e0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"><input name="EMAIL" type="text" placeholder="email address" /><button class="search_submit" type="submit">Subscribe</button></form>
+</div>
+<div class="ed spnsrlistwrapper"> 
+<script type="text/javascript">/* <![CDATA[ */ SmashingAds.showSponsorList(3); /* ]]> */ </script></div>
+<div class="sidebartabs sm-search smashingwidget self-promo">
+<div class="self-promo-inner">
+<a href="http://www.smashingmagazine.com/books/#digital-adaptation" style="border: none;"><img src="http://media.smashingmagazine.com/wp-content/uploads/2013/04/sidebar-digital-adaptation-paul-boag-v5-opt.png" alt="Digital Adaptation by Paul Boag"></a><p>Nothing is more frustrating than <strong>stubborn management</strong>. That's why we published <a href="http://www.smashingmagazine.com/books/#digital-adaptation">Digital Adaptation</a>, a new book by Paul Boag on how to help management overcome legacy practices — for good.</p>
+</div>
+<div class="self-promo-inner">
+<a href="http://www.smashingmagazine.com/smashing-book-4-new-perspectives/?pk_campaign=sb4-sidebar"><img src="http://media.smashingmagazine.com/wp-content/uploads/2013/04/Smashing-Book-4-sidebar-transparent-opt.png" alt="Smashing Printed Books"></a>
+<p>It's done. The <a href="http://www.smashingmagazine.com/smashing-book-4-new-perspectives/?pk_campaign=sb4-sidebar">Smashing Book #4</a>, our brand new book with smart <strong>front-end techniques</strong> and design approaches. Written by respected designers and developers, neatly packed in a gorgeous hardcover.</p>
+</div>
+<div class="self-promo-inner">
+<a href="http://www.smashingmagazine.com/ebooks/?pk_campaign=sb4-sidebar"><img src="http://media.smashingmagazine.com/wp-content/uploads/2013/10/smashing-library-footer-new-opt.png" alt="Smashing Printed Books"></a>
+<p>Hungry for more content? Over 60 <strong>eBooks</strong> are waiting to be discovered in our lovely <a href="http://www.smashingmagazine.com/ebooks/?pk_campaign=sb4-sidebar">Smashing Library</a>. And guess what? You can watch Smashing Conference talks there, too.</p>
+</div>
+<div class="self-promo-inner">
+<a href="http://www.smashingmagazine.com/workshops/?pk_campaign=sb4-sidebar"><img src="http://media.smashingmagazine.com/wp-content/uploads/2014/02/aarron-walter-footer.jpg" alt="Smashing Workshops"></a>
+<p>Do you feel like your <strong>workflow</strong> is slowing you down? We might have just what you need: Front-End, UX and Responsive design <a href="http://www.smashingmagazine.com/workshops/?pk_campaign=sb4-sidebar">full-day workshops</a>, by well-respected experts.</p>
+</div>
+</div>
+<div class="ed spnsrlistwrapper">
+ 
+<script type="text/javascript">/* <![CDATA[ */ SmashingAds.showSponsorList(); /* ]]> */ </script></div>
+<div class="sidebartabs">
+<div id="jobs" class="smashingwidget">
+<h3><a href="http://jobs.smashingmagazine.com/?pk_campaign=sm&amp;piwik_kwd=widget"><span>Smashing Job Board</span><img src="http://www.smashingmagazine.com/files/smashing-widget/v006/img/sm-jobs.png" alt="Smashing Jobs"></a></h3>
+<ul class="topiclist"><li style="display:none;"></li><li class="clearfix"><a href="http://feedproxy.google.com/~r/smjobs/~3/Uri4lpLkgk8/2407635">UX/BRAND DESIGNER - Source Intelligence - (Carlsbad, CA) - FullTime</a><p>Company Source Intelligence is an early stage, forward-thinking company with a strong sense of social and environmental responsibility. If you want your work&#8230;</p></li><li class="clearfix"><a href="http://feedproxy.google.com/~r/smjobs/~3/_zN96hO10-c/2407585">Email &amp; Web Designer - Cogo Labs - (Cambridge, MA) - FullTime</a><p>CogoLabs, a venture accelerator in Kendall Square, is seeking an email &amp; web designer to join our Creative Services team. This is a hybrid role, so successful&#8230;</p></li></ul>
+<p class="view-more"><a href="http://jobs.smashingmagazine.com?pk_campaign=sm&amp;piwik_kwd=widget">View more job openings&hellip;</a></p>
+</div><!-- /#jobs -->
+</div><!-- /.sidebartabs -->
+<div id="sidebar_special"><script type="text/javascript">OA_show("Sidebar Special 1");
+OA_show("Sidebar Special 2");</script> 
+</div>
+<div class="two clearfix"><div class="left">
+<div class="sidebar_sky">
+<script type='text/javascript'>OA_show('Sidebar 1');</script>
+</div><!-- /.ed.sidebared -->
+<div class="sidebar_sky">
+<script type='text/javascript'>OA_show('Sidebar 2');</script>
+</div></div><!-- /.left --></div><!-- /.two -->
+</div><!-- .col.ads -->
+</div>
+<div id="footer">
+  <div class="contribute">
+    <div class="product clearfix">
+      <div class="product-image">
+        <a href="http://www.smashingmagazine.com/smashing-book-4-new-perspectives/?pk_campaign=sb4-footer"><img src="http://media.smashingmagazine.com/wp-content/uploads/2013/10/smashing-book-4-footer-opt.png" alt="Smashing Book #4"></a>
+      </div>
+      <div class="product-description">
+        <p>
+          <a href="http://www.smashingmagazine.com/smashing-book-4-new-perspectives/?pk_campaign=sb4-footer"><strong>Smashing Book #4</strong></a><br />
+          Get our brand new Smashing Book #4, available as print and eBook. <a href="http://www.smashingmagazine.com/smashing-book-4-new-perspectives/?pk_campaign=sb4-footer">Learn more...</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="contribute">
+    <div class="product clearfix">
+      <div class="product-image">
+        <a href="https://shop.smashingmagazine.com/smashing-library-complete.html?pk_campaign=smashingmagazine-footer"><img src="http://media.smashingmagazine.com/wp-content/uploads/2013/10/smashing-library-footer-new-opt.png" alt="The Smashing Library"></a>
+      </div>
+      <div class="product-description">
+        <p>
+          <a href="https://shop.smashingmagazine.com/smashing-library-complete.html?pk_campaign=smashingmagazine-footer"><strong>The Smashing Library</strong></a><br />
+          Grab all published and upcoming Smashing eBooks, in one swoop. <a href="https://shop.smashingmagazine.com/smashing-library-complete.html?pk_campaign=smashingmagazine-footer">Learn more...</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="contribute">
+    <div class="product clearfix">
+      <div class="product-image">
+        <a href="http://www.smashingmagazine.com/workshops/?pk_campaign=smashingmagazine-footer"><img src="http://media.smashingmagazine.com/wp-content/uploads/2014/02/aarron-walter-footer.jpg" alt="Smashing Workshops"></a>
+      </div>
+      <div class="product-description">
+        <p>
+          <a href="http://www.smashingmagazine.com/workshops/?pk_campaign=smashingmagazine-footer"><strong>Smashing Workshops</strong></a><br />
+          Join our hands-on full-day workshops, run by experts of the industry. Good stuff. <a href="http://www.smashingmagazine.com/workshops/?pk_campaign=smashingmagazine-footer">Learn more...</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <p class="statement">
+    <em>With a commitment to quality content for the design community.</em><br />
+    Founded by Vitaly Friedman and Sven Lennartz. 2006-2014.<br />
+    Made in Germany. ✎ <a href="http://www.smashingmagazine.com/write-for-us/">Write for us</a> – <a href="http://www.smashingmagazine.com/contact/">Contact us</a> – <a href="http://www.smashingmagazine.com/about/">Impressum</a>.
+  </p>
+</div><!-- End of Footer -->
+    <script src="//static.getclicky.com/js" type="text/javascript"></script>
+    <script type="text/javascript">
+        try{ clicky.init(66569468); }catch(e){}
+    </script>
+<!--<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script");
+var b=document.getElementsByTagName('script')[0];
+a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0011/1125.js";
+a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>--><script type="text/javascript">var elements=["http://coding.smashingmagazine.com/wp-content/themes/smashingv4/javascripts/footnotes.min.js","http://coding.smashingmagazine.com/wp-content/themes/smashingv4/javascripts/prism.js"];var downloadJSAtOnload=function(elements){if(toString.call(elements)!=="[object Array]"){return false}var i,element;for(i=0;i<elements.length;i++){element=document.createElement("script");element.src=elements[i];document.body.appendChild(element)}return true};if(window.addEventListener){window.addEventListener("load",function(){downloadJSAtOnload(elements)},false)}else{if(window.attachEvent){window.attachEvent("onload",function(){downloadJSAtOnload(elements)})}else{window.onload=function(){downloadJSAtOnload(elements)}}};if(navigator.userAgent.match(/IEMobile\/10\.0/)){var msViewportStyle=document.createElement("style");msViewportStyle.appendChild(document.createTextNode("@-ms-viewport{width:auto!important}"));document.getElementsByTagName("head")[0].appendChild(msViewportStyle)};</script>
+</body>
+</html>
