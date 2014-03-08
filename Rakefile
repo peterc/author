@@ -12,6 +12,7 @@ task :default => :test
 desc 'Console mode'
 task :console do
   require 'irb'
+  require 'author'
   ARGV.clear
   IRB.start
 end
