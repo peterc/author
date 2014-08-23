@@ -12,6 +12,9 @@ og:article:author
 <link rel="alternate" type="application/rss+xml" title="...
 
 
+need to respect full content of links, e.g. TJ Van Toll
+apply more priority to things in H3, TITLE, meta tags, etc.
+
 .authorname
 .author
 .by-line a
@@ -34,6 +37,7 @@ rel="author"
 
 data-from= .. author name
 
+span[@itemprop='name']
 
 
 
@@ -51,7 +55,6 @@ svbtle.com -> figure.avatar a, #page_title a, #bottom_tagline span
 
 
 
-span[@itemprop='name']
 
 NEED
 

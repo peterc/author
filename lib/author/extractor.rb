@@ -11,6 +11,10 @@ module Author
       @options = defaults.merge(options)
       @content = @options[:content]
       @potential_names = []
+
+      if @options[:type] == :html
+        @nokogiri_doc = Nokogiri::HTML(@content)
+      end
     end
 
     # going to be REAL MESSY for now..
@@ -19,7 +23,7 @@ module Author
         @potential_names += @content.split(/\n/)
       elsif @options[:type] == :html
         @potential_names += HTMLNameFinder.new(@content).names
-        @potential_names += Nokogiri::HTML(@content).css("p, li, span, a").map(&:text)
+        @potential_names += @nokogiri_doc.css("title, p, li, span, a").map(&:text)
       end
 
       @name_detector = NameDetector.new(@potential_names)

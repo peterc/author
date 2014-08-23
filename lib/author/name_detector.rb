@@ -64,7 +64,9 @@ module Author
             score_effect += 1 if previous_word[0] == 'am'
             score_effect += 2 if previous_word[0] == '&copy;'
 
+            # We don't like case changing on us mid-name
             score_effect -= 3 if previous_word[0][0] =~ /[A-Z]/ && word[0][0] =~ /[a-z]/
+            score_effect -= 2 if previous_word[0][0] =~ /[a-z]/ && word[0][0] =~ /[A-Z]/
           end
 
           word[1][:score] += score_effect
